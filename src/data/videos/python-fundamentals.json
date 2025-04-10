@@ -6,7 +6,7 @@
       "title": "Introduction to Coding and Python",
       "type": "Theory",
       "youtubeUrl": "https://www.youtube.com/watch?v=8c74mXV2lJ0&list=PLlGueSbLhZoBRnTsGiDJeTXuQCALOTN07&index=1&pp=iAQB",
-      "notesUrl": "",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/1.md",
       "codingQuestionUrl": ""
     },
     {
@@ -14,16 +14,104 @@
       "title": "Python Variables and Data Types",
       "type": "Theory",
       "youtubeUrl": "https://www.youtube.com/watch?v=jr1FF9-VAJs&list=PLlGueSbLhZoBRnTsGiDJeTXuQCALOTN07&index=2&pp=iAQB",
-      "notesUrl": "",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/2.md",
       "codingQuestionUrl": ""
     },
     {
-      "id": "python-fundamentals-3",
-      "title": "Still updating this site",
-      "type": "Under progress",
-      "youtubeUrl": "",
-      "notesUrl": "",
+      "id": "python-fundamentals-3a",
+      "title": "Input and Output/Print",
+      "type": "Theory",
+      "youtubeUrl": "https://youtu.be/0qo3QEidzjA?si=j8I60CnKANp9RFPz",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/3.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-3b",
+      "title": "String Data Type",
+      "type": "Theory",
+      "youtubeUrl": "https://youtu.be/AWptcpgp8XU?si=f5s6Y54_kzERNxYV",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/3.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-4",
+      "title": "Operators",
+      "type": "Theory",
+      "youtubeUrl": "https://youtu.be/w8tfQWolQnE?si=JZFRvtEv4qCrLpNX",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/4.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-5",
+      "title": "Lists Operations, Methods and Functions",
+      "type": "Theory",
+      "youtubeUrl": "https://youtu.be/bvohjRepLz0?si=4aHBo5lCkdVP5-GA",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/5.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-6",
+      "title": "Tuples and Sets Operations & Difference",
+      "type": "Theory",
+      "youtubeUrl": "https://youtu.be/Y3WapTGp7vc?si=Ve1ZwJdIvF6Dppn4",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/6.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-7",
+      "title": "Dictionaries Operations, Methods and Functions",
+      "type": "Theory",
+      "youtubeUrl": "https://youtu.be/S_xF9ThJ8Jw?si=JOrmQHsQJSEEPxhH",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/7.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-8",
+      "title": "Conditional Statements",
+      "type": "Theory",
+      "youtubeUrl": "https://youtu.be/lMdSvt68BkE?si=Q2OHqEOODBh2qJs7",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/8.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-9",
+      "title": " While Loops",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/watch?v=LzMNs0nhZW0",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/9.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-10",
+      "title": "For Loops",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dqhhBt_YF0o",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/10.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-11",
+      "title": "Comprehension",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/watch?v=VYDVqCQy5mg",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/11.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-12",
+      "title": "Functions, Parameters, Local vs Global var",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/watch?v=-5XRSvBjyW8",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/12.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-13",
+      "title": "Lambda Functions, Recursion, args and kwargs",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/watch?v=COH03FV6YlU",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/13.md",
       "codingQuestionUrl": ""
     }
   ]
-} 
+}
