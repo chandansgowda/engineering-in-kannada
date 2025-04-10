@@ -1,6 +1,6 @@
 import React from 'react';
 import { GraduationCap, Youtube, Twitter, Linkedin, Instagram } from 'lucide-react';
-
+import { BsTwitterX } from "react-icons/bs"
 export function Footer() {
   return (
     <footer className="bg-dark/50 backdrop-blur-sm border-t border-white/10">
@@ -39,7 +39,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-primary"
             >
-              <Twitter className="h-5 w-5" />
+              <BsTwitterX className="h-5 w-5" />
             </a>
             <a
               href="https://www.linkedin.com/in/chandan-s-gowda-4b2913183/"
