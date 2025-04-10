@@ -36,3 +36,34 @@ export interface AnnouncementItem {
 export interface AnnouncementsData {
   items: AnnouncementItem[];
 }
+
+// Auth Types
+export interface User {
+  id: string;
+  email?: string;
+  user_metadata?: {
+    full_name?: string;
+    avatar_url?: string;
+  };
+  app_metadata?: {
+    provider?: string;
+    [key: string]: any;
+  };
+  created_at?: string;
+}
+
+export interface AuthState {
+  user: User | null;
+  session: any | null;
+  isLoading: boolean;
+  error: string | null;
+}
+
+export interface AuthContextType extends AuthState {
+  signUp: (email: string, password: string, options?: { full_name?: string }) => Promise<{ error: any | null }>;
+  signIn: (email: string, password: string) => Promise<{ error: any | null }>;
+  signInWithProvider: (provider: 'google' | 'github') => Promise<void>;
+  signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<{ error: any | null }>;
+  updateProfile: (data: { full_name?: string; avatar_url?: string }) => Promise<{ error: any | null }>;
+}
