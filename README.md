@@ -130,10 +130,7 @@ cp .env.example .env
 # Edit .env and add your GitHub token
 
 # Start development server
-npm run dev
-
-# Build for production
-npm run build
+npm run
 ```
 
 ## Notes for Contributors
