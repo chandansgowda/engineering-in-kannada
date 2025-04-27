@@ -151,7 +151,7 @@ export function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Github className="h-4 w-4" />
-                GitHub
+                Contribute
               </a>
             </div>
           </div>
