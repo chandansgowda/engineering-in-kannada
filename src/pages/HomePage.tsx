@@ -81,4 +81,6 @@ export function HomePage() {
       <Footer />
     </div>
   );
+
 }
+
