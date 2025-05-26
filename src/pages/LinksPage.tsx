@@ -55,16 +55,12 @@ export function LinksPage() {
                           }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
-                        <div className="absolute bottom-4 left-4">
-                          <span className="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-sm font-medium text-primary backdrop-blur-sm">
-                            {category.title}
-                          </span>
-                        </div>
+                        {/* Removed category badge from cover image */}
                       </div>
                       <div className="p-6">
                         <div className="flex items-center gap-2">
-                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                            {link.icon ? <DynamicIcon iconName={link.icon} /> : <ExternalLink className="w-4 h-4 text-primary" />}
+                          <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                            {link.icon ? <DynamicIcon iconName={link.icon} /> : <ExternalLink className="w-6 h-6 text-primary" />}
                           </div>
                           {/* <span className="text-sm text-gray-400">{link.id}</span> */}
                         </div>
@@ -97,10 +93,7 @@ export function LinksPage() {
                           </div>
                         </div>
                         <p className="text-gray-400 mt-2 flex-grow">{link.description}</p>
-                        <div className="mt-6 pt-4 border-t border-white/10 flex justify-between items-center">
-                          <span className="text-sm text-primary">Visit</span>
-                          <ExternalLink className="h-4 w-4 text-primary opacity-70 group-hover:opacity-100" />
-                        </div>
+                        {/* Removed bottom section with "Visit" text and icon */}
                       </div>
                     </a>
                   )
