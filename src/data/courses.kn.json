@@ -1,0 +1,39 @@
+{
+  "courses": [
+    {
+      "id": "python-fundamentals",
+      "title": "ಕನ್ನಡದಲ್ಲಿ ಪೈಥಾನ್ ಮೂಲಗಳು",
+      "description": "ನೈಜ-ಪ್ರಪಂಚದ ಉದಾಹರಣೆಗಳೊಂದಿಗೆ ಮೊದಲಿನಿಂದ ಕನ್ನಡದಲ್ಲಿ ಪೈಥಾನ್ ಮೂಲಭೂತ ವಿಷಯಗಳನ್ನು ಕಲಿಯಿರಿ.",
+      "thumbnail": "https://i3.ytimg.com/vi/8c74mXV2lJ0/hqdefault.jpg",
+      "difficulty": "ಹರಿಕಾರ"
+    },
+    {
+      "id": "python-oops",
+      "title": "ಕನ್ನಡದಲ್ಲಿ ಪೈಥಾನ್ ಒಒಪಿಎಸ್",
+      "description": "ನೈಜ-ಪ್ರಪಂಚದ ಉದಾಹರಣೆಗಳೊಂದಿಗೆ ಕನ್ನಡದಲ್ಲಿ ಪೈಥಾನ್‌ನಲ್ಲಿ ಆಬ್ಜೆಕ್ಟ್ ಓರಿಯೆಂಟೆಡ್ ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಕಲಿಯಿರಿ.",
+      "thumbnail": "https://i3.ytimg.com/vi/aXuYPVStgdk/hqdefault.jpg",
+      "difficulty": "ಮಧ್ಯಂತರ"
+    },
+    {
+      "id": "web-dev-manjunath",
+      "title": "ಕನ್ನಡದಲ್ಲಿ ವೆಬ್ ಡೆವಲಪ್‌ಮೆಂಟ್",
+      "description": "ಕನ್ನಡದಲ್ಲಿ ಮಂಜುನಾಥ್ ಅವರೊಂದಿಗೆ ಎಚ್‌ಟಿಎಂಎಲ್, ಸಿಎಸ್‌ಎಸ್ ಮತ್ತು ಜೆಎಸ್ ಮೂಲಭೂತ ಅಂಶಗಳನ್ನು ಹ್ಯಾಂಡ್ಸ್-ಆನ್ ಪ್ರಾಜೆಕ್ಟ್‌ನೊಂದಿಗೆ ಕಲಿಯಿರಿ.",
+      "thumbnail": "https://i3.ytimg.com/vi/mVbsESNhDAk/hqdefault.jpg",
+      "difficulty": "ಹರಿಕಾರ"
+    },
+    {
+      "id": "c-fundamentals",
+      "title": "ಕನ್ನಡದಲ್ಲಿ ಸಿ ಪ್ರೋಗ್ರಾಮಿಂಗ್",
+      "description": "ಕನ್ನಡದಲ್ಲಿ ಮೂಲಭೂತ ಸಿ ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಕ್ರ್ಯಾಶ್ ಕೋರ್ಸ್.",
+      "thumbnail": "https://i.ytimg.com/vi/0sd6OpPG2UM/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDYHXnfNHb_1mSOjLYbePMJPKVqaA",
+      "difficulty": "ಹರಿಕಾರ"
+    },
+    {
+      "id": "dsa-c",
+      "title": "ಸಿ ಯಲ್ಲಿ ಡೇಟಾ ರಚನೆಗಳು ಮತ್ತು ಅಲ್ಗಾರಿದಮ್‌ಗಳು",
+      "description": "ಕನ್ನಡದಲ್ಲಿ ಸಿ ಯಲ್ಲಿ ಡೇಟಾ ರಚನೆಗಳು ಮತ್ತು ಅಲ್ಗಾರಿದಮ್‌ಗಳನ್ನು ಕಲಿಯಿರಿ.",
+      "thumbnail": "https://i.ytimg.com/vi/iDe1fWnneCA/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAZH7kV7J3uszbIxnRQowDjt7rpCg",
+      "difficulty": "ಮಧ್ಯಂತರ"
+    }
+  ]
+}

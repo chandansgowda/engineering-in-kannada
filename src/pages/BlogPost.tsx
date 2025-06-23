@@ -6,8 +6,11 @@ import remarkGfm from 'remark-gfm';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ArrowLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
+
 
 export const BlogPost: React.FC = () => {
+  const { t } = useTranslation(); 
   const { slug } = useParams<{ slug: string }>();
   const blog = slug ? getBlogPost(slug) : null;
 
@@ -18,7 +21,7 @@ export const BlogPost: React.FC = () => {
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-4xl font-bold mb-4">Blog Post Not Found</h1>
           <Link to="/blogs" className="text-primary hover:underline">
-            ← Back to Blogs
+            {t('backToCourses')}
           </Link>
         </div>
         <Footer />

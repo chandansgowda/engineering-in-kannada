@@ -1,8 +1,12 @@
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 import { GraduationCap, Youtube, Linkedin, Instagram } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 
 export function Footer() {
+  const { t } = useTranslation(); // Initialize useTranslation
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-dark/50 backdrop-blur-sm border-t border-white/10">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -10,13 +14,12 @@ export function Footer() {
           <div className="flex items-center gap-2">
             <GraduationCap className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold text-white">
-              Engineering in Kannada
+              {t('engineeringInKannada')}
             </span>
           </div>
 
           <p className="mt-4 max-w-md text-center text-sm text-gray-400">
-            Empowering Kannada-speaking students with quality engineering
-            education. Learn at your own pace, completely free.
+            {t('footerTagline')}
           </p>
 
           <div className="mt-8 flex items-center gap-6">
@@ -56,10 +59,9 @@ export function Footer() {
 
           <div className="mt-8 text-center text-sm text-gray-400">
             <p>
-              © {new Date().getFullYear()} Engineering in Kannada. All rights
-              reserved.
+              {t('footerCopyright', { year: currentYear })}
             </p>
-            <p className="mt-1">Made with ❤️ for the Kannada tech community</p>
+            <p className="mt-1">{t('footerMadeWithLove')}</p>
           </div>
         </div>
       </div>

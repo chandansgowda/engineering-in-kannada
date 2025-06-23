@@ -1,0 +1,37 @@
+{
+  "courseId": "c-basics-crash-old",
+  "videos": [
+    {
+      "id": "c-basics-crash-old-1",
+      "title": "೧. ಸಿ ಗೆ ಪರಿಚಯ",
+      "type": "Theory + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/0sd6OpPG2UM",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "c-basics-crash-old-2",
+      "title": "೨. ಲೂಪ್‌ಗಳು ಮತ್ತು ಸ್ವಿಚ್ ಕೇಸ್",
+      "type": "Theory + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/LEb_PirvYEU",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "c-basics-crash-old-3",
+      "title": "೩. ಅರೇಗಳು ಮತ್ತು ಮ್ಯಾಟ್ರಿಸಸ್‌ಗಳು",
+      "type": "Theory + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/RWMHf5kRmDo",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "c-basics-crash-old-4",
+      "title": "೪. ಫಂಕ್ಷನ್‌ಗಳು ಮತ್ತು ಸ್ಟ್ಯಾಂಡರ್ಡ್ ಲೈಬ್ರರಿ",
+      "type": "Theory + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/ZNltu1NUGz4",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    }
+  ]
+}

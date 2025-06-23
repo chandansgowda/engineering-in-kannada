@@ -1,0 +1,70 @@
+{
+  "categories": [
+    {
+      "id": "social",
+      "title": "ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮಗಳು",
+      "links": [
+        {
+          "id": "youtube",
+          "title": "ಯೂಟ್ಯೂಬ್",
+          "description": "ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್ ಟ್ಯುಟೋರಿಯಲ್‌ಗಳು",
+          "coverImage": "https://yt3.googleusercontent.com/amnUIY2deziC779S2Cxx7_4U95lwXsH-Vv1PgpjiCAvzVUpdD-vmjoV3VLZlzHH0fG-BNEgUxeg=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+          "url": "https://www.youtube.com/@EngineeringinKannada",
+          "icon": "Youtube"
+        },
+        {
+          "id": "instagram",
+          "title": "ಇನ್‌ಸ್ಟಾಗ್ರಾಮ್",
+          "description": "ಸಣ್ಣ ಟ್ಯುಟೋರಿಯಲ್‌ಗಳು ಮತ್ತು ಅಪ್‌ಡೇಟ್‌ಗಳು",
+          "coverImage": "https://scontent-icn2-1.cdninstagram.com/v/t51.2885-19/496598769_18059721569156973_1708736289005547134_n.jpg?_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2QEXWIKhzV3hihjEfnfSLqF1wa74pGP9IukNLTdItYORCaQxapGmKd3wrFTyF_7g7A4&_nc_ohc=5YLN3B-_kWYQ7kNvwG41fTs&_nc_gid=WXspB09oPD85ftHI3zaIew&edm=AEF8tYYBAAAA&ccb=7-5&oh=00_AfJR0_LTVKQRCGpdsbA2Bz5N3BNO7VM4Y8oktSmXto_vIQ&oe=68351E53&_nc_sid=1e20d2",
+          "url": "https://www.instagram.com/engineering_in_kannada/",
+          "icon": "Instagram"
+        },
+        {
+          "id": "twitter",
+          "title": "ಟ್ವಿಟರ್",
+          "description": "ತಾಂತ್ರಿಕ ಅಪ್‌ಡೇಟ್‌ಗಳು ಮತ್ತು ಪ್ರಕಟಣೆಗಳು",
+          "coverImage": "",
+          "url": "https://twitter.com/chandansgowdru",
+          "icon": "Twitter"
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "title": "ವೃತ್ತಿಪರ",
+      "links": [
+        {
+          "id": "github",
+          "title": "ಗಿಟ್‌ಹಬ್",
+          "description": "ಓಪನ್ ಸೋರ್ಸ್ ಯೋಜನೆಗಳು ಮತ್ತು ಕೊಡುಗೆಗಳು",
+          "coverImage": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb",
+          "url": "https://github.com/chandansgowda",
+          "icon": "Github"
+        },
+        {
+          "id": "linkedin",
+          "title": "ಲಿಂಕ್ಡ್‌ಇನ್",
+          "description": "ವೃತ್ತಿಪರ ಪ್ರೊಫೈಲ್ ಮತ್ತು ನೆಟ್‌ವರ್ಕ್",
+          "coverImage": "https://images.unsplash.com/photo-1611944212129-29977ae1398c",
+          "url": "https://www.linkedin.com/in/chandan-s-gowda-4b2913183/",
+          "icon": "Linkedin"
+        }
+      ]
+    },
+    {
+      "id": "python-notes-1",
+      "title": "ಪೈಥಾನ್ ನೋಟ್ಸ್",
+      "links": [
+        {
+          "id": "notes-1",
+          "title": "ಸ್ಟಡಿ ನೋಟ್ಸ್",
+          "description": "ಉಚಿತ ಕಲಿಕಾ ಸಂಪನ್ಮೂಲಗಳು ಮತ್ತು ನೋಟ್ಸ್",
+          "coverImage": "https://images.unsplash.com/photo-1517842645767-c639042777db",
+          "url": "https://github.com/chandansgowda/learn-python-in-kannada",
+          "icon": "FileText"
+        }
+      ]
+    }
+  ]
+}

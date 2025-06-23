@@ -1,0 +1,149 @@
+{
+  "courseId": "dsa-c",
+  "videos": [
+    {
+      "id": "dsa-c-1",
+      "title": "೧. ಡಿಎಸ್‌ಎ ಗೆ ಪರಿಚಯ",
+      "type": "DSA + Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/iDe1fWnneCA",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-2",
+      "title": "೨. ಸ್ಟ್ರಕ್ಟ್‌ಗಳು",
+      "type": "DSA + Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/OEDZLbQqaK8",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-3",
+      "title": "೩. ನೆಸ್ಟೆಡ್ ಸ್ಟ್ರಕ್ಟ್‌ಗಳು",
+      "type": "DSA + Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/dc8DpiGAS4M",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-4",
+      "title": "೪. ಪಾಯಿಂಟರ್‌ಗಳು",
+      "type": "Theory + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/UfTS7LDPf2Y",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-5",
+      "title": "೫. ಪಾಯಿಂಟರ್‌ಗಳ ಅಂಕಗಣಿತ",
+      "type": "DSA + Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/Ek0QrA39Uas",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-6",
+      "title": "೬. ಸ್ಕೋಪ್‌ಗಳು",
+      "type": "Theory + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/GdEy8I-m6xg",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-7",
+      "title": "೭. ಅರೇಗಳು",
+      "type": "Arrays",
+      "youtubeUrl": "https://www.youtube.com/embed/c-kortlln4w",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-8",
+      "title": "೮. ಲೀನಿಯರ್ ಸರ್ಚ್ ಅಲ್ಗಾರಿದಮ್",
+      "type": "Algorithm + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/Yovsd8aoiV8",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-9",
+      "title": "೯. ಬೈನರಿ ಸರ್ಚ್ - ಅಲ್ಗಾರಿದಮ್",
+      "type": "Algorithm + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/IwiD7shJVcQ",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-10",
+      "title": "೧೦. ಬೈನರಿ ಸರ್ಚ್ - ಅನುಷ್ಠಾನ",
+      "type": "Algorithm + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/Kf8i_vPSYRc",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-11",
+      "title": "೧೧. ಅರೇಗಳ ಇನ್ಸರ್ಷನ್",
+      "type": "Arrays",
+      "youtubeUrl": "https://www.youtube.com/embed/D5eKRbiKY6Q",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-12",
+      "title": "೧೨. ಅರೇ ಎಲಿಮೆಂಟ್ ಡಿಲೀಷನ್ - ಇಂಡೆಕ್ಸ್ ಬಳಸಿ",
+      "type": "Arrays",
+      "youtubeUrl": "https://www.youtube.com/embed/MBqOUNZ2nRg",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-13",
+      "title": "೧೩. ಅರೇ ಎಲಿಮೆಂಟ್ ಡಿಲೀಷನ್ - ಮೌಲ್ಯ ಬಳಸಿ",
+      "type": "Arrays",
+      "youtubeUrl": "https://www.youtube.com/embed/83-lWtSuwk8",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-14",
+      "title": "೧೪. ಸ್ವಾಪಿಂಗ್",
+      "type": "DSA + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/38CloNYtopw",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-15",
+      "title": "೧೫. ಅರೇಯನ್ನು ಹಿಮ್ಮುಖಗೊಳಿಸುವುದು",
+      "type": "Algorithm + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/1oz7FoTJbPw",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-16",
+      "title": "೧೬. ಬಬಲ್ ಸಾರ್ಟ್ - ಅಲ್ಗಾರಿದಮ್",
+      "type": "Algorithm + Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/F56XLS0IFiE",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-17",
+      "title": "೧೭. ಬಬಲ್ ಸಾರ್ಟ್ - ಅನುಷ್ಠಾನ",
+      "type": "Algorithm + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/NHXhQnVKKdA",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "dsa-c-18",
+      "title": "೧೮. ಬಬಲ್ ಸಾರ್ಟ್ - ಆಪ್ಟಿಮೈಸೇಶನ್",
+      "type": "Algorithm + Code",
+      "youtubeUrl": "https://www.youtube.com/embed/9J5qC3Jqqv0",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    }
+  ]
+}

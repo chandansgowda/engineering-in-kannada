@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Home, Trophy, FileText, Link2 } from "lucide-react";
+import LanguageSwitcher from "./LanguageSwitcher"; // Import LanguageSwitcher
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 export function Header() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -13,7 +16,7 @@ export function Header() {
           <Link to="/" className="flex items-center gap-2">
             <img
               src="/images/logo.jpg"
-              alt="Engineering in Kannada"
+              alt={t('engineeringInKannada')} // Translate alt text
               className="w-8 h-8 rounded-full"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -21,12 +24,12 @@ export function Header() {
               }}
             />
             <span className="text-white font-bold text-lg hidden sm:inline">
-              Engineering in Kannada
+              {t('engineeringInKannada')} {/* Translate site name */}
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-4"> {/* Reduced gap for switcher */}
             <Link
               to="/"
               className={`flex items-center gap-2 text-sm ${
@@ -36,7 +39,7 @@ export function Header() {
               }`}
             >
               <Home className="h-4 w-4" />
-              Courses
+              {t('courses')}
             </Link>
             <Link
               to="/leaderboard"
@@ -47,7 +50,7 @@ export function Header() {
               }`}
             >
               <Trophy className="h-4 w-4" />
-              Leaderboard
+              {t('leaderboard')}
             </Link>
             <Link
               to="/blogs"
@@ -58,7 +61,7 @@ export function Header() {
               }`}
             >
               <FileText className="h-4 w-4" />
-              Blogs
+              {t('blogs')}
             </Link>
             <Link
               to="/links"
@@ -69,17 +72,21 @@ export function Header() {
               }`}
             >
               <Link2 className="h-4 w-4" />
-              Links
+              {t('links')}
             </Link>
+            <LanguageSwitcher /> {/* Added LanguageSwitcher here for desktop */}
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile Menu Button and Switcher */}
+          <div className="md:hidden flex items-center">
+            <LanguageSwitcher /> {/* LanguageSwitcher for mobile */}
+            <button
+              className="text-white ml-2" // Added margin for spacing
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -95,7 +102,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               <Home className="h-4 w-4" />
-              Courses
+              {t('courses')}
             </Link>
             <Link
               to="/leaderboard"
@@ -107,7 +114,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               <Trophy className="h-4 w-4" />
-              Leaderboard
+              {t('leaderboard')}
             </Link>
             <Link
               to="/blogs"
@@ -119,7 +126,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               <FileText className="h-4 w-4" />
-              Blogs
+              {t('blogs')}
             </Link>
             <Link
               to="/links"
@@ -131,7 +138,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               <Link2 className="h-4 w-4" />
-              Links
+              {t('links')}
             </Link>
           </nav>
         )}

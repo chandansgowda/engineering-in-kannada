@@ -3,6 +3,12 @@ const REPO_NAME = "engineering-in-kannada";
 const GITHUB_API_BASE = "https://api.github.com";
 const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN as string;
 
+if (!GITHUB_TOKEN) {
+  console.warn(
+    "VITE_GITHUB_TOKEN is not set. GitHub API requests will be unauthenticated and may be rate-limited, affecting leaderboard functionality."
+  );
+}
+
 interface GitHubUser {
   login: string;
   avatar_url: string;

@@ -1,0 +1,45 @@
+{
+  "courseId": "python-oops",
+  "videos": [
+    {
+      "id": "python-oops-1",
+      "title": "೧. ಆಬ್ಜೆಕ್ಟ್ ಓರಿಯೆಂಟೆಡ್ ಪ್ರೋಗ್ರಾಮಿಂಗ್‌ಗೆ ಪರಿಚಯ",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/embed/aXuYPVStgdk",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/15.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-oops-2",
+      "title": "೨. ಕನ್‌ಸ್ಟ್ರಕ್ಟರ್, ಸೆಲ್ಫ್ ಮತ್ತು ಐಚ್ಛಿಕ ಪ್ಯಾರಾಮೀಟರ್‌ಗಳು",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/embed/at9RaJC3Jsg",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/16.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-oops-3",
+      "title": "೩. ಒಒಪಿಎಸ್‌ನ ಸ್ತಂಭಗಳು ಭಾಗ ೧: ಅಬ್‌ಸ್ಟ್ರಾಕ್ಷನ್ ಮತ್ತು ಎನ್‌ಕ್ಯಾಪ್ಸುಲೇಶನ್",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/embed/ucdxseIpfYE",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/17.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-oops-4",
+      "title": "೪. ಒಒಪಿಎಸ್‌ನ ಸ್ತಂಭಗಳು ಭಾಗ ೨: ಇನ್ಹೆರಿಟೆನ್ಸ್ ಮತ್ತು ಪಾಲಿಮಾರ್ಫಿಸಮ್",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/embed/g14iWkxRCQs",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/17.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-oops-5",
+      "title": "೫. ಗೆಟರ್ಸ್, ಸೆಟರ್ಸ್, ಓವರ್‌ಲೋಡಿಂಗ್ ಮತ್ತು ಓವರ್‌ರೈಡಿಂಗ್, ಅಬ್‌ಸ್ಟ್ರಾಕ್ಟ್ ಕ್ಲಾಸ್‌ಗಳು",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/embed/3TVZmjMeMKg",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/18.md",
+      "codingQuestionUrl": ""
+    }
+  ]
+}

@@ -3,8 +3,10 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { Github, Loader2 } from "lucide-react";
 import { fetchLeaderboardData, GitHubContributor } from "../services/github";
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 export function LeaderboardPage() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [contributors, setContributors] = React.useState<GitHubContributor[]>(
     []
   );
@@ -19,7 +21,7 @@ export function LeaderboardPage() {
         const data = await fetchLeaderboardData();
         setContributors(data);
       } catch (err) {
-        setError("Failed to load contributor data. Please try again later.");
+        setError(t('leaderboardError')); // Use translated error
         console.error("Error loading contributors:", err);
       } finally {
         setLoading(false);
@@ -35,21 +37,21 @@ export function LeaderboardPage() {
       <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-white sm:text-4xl">
-            Contributor Leaderboard
+            {t('leaderboardTitle')}
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-300">
-            Celebrating our amazing contributors who help make engineering
-            education accessible in Kannada.
+            {t('leaderboardSubtitle')}
           </p>
         </div>
 
         {loading ? (
           <div className="flex justify-center items-center min-h-[400px]">
             <Loader2 className="h-8 w-8 text-primary animate-spin" />
+            {/* Optionally, add a loading text: <p className="ml-2 text-white">{t('loading')}</p> */}
           </div>
         ) : error ? (
           <div className="text-center p-8 bg-red-500/10 rounded-xl border border-red-500/20">
-            <p className="text-red-400">{error}</p>
+            <p className="text-red-400">{error}</p> {/* Error is already translated from useEffect */}
           </div>
         ) : (
           <div className="mt-8 overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
@@ -61,37 +63,37 @@ export function LeaderboardPage() {
                       scope="col"
                       className="px-6 py-4 text-left text-sm font-semibold text-white"
                     >
-                      Rank
+                      {t('leaderboardRank')}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-4 text-left text-sm font-semibold text-white"
                     >
-                      Contributor
+                      {t('leaderboardContributor')}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-4 text-center text-sm font-semibold text-white"
                     >
-                      PRs
+                      {t('leaderboardPRs')}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-4 text-center text-sm font-semibold text-white"
                     >
-                      Issues
+                      {t('leaderboardIssues')}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-4 text-center text-sm font-semibold text-white"
                     >
-                      Commits
+                      {t('leaderboardCommits')}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-4 text-right text-sm font-semibold text-white"
                     >
-                      Profile
+                      {t('leaderboardProfile')}
                     </th>
                   </tr>
                 </thead>

@@ -1,0 +1,61 @@
+{
+  "courseId": "web-dev-manjunath",
+  "videos": [
+    {
+      "id": "web-dev-1",
+      "title": "೧. ಎಚ್‌ಟಿಎಂಎಲ್ ಮತ್ತು ಸಿಎಸ್‌ಎಸ್‌ಗೆ ಪರಿಚಯ",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/embed/mVbsESNhDAk",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "web-dev-2",
+      "title": "೨. ಸಿಎಸ್‌ಎಸ್ ಮೂಲಗಳು",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/embed/kzoveSCMJAU",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "web-dev-3",
+      "title": "೩. ಸಿಎಸ್‌ಎಸ್ ಗ್ರಿಡ್ ಮತ್ತು ಫ್ಲೆಕ್ಸ್‌ಬಾಕ್ಸ್",
+      "type": "Hands-On",
+      "youtubeUrl": "https://www.youtube.com/embed/TkpulmeSEqI",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "web-dev-4",
+      "title": "೪. ಮೀಡಿಯಾ ಕ್ವೆರಿಗಳು ಮತ್ತು ರೆಸ್ಪಾನ್ಸಿವ್ ಡಿಸೈನ್",
+      "type": "Hands-On",
+      "youtubeUrl": "https://www.youtube.com/embed/rEootTokgu4",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "web-dev-5",
+      "title": "೫. ಸಿಎಸ್‌ಎಸ್ ಆನಿಮೇಷನ್",
+      "type": "Hands-On",
+      "youtubeUrl": "https://www.youtube.com/embed/eCwXvcJuYi8",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "web-dev-6",
+      "title": "೬. ವೆಬ್‌ಸೈಟ್ ಪ್ರಾಜೆಕ್ಟ್ ಭಾಗ ೧",
+      "type": "Project",
+      "youtubeUrl": "https://www.youtube.com/embed/5W73TFVgcmo",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "web-dev-7",
+      "title": "೭. ವೆಬ್‌ಸೈಟ್ ಪ್ರಾಜೆಕ್ಟ್ ಭಾಗ ೨",
+      "type": "Project",
+      "youtubeUrl": "https://www.youtube.com/embed/16eg-s66txE",
+      "notesUrl": "",
+      "codingQuestionUrl": ""
+    }
+  ]
+}
