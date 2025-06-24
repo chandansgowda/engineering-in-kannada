@@ -4,8 +4,8 @@ import i18n from '../i18n'; // Import i18n instance
 // Import all blog content files as raw strings
 const allContentModules: Record<string, string> = import.meta.glob('../blogs/*/content*.md', {
   eager: true,
-  query: '?raw', 
-  import: 'default', 
+  query: '?raw',
+  import: 'default',
 });
 
 // Import all metadata files as modules (Vite handles JSON modules by default)
@@ -43,13 +43,13 @@ export const getBlogPosts = (): BlogPost[] => {
         const defaultContentPath = `../blogs/${slug}/content.md`;
         contentStr = allContentModules[defaultContentPath]; // Might be undefined if no default content.md
       }
-    } 
+    }
     // 2. Fallback to default language metadata (metadata.json)
     else {
       const defaultMetadataPath = `../blogs/${slug}/metadata.json`;
       if (allMetadataModules[defaultMetadataPath]) {
         metadataMod = allMetadataModules[defaultMetadataPath];
-        postLang = 'en'; 
+        postLang = 'en';
         // Try corresponding current language content
         const currentLangContentPath = `../blogs/${slug}/content.${currentLang}.md`;
         if (allContentModules[currentLangContentPath]) {
@@ -121,11 +121,11 @@ export const getBlogPost = (slug: string): BlogPost | null => {
     console.error(`Critical: Metadata resolved but module or default export missing for slug: ${slug}`);
     return null;
   }
-  
+
   // For getBlogPost, content is essential. If no contentStr was found by any means.
   if (contentStr === undefined) {
     console.error(`Content string is undefined for slug: ${slug}. Paths checked: ${currentLangContentPath}, ${defaultContentPath}`);
-    return null; 
+    return null;
   }
 
   const metadata = metadataMod.default;
