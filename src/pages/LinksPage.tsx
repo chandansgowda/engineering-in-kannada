@@ -51,7 +51,8 @@ export function LinksPage() {
                           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = `https://via.placeholder.com/800x400?text=${link.title}`;
+                            target.src = `https://dummyimage.com/800x400/1a1a1a/ffffff&text=${encodeURIComponent(link.title)}`;
+
                           }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
