@@ -16,7 +16,7 @@
           "id": "instagram",
           "title": "Instagram",
           "description": "Short-form tutorials and updates",
-          "coverImage": "https://scontent-icn2-1.cdninstagram.com/v/t51.2885-19/496598769_18059721569156973_1708736289005547134_n.jpg?_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2QEXWIKhzV3hihjEfnfSLqF1wa74pGP9IukNLTdItYORCaQxapGmKd3wrFTyF_7g7A4&_nc_ohc=5YLN3B-_kWYQ7kNvwG41fTs&_nc_gid=WXspB09oPD85ftHI3zaIew&edm=AEF8tYYBAAAA&ccb=7-5&oh=00_AfJR0_LTVKQRCGpdsbA2Bz5N3BNO7VM4Y8oktSmXto_vIQ&oe=68351E53&_nc_sid=1e20d2",
+          "coverImage": "https://images.unsplash.com/photo-1611262588024-d12430b98920?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "url": "https://www.instagram.com/engineering_in_kannada/",
           "icon": "Instagram"
         },
@@ -24,7 +24,7 @@
           "id": "twitter",
           "title": "Twitter",
           "description": "Tech updates and announcements",
-          "coverImage": "",
+          "coverImage": "https://images.unsplash.com/photo-1679061399645-f2d8eccd7328?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "url": "https://twitter.com/chandansgowdru",
           "icon": "Twitter"
         }
