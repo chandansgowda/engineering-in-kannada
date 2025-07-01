@@ -27,6 +27,15 @@ export function VideoCard({ video }: VideoCardProps) {
   const [showNotes, setShowNotes] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
 
+  const getVideoId = (url: string): string | null => {
+    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
+  const videoId = video.youtubeUrl ? getVideoId(video.youtubeUrl) : null;
+  const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
+
   const playCelebrationSound = () => {
     const audioContext = new (window.AudioContext ||
       (window as { webkitAudioContext?: typeof AudioContext })
@@ -130,6 +139,24 @@ export function VideoCard({ video }: VideoCardProps) {
   return (
     <>
       <div className="rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 p-4 sm:p-6 transition-all duration-300 hover:bg-white/20">
+        {thumbnailUrl && (
+          <div className="mb-4 rounded-lg overflow-hidden w-full">
+            <a href={video.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block w-full">
+              <div className="relative pt-[56.25%] bg-black rounded-lg">
+                <img
+                  src={thumbnailUrl}
+                  alt={`${video.title} thumbnail`}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'https://via.placeholder.com/800x450?text=Thumbnail+Not+Available';
+                  }}
+                />
+              </div>
+            </a>
+          </div>
+        )}
+        
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-3">
