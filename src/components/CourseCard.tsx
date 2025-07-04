@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Course } from "../types";
 import { BookOpen, Star } from "lucide-react";
 import { useProgressStore } from "../store/progress";
+import ShareButton from "./ShareButton"; // Import the new ShareButton
 import { getTotalVideos } from "../utils/courseUtils";
 
 interface CourseCardProps {
@@ -65,6 +66,14 @@ export function CourseCard({ course }: CourseCardProps) {
           {course.title}
         </h3>
         <p className="mt-2 text-gray-400">{course.description}</p>
+        {course && course.id && course.title && (
+          <div className="mt-4 flex justify-end"> {/* onClick prop removed here as ShareButton handles its own click */}
+            <ShareButton
+              url={`${window.location.origin}/course/${course.id}`}
+              title={course.title}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

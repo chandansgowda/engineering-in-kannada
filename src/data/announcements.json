@@ -3,19 +3,19 @@
     {
       "id": "quote-1",
       "type": "quote",
-      "content": "The only way to do great work is to love what you do.",
+      "contentKey": "announcement.quote1",
       "isActive": true
     },
     {
       "id": "announcement-1",
       "type": "announcement",
-      "content": "DSA in Python course coming soon! Stay tuned for updates.",
+      "contentKey": "announcement.dsaPython",
       "isActive": true
     },
     {
       "id": "announcement-2",
       "type": "announcement",
-      "content": "Follow me on Instagram for short form tutorials and tech updates.",
+      "contentKey": "announcement.followInstagram",
       "isActive": true
     }
   ]

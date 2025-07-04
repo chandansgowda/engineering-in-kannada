@@ -1,17 +1,24 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getBlogPosts } from '../utils/blogUtils';
 import { truncateWords } from '../utils/textUtils';
 import { Calendar, User, Tag, BookOpen } from 'lucide-react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { ScrollToTop } from '../components/ScrollToTop'; // 🟢 Import ScrollToTop component
+import { useTranslation } from 'react-i18next';
+import { BlogPost } from '../types'; // For useState typing
+import ShareButton from '../components/ShareButton'; // Import the new ShareButton
 
 export function Blogs() {
-  const blogs = getBlogPosts();
+  const { t, i18n } = useTranslation(); // Ensure i18n is destructured
+  const [blogs, setBlogs] = useState<BlogPost[]>([]); // Use state for blogs
+
+  useEffect(() => {
+    setBlogs(getBlogPosts()); // Fetch/update blogs when language changes
+  }, [i18n.language]); // Dependency on language change
 
   return (
     <div className="min-h-screen bg-dark">
-      <ScrollToTop /> {/* 🟢 Add ScrollToTop component */}
       <Header />
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-20">
@@ -21,7 +28,7 @@ export function Blogs() {
             <div className="h-0.5 w-12 bg-primary/50"></div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-yellow-400 to-primary bg-clip-text text-transparent pb-2">
-            Explore Our Tech Blogs
+            {t('blogPageHeader')}
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -29,7 +36,7 @@ export function Blogs() {
             <Link
               key={blog.slug}
               to={`/blogs/${blog.slug}`}
-              className="group cursor-pointer overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:bg-white/20"
+              className="group cursor-pointer flex flex-col justify-between overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:bg-white/20"
             >
               <div className="p-6">
                 <div className="flex items-center gap-4 text-gray-400 text-sm mb-4">
@@ -59,6 +66,14 @@ export function Blogs() {
                     </span>
                   ))}
                 </div>
+                {blog && blog.slug && blog.metadata && blog.metadata.title && (
+                  <div className="mt-4 pt-4 border-t border-white/10 flex justify-end"> {/* onClick prop removed here as ShareButton handles its own click */}
+                    <ShareButton
+                      url={`${window.location.origin}/blogs/${blog.slug}`}
+                      title={blog.metadata.title}
+                    />
+                  </div>
+                )}
               </div>
             </Link>
           ))}

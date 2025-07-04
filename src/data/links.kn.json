@@ -1,29 +1,29 @@
-{ 
+{
   "categories": [
     {
       "id": "social",
-      "title": "Social Handles",
+      "title": "ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮಗಳು",
       "links": [
         {
           "id": "youtube",
-          "title": "YouTube",
-          "description": "Engineering tutorials in Kannada",
+          "title": "ಯೂಟ್ಯೂಬ್",
+          "description": "ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್ ಟ್ಯುಟೋರಿಯಲ್‌ಗಳು",
           "coverImage": "https://yt3.googleusercontent.com/amnUIY2deziC779S2Cxx7_4U95lwXsH-Vv1PgpjiCAvzVUpdD-vmjoV3VLZlzHH0fG-BNEgUxeg=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
           "url": "https://www.youtube.com/@EngineeringinKannada",
           "icon": "Youtube"
         },
         {
           "id": "instagram",
-          "title": "Instagram",
-          "description": "Short-form tutorials and updates",
+          "title": "ಇನ್‌ಸ್ಟಾಗ್ರಾಮ್",
+          "description": "ಸಣ್ಣ ಟ್ಯುಟೋರಿಯಲ್‌ಗಳು ಮತ್ತು ಅಪ್‌ಡೇಟ್‌ಗಳು",
           "coverImage": "https://en.m.wikipedia.org/wiki/File:Instagram_logo_2022.svg",
           "url": "https://www.instagram.com/engineering_in_kannada/",
           "icon": "Instagram"
         },
         {
           "id": "twitter",
-          "title": "Twitter",
-          "description": "Tech updates and announcements",
+          "title": "ಟ್ವಿಟರ್",
+          "description": "ತಾಂತ್ರಿಕ ಅಪ್‌ಡೇಟ್‌ಗಳು ಮತ್ತು ಪ್ರಕಟಣೆಗಳು",
           "coverImage": "https://en.m.wikipedia.org/wiki/File:Logo_of_Twitter.svg",
           "url": "https://twitter.com/chandansgowdru",
           "icon": "Twitter"
@@ -32,20 +32,20 @@
     },
     {
       "id": "professional",
-      "title": "Professional",
+      "title": "ವೃತ್ತಿಪರ",
       "links": [
         {
           "id": "github",
-          "title": "GitHub",
-          "description": "Open source projects and contributions",
+          "title": "ಗಿಟ್‌ಹಬ್",
+          "description": "ಓಪನ್ ಸೋರ್ಸ್ ಯೋಜನೆಗಳು ಮತ್ತು ಕೊಡುಗೆಗಳು",
           "coverImage": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb",
           "url": "https://github.com/chandansgowda",
           "icon": "Github"
         },
         {
           "id": "linkedin",
-          "title": "LinkedIn",
-          "description": "Professional profile and network",
+          "title": "ಲಿಂಕ್ಡ್‌ಇನ್",
+          "description": "ವೃತ್ತಿಪರ ಪ್ರೊಫೈಲ್ ಮತ್ತು ನೆಟ್‌ವರ್ಕ್",
           "coverImage": "https://images.unsplash.com/photo-1611944212129-29977ae1398c",
           "url": "https://www.linkedin.com/in/chandan-s-gowda-4b2913183/",
           "icon": "Linkedin"
@@ -54,12 +54,12 @@
     },
     {
       "id": "python-notes-1",
-      "title": "Python Notes",
+      "title": "ಪೈಥಾನ್ ನೋಟ್ಸ್",
       "links": [
         {
           "id": "notes-1",
-          "title": "Study Notes",
-          "description": "Free learning resources and notes",
+          "title": "ಸ್ಟಡಿ ನೋಟ್ಸ್",
+          "description": "ಉಚಿತ ಕಲಿಕಾ ಸಂಪನ್ಮೂಲಗಳು ಮತ್ತು ನೋಟ್ಸ್",
           "coverImage": "https://images.unsplash.com/photo-1517842645767-c639042777db",
           "url": "https://github.com/chandansgowda/learn-python-in-kannada",
           "icon": "FileText"
@@ -68,6 +68,3 @@
     }
   ]
 }
-
-
-

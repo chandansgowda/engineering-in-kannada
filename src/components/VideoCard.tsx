@@ -3,7 +3,7 @@ import { Video } from "../types";
 import { PlayCircle, FileText, CheckCircle, Star, Code, Share2 } from "lucide-react";
 import { useProgressStore } from "../store/progress";
 import confetti from "canvas-confetti";
-import { dispatchToast } from "../utils/toastWithCustomMessages";
+import { toastWithCustomMessages } from "../utils/toastWithCustomMessages"; // Changed import
 import { useBreakpoint } from "../utils/useBreakPoint";
 import { NotesViewer } from "./NotesViewer";
 import EmbedVideoComponent from "./EmbedVideoComponent";
@@ -159,7 +159,7 @@ export function VideoCard({ video }: VideoCardProps) {
 
   const handleNotesAndVideoClick = (uri: string | undefined) => {
     if (!uri) {
-      dispatchToast(
+      toastWithCustomMessages.showInfo( // Changed to showInfo
         "🚀 Coming Soon! Stay tuned.",
         isDesktop ? "top-right" : "bottom-center"
       );
@@ -232,7 +232,7 @@ export function VideoCard({ video }: VideoCardProps) {
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-dark transition-colors hover:bg-primary/80"
             onClick={() => {
               if (!video.youtubeUrl) {
-                dispatchToast(
+                toastWithCustomMessages.showInfo( // Changed to showInfo
                   "Video coming soon!",
                   isDesktop ? "top-right" : "bottom-center"
                 );

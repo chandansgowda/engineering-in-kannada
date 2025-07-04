@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation  } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { MetaTags } from "./components/MetaTags"; // Import MetaTags
 import { HomePage } from "./pages/HomePage";
 import { CoursePage } from "./pages/CoursePage";
 import { LeaderboardPage } from "./pages/LeaderboardPage";
@@ -25,6 +26,7 @@ function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <BrowserRouter>
+      <MetaTags /> {/* Add default MetaTags here */}
       <AnalyticsWrapper>
         <Routes>
           <Route path="/" element={<HomePage />} />

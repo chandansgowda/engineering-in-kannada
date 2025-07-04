@@ -1,0 +1,117 @@
+{
+  "courseId": "python-fundamentals",
+  "videos": [
+    {
+      "id": "python-fundamentals-1",
+      "title": "೧. ಕೋಡಿಂಗ್ ಮತ್ತು ಪೈಥಾನ್‌ಗೆ ಪರಿಚಯ",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/8c74mXV2lJ0?si=6WGfdVNzahy-B37U",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/1.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-2",
+      "title": "೨. ಪೈಥಾನ್ ವೇರಿಯೇಬಲ್‌ಗಳು ಮತ್ತು ಡೇಟಾ ಪ್ರಕಾರಗಳು",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/jr1FF9-VAJs",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/2.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-3a",
+      "title": "೩. ಇನ್‌ಪುಟ್ ಮತ್ತು ಔಟ್‌ಪುಟ್/ಪ್ರಿಂಟ್",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/0qo3QEidzjA",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/3.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-3b",
+      "title": "೪. ಸ್ಟ್ರಿಂಗ್ ಡೇಟಾ ಪ್ರಕಾರ",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/AWptcpgp8XU",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/3.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-4",
+      "title": "೫. ಆಪರೇಟರ್‌ಗಳು",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/w8tfQWolQnE",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/4.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-5",
+      "title": "೬. ಲಿಸ್ಟ್‌ಗಳ ಕಾರ್ಯಾಚರಣೆಗಳು, ವಿಧಾನಗಳು ಮತ್ತು ಕಾರ್ಯಗಳು",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/bvohjRepLz0",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/5.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-6",
+      "title": "೭. ಟಪಲ್‌ಗಳು ಮತ್ತು ಸೆಟ್‌ಗಳ ಕಾರ್ಯಾಚರಣೆಗಳು ಮತ್ತು ವ್ಯತ್ಯಾಸ",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/Y3WapTGp7vc",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/6.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-7",
+      "title": "೮. ಡಿಕ್ಷನರಿಗಳ ಕಾರ್ಯಾಚರಣೆಗಳು, ವಿಧಾನಗಳು ಮತ್ತು ಕಾರ್ಯಗಳು",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/S_xF9ThJ8Jw",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/7.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-8",
+      "title": "೯. ಷರತ್ತುಬದ್ಧ ಹೇಳಿಕೆಗಳು: if, elif, else",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/lMdSvt68BkE",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/8.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-9",
+      "title": "೧೦. While ಲೂಪ್‌ಗಳು",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/LzMNs0nhZW0",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/9.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-10",
+      "title": "೧೧. For ಲೂಪ್‌ಗಳು",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/dqhhBt_YF0o",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/10.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-11",
+      "title": "೧೨. ಲಿಸ್ಟ್‌ಗಳು ಮತ್ತು ಡಿಕ್ಷನರಿಗಳಲ್ಲಿ ಕಾಂಪ್ರಹೆನ್ಷನ್‌ಗಳು",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/VYDVqCQy5mg",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/11.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-12",
+      "title": "೧೩. ಫಂಕ್ಷನ್‌ಗಳು, ಪ್ಯಾರಾಮೀಟರ್‌ಗಳು, ಲೋಕಲ್ vs ಗ್ಲೋಬಲ್ ವೇರಿಯಬಲ್‌ಗಳು",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/-5XRSvBjyW8",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/12.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "python-fundamentals-13",
+      "title": "೧೪. ಲ್ಯಾಂಬ್ಡಾ ಫಂಕ್ಷನ್‌ಗಳು, ರಿಕರ್ಷನ್, args ಮತ್ತು kwargs",
+      "type": "Theory",
+      "youtubeUrl": "https://www.youtube.com/embed/COH03FV6YlU",
+      "notesUrl": "https://github.com/chandansgowda/learn-python-in-kannada/blob/main/notes/13.md",
+      "codingQuestionUrl": ""
+    }
+  ]
+}
