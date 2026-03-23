@@ -1,31 +1,43 @@
-# feat: Implement complete technical blog engine with humanized Karnataka analogies
+# feat: Add blog engine UI, LikeButton, and Blog reading experience
 
 ## Summary
-This PR introduces a robust, full-featured blog ecosystem for the "Engineering in Kannada" project. Moving beyond static pages, this implementation provides a premium digital library designed to simplify complex engineering concepts using the local cultural context of Karnataka. The goal is to lower the barrier to entry for engineering students by combining high-level technical depth with familiar, real-world analogies.
+This PR introduces the complete **blog feature layer** for the "Engineering in Kannada" project — the UI, navigation, and reading experience infrastructure. No blog content is added in this PR; blog posts will be submitted individually in separate PRs.
 
-## Key Functionalities
-- **Technical Library (100+ Posts)**: A comprehensive collection of blogs covering AI/ML, DevOps, Web Development, and Career Skills. Each post uses a unique "English + Kannada" mix for maximum retention.
-- **Dynamic Search & Discovery**: Implemented a responsive search engine with debounced input and real-time filtering across 100+ topics.
-- **Categorized Navigation**: Systematic tagging and domain-based categorization (e.g., Artificial Intelligence, Backend, Career) for structured learning paths.
-- **Interactive Engagement**: Integrated a custom `LikeButton` component with SVG animations, local state persistence, and baseline social proof counts.
-- **Contextual Cross-Linking**: Smart "Related Posts" logic that allows students to follow a technical thread (e.g., starting with *What is an API?* and navigating to *REST vs. GraphQL*).
+## What's Changed
 
-## UI/UX Enhancements
-- **Humanized Analogies**: Every technical post is grounded in local landmarks (e.g., *Silk Board for Deadlocks*, *Manyata Tech Park for DSA*), making abstract concepts tangible.
-- **Modern Design System**: A high-performance UI using Tailwind CSS with glassmorphism effects, depth-layered headers, and subtle micro-animations.
-- **Mobile-First Experience**: Optimized typography for both Kannada and Latin scripts, ensuring a comfortable reading experience on all devices.
-- **Search Highlighting**: Integrated a `Highlighter` component that provides visual cues for search terms within the results.
+### New Components (`src/components/blogs/`)
+- **`BlogCard.tsx`** — Card component for displaying blog post previews with domain tag, difficulty badge, read time, author, and tags
+- **`BlogHeader.tsx`** — Hero section for the `/blogs` listing page
+- **`BlogSection.tsx`** — Collapsible domain section that groups blogs by category (e.g., AI/ML, Backend, DevOps)
+- **`EmptyState.tsx`** — Friendly empty state UI shown when no blogs match filters
+- **`SearchBar.tsx`** — Debounced search input for filtering blogs by title/tags
+- **`CategoryFilter.tsx`** — Filter pill buttons for browsing by domain
+- **`TagFilter.tsx`** — Tag-level filtering for fine-grained discovery
+- **`Highlighter.tsx`** — Highlights matched search terms within blog card text
 
-## Impact on Users
-- **Bridge the Knowledge Gap**: Students often struggle with textbook definitions. By using analogies like "Darshini Kitchen" for Process/Threads or "Nandi Milk Packets" for Recursion, we've made learning intuitive.
-- **Improved Content Discovery**: The search-first layout allows students to find answers to specific technical doubts instantly.
-- **Higher Retention**: The bilingual approach respects the student's primary language while preparing them for English-speaking technical interviews.
+### New Components (`src/components/`)
+- **`LikeButton.tsx`** — Interactive like button with SVG heart animation and `localStorage`-based persistence per blog post
 
-## Technical Details
-- **Architecture**: Markdown-driven content structure allowing for easy future updates.
-- **Performance**: Optimized asset loading and component re-renders for a snappy, app-like feel.
-- **Components**: Reusable card layouts, header sections, and interactive feedback systems.
+### Updated Pages (`src/pages/`)
+- **`Blogs.tsx`** — Full blog listing page with domain-based grouping, collapsible sections, and filter/reset logic
+- **`BlogPost.tsx`** — Individual blog post reading page with:
+  - Markdown rendering via `react-markdown` + `remark-gfm`
+  - Domain, difficulty, and read-time metadata display
+  - Author with optional GitHub/LinkedIn link
+  - Tags section
+  - "Related Blogs" grid at the bottom
+  - Integrated `LikeButton`
 
----
+### Styling (`src/index.css`, `tailwind.config.js`)
+- Blog-specific typography styles for Markdown prose rendering
+- Tailwind `prose-invert` configuration for dark-mode content readability
 
-*Verified on Windows/Node.js. Deployment tested via build script.*
+## What's NOT in this PR
+- ❌ No blog content files (`.md` content, `metadata.json`)
+- Blog posts will be added one-by-one in separate PRs (one PR per blog)
+
+## Testing
+- Verified on Windows / Node.js with `npm run dev`
+- Blog listing page renders correctly with 0 or more blog posts
+- Empty state shows when no blogs are available
+- Like button persists state across page reloads via `localStorage`
