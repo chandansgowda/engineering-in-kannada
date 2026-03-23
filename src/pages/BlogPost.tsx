@@ -62,7 +62,7 @@ export const BlogPost: React.FC = () => {
                 </span>
               )}
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">{blog.metadata.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-semibold mb-6 font-display">{blog.metadata.title}</h1>
             <div className="flex items-center gap-6 text-gray-400 text-sm">
               <span>
                 By{' '}

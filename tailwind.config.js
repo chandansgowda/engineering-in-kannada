@@ -7,6 +7,10 @@ export default {
         primary: "#FFD700",
         dark: "#1A1A1A",
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Inter', 'sans-serif'],
+      },
       backdropBlur: {
         xs: "2px",
       },
@@ -14,6 +18,11 @@ export default {
         DEFAULT: {
           css: {
             color: "white",
+            fontFamily: 'Inter, sans-serif',
+            'h1, h2, h3, h4, h5, h6': {
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '600',
+            },
             a: {
               color: "#FFD700",
               "&:hover": {

@@ -36,7 +36,7 @@ export function Blogs() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-gray-200 font-sans selection:bg-primary/30">
+    <div className="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-primary/30">
       <ScrollToTop />
       <Header />
       

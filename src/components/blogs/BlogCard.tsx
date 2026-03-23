@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { User, Tag, Clock } from 'lucide-react';
+import { User, Tag, Clock, Heart } from 'lucide-react';
 import { BlogPost } from '../../types';
 import { truncateWords } from '../../utils/textUtils';
 import { Highlighter } from './Highlighter';
@@ -55,12 +55,18 @@ export function BlogCard({ blog, searchTerm = "" }: BlogCardProps) {
               </div>
               <span className="group-hover:text-gray-400">{blog.metadata.author}</span>
             </div>
-            {blog.metadata.readTime && (
+            <div className="flex items-center gap-2">
               <div className="flex items-center gap-1 px-1.5 md:px-2 py-0.5 md:py-1 rounded-md bg-white/[0.03] border border-white/[0.05]">
-                <Clock className="h-2 md:h-2.5 w-2 md:w-2.5 text-primary/60" />
-                <span className="tracking-tighter opacity-70 group-hover:opacity-100">{blog.metadata.readTime}</span>
+                <Heart className={`h-2 md:h-2.5 w-2 md:w-2.5 ${JSON.parse(localStorage.getItem('likedPosts') || '{}')[blog.slug] ? 'text-primary fill-primary' : 'text-primary/60'}`} />
+                <span className="tracking-tighter opacity-70 group-hover:opacity-100">{(blog.slug.split('').reduce((acc, char) => acc + (char.codePointAt(0) || 0), 0) % 3) + 10 + (JSON.parse(localStorage.getItem('likedPosts') || '{}')[blog.slug] ? 1 : 0)}</span>
               </div>
-            )}
+              {blog.metadata.readTime && (
+                <div className="flex items-center gap-1 px-1.5 md:px-2 py-0.5 md:py-1 rounded-md bg-white/[0.03] border border-white/[0.05]">
+                  <Clock className="h-2 md:h-2.5 w-2 md:w-2.5 text-primary/60" />
+                  <span className="tracking-tighter opacity-70 group-hover:opacity-100">{blog.metadata.readTime}</span>
+                </div>
+              )}
+            </div>
           </div>
           
           <div className="flex flex-wrap gap-1 md:gap-1.5">

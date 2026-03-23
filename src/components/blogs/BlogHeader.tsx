@@ -9,12 +9,12 @@ export function BlogHeader() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
 
-          <h1 className="text-3xl md:text-5xl lg:text-5xl font-black text-white mb-1.5 md:mb-2 tracking-tighter leading-[1.1] md:leading-[1.1]">
+          <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold text-white mb-1.5 md:mb-2 tracking-tight leading-[1.1] md:leading-[1.1] font-display">
             Engineering Concepts,
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-br from-primary via-yellow-400 to-yellow-600">Simplified in Kannada.</span>
           </h1>
-          <p className="text-[9px] md:text-xs text-gray-300 mb-0 max-w-lg mx-auto leading-relaxed font-black px-4 md:px-0 opacity-90 uppercase tracking-widest">
+          <p className="text-base md:text-lg text-gray-300 mb-0 max-w-2xl mx-auto leading-relaxed px-4 md:px-0 opacity-90 font-sans">
             Bridging the gap between complex concepts and local context. Premium resources for the next generation of engineers.
           </p>
         </div>

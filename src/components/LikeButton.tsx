@@ -17,8 +17,8 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ slug }) => {
 
     // Mock likes count (since we don't have a backend)
     // We'll generate a consistent "fake" number based on the slug, starting from 10
-    const hash = slug.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const baseLikes = (hash % 90) + 10;
+    const hash = slug.split('').reduce((acc, char) => acc + (char.codePointAt(0) || 0), 0);
+    const baseLikes = (hash % 3) + 10;
     setLikes(baseLikes + (likedPosts[slug] ? 1 : 0));
   }, [slug]);
 

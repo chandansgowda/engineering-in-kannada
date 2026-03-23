@@ -32,11 +32,11 @@ export function BlogSection({ domain, blogs, isExpanded, searchTerm, onToggle }:
               <Compass className="w-4 md:w-5 h-4 md:h-5" />
             </div>
             <div>
-              <h2 className={`text-lg md:text-2xl font-black transition-all duration-500 tracking-tighter ${isExpanded ? 'text-white' : 'text-gray-400 group-hover:text-white'}`}>
+              <h2 className={`text-xl md:text-2xl font-bold font-display tracking-tight transition-all duration-500 ${isExpanded ? 'text-white' : 'text-white/80 group-hover:text-white'}`}>
                 {domain}
               </h2>
-              <p className="text-[9px] md:text-[10px] text-gray-600 mt-0.5 font-black uppercase tracking-[0.15em] opacity-60">
-                {blogs.length} {blogs.length === 1 ? 'Collection' : 'Collections'}
+              <p className="text-xs md:text-sm text-gray-400 mt-1 font-medium italic opacity-80 font-sans">
+                {blogs.length} {blogs.length === 1 ? 'topic covered' : 'topics covered'}
               </p>
             </div>
           </div>
