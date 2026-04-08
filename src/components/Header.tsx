@@ -1,141 +1,117 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Home, Trophy, FileText, Link2 } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Home, Trophy, FileText, Link2, BookOpen } from 'lucide-react';
+
+const NAV_LINKS = [
+  { to: '/', label: 'Courses', icon: Home, match: (p: string) => p === '/' || p === '/courses' },
+  { to: '/leaderboard', label: 'Leaderboard', icon: Trophy, match: (p: string) => p === '/leaderboard' },
+  { to: '/blogs', label: 'Blogs', icon: FileText, match: (p: string) => p.startsWith('/blogs') },
+  { to: '/links', label: 'Links', icon: Link2, match: (p: string) => p === '/links' },
+];
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Close menu on route change
+  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+
   return (
-    <header className="bg-dark/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2">
+    <div className="fixed top-4 left-0 right-0 z-[9999] flex flex-col items-center px-4">
+      {/* Pill navbar */}
+      <nav
+        className={`pill-glass w-full max-w-[90vw] transition-all duration-300 ${scrolled ? 'pill-glass-scrolled' : ''}`}
+      >
+        <div className="flex items-center justify-between px-5 py-3 h-14">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 shrink-0">
             <img
               src="/images/logo.jpg"
               alt="Engineering in Kannada"
-              className="w-8 h-8 rounded-full"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = 'https://via.placeholder.com/32?text=EK';
-              }}
+              className="w-8 h-8 object-contain self-center"
+              onError={(e) => { (e.target as HTMLImageElement).src = 'https://via.placeholder.com/32?text=EK'; }}
             />
-            <span className="text-white font-bold text-lg hidden sm:inline">
+            <span className="text-white font-semibold text-sm hidden sm:block whitespace-nowrap self-center">
               Engineering in Kannada
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link
-              to="/"
-              className={`flex items-center gap-2 text-sm ${
-                location.pathname === "/" || location.pathname === "/courses"
-                  ? "text-primary"
-                  : "text-gray-300 hover:text-primary"
-              }`}
-            >
-              <Home className="h-4 w-4" />
-              Courses
-            </Link>
-            <Link
-              to="/leaderboard"
-              className={`flex items-center gap-2 text-sm ${
-                location.pathname === "/leaderboard"
-                  ? "text-primary"
-                  : "text-gray-300 hover:text-primary"
-              }`}
-            >
-              <Trophy className="h-4 w-4" />
-              Leaderboard
-            </Link>
-            <Link
-              to="/blogs"
-              className={`flex items-center gap-2 text-sm ${
-                location.pathname.includes("/blogs")
-                  ? "text-primary"
-                  : "text-gray-300 hover:text-primary"
-              }`}
-            >
-              <FileText className="h-4 w-4" />
-              Blogs
-            </Link>
-            <Link
-              to="/links"
-              className={`flex items-center gap-2 text-sm ${
-                location.pathname === "/links"
-                  ? "text-primary"
-                  : "text-gray-300 hover:text-primary"
-              }`}
-            >
-              <Link2 className="h-4 w-4" />
-              Links
-            </Link>
-          </nav>
+          {/* Desktop nav — center */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map(({ to, label, match }) => (
+              <Link
+                key={to}
+                to={to}
+                className={`px-3 py-1.5 rounded-full text-sm transition-colors duration-200 ${
+                  match(location.pathname)
+                    ? 'text-primary bg-primary/10'
+                    : 'text-gray-300 hover:text-primary hover:bg-white/5'
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* CTA + hamburger */}
+          <div className="flex items-center gap-2">
+            <a
+              href="https://www.youtube.com/@EngineeringinKannada"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-dark text-sm font-semibold hover:bg-primary-dark transition-colors duration-200"
+            >
+              <BookOpen className="h-3.5 w-3.5" />
+              Watch Free
+            </a>
+            <button
+              className="md:hidden text-white p-1"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
+      </nav>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <nav className="mt-4 flex flex-col gap-2 md:hidden">
-            <Link
-              to="/"
-              className={`flex items-center gap-2 p-2 text-sm ${
-                location.pathname === "/" || location.pathname === "/courses"
-                  ? "text-primary"
-                  : "text-gray-300 hover:text-primary"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+      {/* Mobile drawer — slides down below pill */}
+      {menuOpen && (
+        <div className="mt-2 w-full max-w-[90vw] animate-slide-down overflow-hidden rounded-none bg-[rgba(15,15,26,0.95)] border border-white/10 backdrop-blur-[16px]">
+          <div className="flex flex-col gap-1 p-3">
+            {NAV_LINKS.map(({ to, label, icon: Icon, match }) => (
+              <Link
+                key={to}
+                to={to}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm transition-colors ${
+                  match(location.pathname)
+                    ? 'text-primary bg-primary/10'
+                    : 'text-gray-300 hover:text-primary hover:bg-white/5'
+                }`}
+              >
+                <Icon className="h-4 w-4" />
+                {label}
+              </Link>
+            ))}
+            <a
+              href="https://www.youtube.com/@EngineeringinKannada"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary text-dark text-sm font-semibold mt-1"
             >
-              <Home className="h-4 w-4" />
-              Courses
-            </Link>
-            <Link
-              to="/leaderboard"
-              className={`flex items-center gap-2 p-2 text-sm ${
-                location.pathname === "/leaderboard"
-                  ? "text-primary"
-                  : "text-gray-300 hover:text-primary"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Trophy className="h-4 w-4" />
-              Leaderboard
-            </Link>
-            <Link
-              to="/blogs"
-              className={`flex items-center gap-2 p-2 text-sm ${
-                location.pathname.includes("/blogs")
-                  ? "text-primary"
-                  : "text-gray-300 hover:text-primary"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <FileText className="h-4 w-4" />
-              Blogs
-            </Link>
-            <Link
-              to="/links"
-              className={`flex items-center gap-2 p-2 text-sm ${
-                location.pathname === "/links"
-                  ? "text-primary"
-                  : "text-gray-300 hover:text-primary"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Link2 className="h-4 w-4" />
-              Links
-            </Link>
-          </nav>
-        )}
-      </div>
-    </header>
+              <BookOpen className="h-4 w-4" />
+              Watch Free on YouTube
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

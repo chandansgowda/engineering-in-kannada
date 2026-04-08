@@ -1,69 +1,86 @@
 import { Link } from 'react-router-dom';
 import { getBlogPosts } from '../utils/blogUtils';
 import { truncateWords } from '../utils/textUtils';
-import { Calendar, User, Tag, BookOpen } from 'lucide-react';
+import { Calendar, User, Tag, ArrowRight } from 'lucide-react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { ScrollToTop } from '../components/ScrollToTop'; // 🟢 Import ScrollToTop component
+import { ScrollToTop } from '../components/ScrollToTop';
 
 export function Blogs() {
   const blogs = getBlogPosts();
 
   return (
     <div className="min-h-screen bg-dark">
-      <ScrollToTop /> {/* 🟢 Add ScrollToTop component */}
+      <ScrollToTop />
       <Header />
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="h-0.5 w-12 bg-primary/50"></div>
-            <BookOpen className="h-6 w-6 text-primary" />
-            <div className="h-0.5 w-12 bg-primary/50"></div>
+
+      <div className="mx-auto max-w-5xl px-4 pt-28 pb-16 page-enter">
+        {/* Page heading */}
+        <div className="mb-10">
+          <h1 className="text-3xl font-bold text-white">Blogs</h1>
+          <p className="mt-1 text-sm text-gray-400">
+            Articles, guides and tutorials from the community
+          </p>
+        </div>
+
+        {blogs.length === 0 ? (
+          <div className="rounded-2xl bg-dark-2 border border-white/10 p-12 text-center">
+            <p className="text-gray-400">No blogs published yet. Check back soon.</p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-yellow-400 to-primary bg-clip-text text-transparent pb-2">
-            Explore Our Tech Blogs
-          </h1>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogs.map((blog) => (
-            <Link
-              key={blog.slug}
-              to={`/blogs/${blog.slug}`}
-              className="group cursor-pointer overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:bg-white/20"
-            >
-              <div className="p-6">
-                <div className="flex items-center gap-4 text-gray-400 text-sm mb-4">
-                  <div className="flex items-center gap-2">
-                    <User className="h-4 w-4 text-primary" />
-                    <span>{blog.metadata.author}</span>
+        ) : (
+          <div className="flex flex-col gap-4">
+            {blogs.map((blog) => (
+              <Link
+                key={blog.slug}
+                to={`/blogs/${blog.slug}`}
+                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4
+                           rounded-2xl bg-dark-2 border border-white/10 px-6 py-5
+                           hover:border-primary/40 hover:bg-dark-3 transition-all duration-200"
+              >
+                {/* Left */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
+                    {blog.metadata.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
+                      >
+                        <Tag className="h-2.5 w-2.5" />
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-primary" />
-                    <span>{new Date(blog.metadata.date).toLocaleDateString()}</span>
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3 leading-tight">
-                  {truncateWords(blog.metadata.title, 10)}
-                </h3>
-                <p className="text-gray-300 text-sm mb-4 leading-relaxed">
-                  {truncateWords(blog.metadata.description, 20)}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {blog.metadata.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center gap-1 rounded-full bg-primary/20 px-3 py-1 text-sm font-medium text-primary backdrop-blur-sm"
-                    >
-                      <Tag className="h-3 w-3" />
-                      {tag}
+
+                  <h2 className="text-base font-semibold text-white leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                    {truncateWords(blog.metadata.title, 12)}
+                  </h2>
+
+                  <p className="mt-1 text-sm text-gray-400 line-clamp-2">
+                    {truncateWords(blog.metadata.description, 20)}
+                  </p>
+
+                  <div className="flex items-center gap-4 mt-3 text-xs text-gray-500">
+                    <span className="flex items-center gap-1">
+                      <User className="h-3 w-3" />
+                      {blog.metadata.author}
                     </span>
-                  ))}
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3 w-3" />
+                      {new Date(blog.metadata.date).toLocaleDateString('en-IN', {
+                        day: 'numeric', month: 'short', year: 'numeric',
+                      })}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+
+                {/* Arrow */}
+                <ArrowRight className="h-4 w-4 text-gray-600 group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
+
       <Footer />
     </div>
   );

@@ -1,14 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.custom-progress {
-    background: #FFD700;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0f0f1a;
+    color: white;
+    font-family: 'Noto Sans Kannada', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Thin saffron scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #13131f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #f59e0b;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d97706;
+  }
 }
 
+@layer components {
+  /* Frosted glass pill — shared by header & footer */
+  .pill-glass {
+    background: rgba(15, 15, 26, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-radius: 9999px;
+  }
+
+  .pill-glass-scrolled {
+    background: rgba(15, 15, 26, 0.92);
+  }
+
+  /* Page fade-in transition */
+  .page-enter {
+    animation: fadeIn 200ms ease-in-out;
+  }
+}
+
+/* Toast overrides */
 .custom-toast {
-    @apply bg-dark text-white rounded-lg shadow-lg;
-    @media (min-width: 768px) {
-    margin-top: 10vh;
-    }
+  background: rgba(19, 19, 31, 0.95) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(16px);
+}
+
+.custom-progress {
+  background: #f59e0b !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

@@ -1,0 +1,27 @@
+{
+  "courseId": "c-fundamentals",
+  "videos": [
+    { "videoId": "0sd6OpPG2UM", "title": "C Programming Crash Course in Kannada | Intro, Input/Output, Data Types and Operators", "thumbnail": "https://i.ytimg.com/vi/0sd6OpPG2UM/mqdefault.jpg", "description": "", "position": 0 },
+    { "videoId": "LEb_PirvYEU", "title": "C Programming Crash Course in Kannada | If-else, For & While Loops, Switch case", "thumbnail": "https://i.ytimg.com/vi/LEb_PirvYEU/mqdefault.jpg", "description": "", "position": 1 },
+    { "videoId": "RWMHf5kRmDo", "title": "C Programming Crash Course in Kannada | Arrays, Multidimensional Arrays or Matrices", "thumbnail": "https://i.ytimg.com/vi/RWMHf5kRmDo/mqdefault.jpg", "description": "", "position": 2 },
+    { "videoId": "ZNltu1NUGz4", "title": "C Programming Crash Course in Kannada | Functions, User Defined & Standard Library", "thumbnail": "https://i.ytimg.com/vi/ZNltu1NUGz4/mqdefault.jpg", "description": "", "position": 3 },
+    { "videoId": "iDe1fWnneCA", "title": "Data Structures and Algorithms in Kannada | Introduction to DSA, Types of Data Structures", "thumbnail": "https://i.ytimg.com/vi/iDe1fWnneCA/mqdefault.jpg", "description": "", "position": 4 },
+    { "videoId": "OEDZLbQqaK8", "title": "C Structures in Kannada | Define, Initialize and Manipulate Structs in C | DSA in C - 2", "thumbnail": "https://i.ytimg.com/vi/OEDZLbQqaK8/mqdefault.jpg", "description": "", "position": 5 },
+    { "videoId": "dc8DpiGAS4M", "title": "C Nested Structures in Kannada | How to nest struct inside another struct in C | DSA in C - 3", "thumbnail": "https://i.ytimg.com/vi/dc8DpiGAS4M/mqdefault.jpg", "description": "", "position": 6 },
+    { "videoId": "UfTS7LDPf2Y", "title": "Pointers in Kannada | Introduction to address and pointers in C | DSA in C - 4", "thumbnail": "https://i.ytimg.com/vi/UfTS7LDPf2Y/mqdefault.jpg", "description": "", "position": 7 },
+    { "videoId": "Ek0QrA39Uas", "title": "Pointer Arithmetic in Kannada | Addition and Subtraction in pointers and Arrays | DSA in C - 5", "thumbnail": "https://i.ytimg.com/vi/Ek0QrA39Uas/mqdefault.jpg", "description": "", "position": 8 },
+    { "videoId": "GdEy8I-m6xg", "title": "Pointer with Functions in Kannada | Local Scope, Passing Address as Parameter | DSA in C - 6", "thumbnail": "https://i.ytimg.com/vi/GdEy8I-m6xg/mqdefault.jpg", "description": "", "position": 9 },
+    { "videoId": "c-kortlln4w", "title": "Array Input and Output Operations in Kannada | Arrays Menu Driven Program | DSA in C - 7", "thumbnail": "https://i.ytimg.com/vi/c-kortlln4w/mqdefault.jpg", "description": "", "position": 10 },
+    { "videoId": "Yovsd8aoiV8", "title": "Linear Search Algorithm in Kannada | Arrays Menu Driven Program | DSA in C - 8", "thumbnail": "https://i.ytimg.com/vi/Yovsd8aoiV8/mqdefault.jpg", "description": "", "position": 11 },
+    { "videoId": "IwiD7shJVcQ", "title": "Binary Search Algorithm in Kannada | Algorithm with Real World Example | DSA in C - 9", "thumbnail": "https://i.ytimg.com/vi/IwiD7shJVcQ/mqdefault.jpg", "description": "", "position": 12 },
+    { "videoId": "Kf8i_vPSYRc", "title": "Binary Search in Kannada | Algorithms and Code in C | Array Menu Driven Program | DSA in C - 10", "thumbnail": "https://i.ytimg.com/vi/Kf8i_vPSYRc/mqdefault.jpg", "description": "", "position": 13 },
+    { "videoId": "D5eKRbiKY6Q", "title": "Array Insert at Position in Kannada | Array Insertion | Menu Driven Program | DSA in C - 11", "thumbnail": "https://i.ytimg.com/vi/D5eKRbiKY6Q/mqdefault.jpg", "description": "", "position": 14 },
+    { "videoId": "MBqOUNZ2nRg", "title": "Delete using Index in Kannada | Array Element Deletion | Menu Driven Program | DSA in C - 12", "thumbnail": "https://i.ytimg.com/vi/MBqOUNZ2nRg/mqdefault.jpg", "description": "", "position": 15 },
+    { "videoId": "83-lWtSuwk8", "title": "Delete Value in Array in Kannada | Array Element Deletion | Menu Driven Program | DSA in C - 13", "thumbnail": "https://i.ytimg.com/vi/83-lWtSuwk8/mqdefault.jpg", "description": "", "position": 16 },
+    { "videoId": "38CloNYtopw", "title": "Swap Two Variables Algorithm and Program in C | Swapping function using pointers | DSA in C - 14", "thumbnail": "https://i.ytimg.com/vi/38CloNYtopw/mqdefault.jpg", "description": "", "position": 17 },
+    { "videoId": "1oz7FoTJbPw", "title": "Reversing an Array Algorithm and Program in C | How to reverse an array? | DSA in C - 15", "thumbnail": "https://i.ytimg.com/vi/1oz7FoTJbPw/mqdefault.jpg", "description": "", "position": 18 },
+    { "videoId": "F56XLS0IFiE", "title": "Bubble Sort Algorithm in Kannada | How to sort an array using bubble sort? | DSA in C - 16", "thumbnail": "https://i.ytimg.com/vi/F56XLS0IFiE/mqdefault.jpg", "description": "", "position": 19 },
+    { "videoId": "NHXhQnVKKdA", "title": "Bubble Sort C Program in Kannada | How to sort an array using bubble sort? | DSA in C - 17", "thumbnail": "https://i.ytimg.com/vi/NHXhQnVKKdA/mqdefault.jpg", "description": "", "position": 20 },
+    { "videoId": "9J5qC3Jqqv0", "title": "Optimized Bubble Sort C Program in Kannada | Time complexity optimization | DSA in C - 18", "thumbnail": "https://i.ytimg.com/vi/9J5qC3Jqqv0/mqdefault.jpg", "description": "", "position": 21 }
+  ]
+}

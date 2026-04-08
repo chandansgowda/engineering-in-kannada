@@ -3,33 +3,32 @@ import announcementsData from '../data/announcements.json';
 import { AnnouncementItem } from '../types';
 
 export function AnnouncementBanner() {
-  const activeItems = announcementsData.items.filter(item => item.isActive);
+  const activeItems = (announcementsData.items as AnnouncementItem[]).filter((i) => i.isActive);
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [isVisible, setIsVisible] = React.useState(true);
+  const [visible, setVisible] = React.useState(true);
 
   React.useEffect(() => {
     if (activeItems.length <= 1) return;
-
-    const interval = setInterval(() => {
-      setIsVisible(false);
+    const id = setInterval(() => {
+      setVisible(false);
       setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % activeItems.length);
-        setIsVisible(true);
-      }, 500);
-    }, 5000);
-
-    return () => clearInterval(interval);
+        setCurrentIndex((p) => (p + 1) % activeItems.length);
+        setVisible(true);
+      }, 300);
+    }, 3000);
+    return () => clearInterval(id);
   }, [activeItems.length]);
 
   if (activeItems.length === 0) return null;
 
-  const currentItem = activeItems[currentIndex];
+  const item = activeItems[currentIndex];
 
   return (
-    <div className="rounded-lg bg-primary/10 p-4 backdrop-blur-sm">
-      <div className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <p className="text-center text-sm text-white">{currentItem.content}</p>
-      </div>
+    <div className="rounded-2xl bg-primary/10 border border-primary/20 px-5 py-3 flex items-center justify-center">
+      <p className={`text-sm text-gray-200 text-center transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}>
+        {item.content}
+        {item.author && <span className="ml-2 text-primary">— {item.author}</span>}
+      </p>
     </div>
   );
-} 
+}

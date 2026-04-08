@@ -17,7 +17,7 @@ export const BlogPost: React.FC = () => {
       <div className="min-h-screen bg-dark text-white">
         <ScrollToTop /> {/* 🟢 Add ScrollToTop component */}
         <Header />
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 pt-28 pb-8">
           <h1 className="text-4xl font-bold mb-4">Blog Post Not Found</h1>
           <Link to="/blogs" className="text-primary hover:underline">
             ← Back to Blogs
@@ -32,7 +32,7 @@ export const BlogPost: React.FC = () => {
     <div className="min-h-screen bg-dark text-white">
       <ScrollToTop /> {/* 🟢 Add ScrollToTop component */}
       <Header />
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 pt-28 pb-12 page-enter">
         <Link 
           to="/blogs"
           className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8"

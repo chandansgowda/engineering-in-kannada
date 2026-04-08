@@ -1,0 +1,15 @@
+{
+  "courseId": "python-oops",
+  "videos": [
+    { "videoId": "aXuYPVStgdk", "title": "Python in Kannada - Object Oriented Programming Introduction | Zero To Hero Full Course - #15", "thumbnail": "https://i.ytimg.com/vi/aXuYPVStgdk/mqdefault.jpg", "description": "", "position": 0 },
+    { "videoId": "at9RaJC3Jsg", "title": "Python in Kannada - Constructor, self keyword, optional parameters | Zero To Hero Full Course - #16", "thumbnail": "https://i.ytimg.com/vi/at9RaJC3Jsg/mqdefault.jpg", "description": "", "position": 1 },
+    { "videoId": "ucdxseIpfYE", "title": "Python in Kannada - Pillars of OOP | Abstraction & Encapsulation | Zero To Hero Full Course - #17A", "thumbnail": "https://i.ytimg.com/vi/ucdxseIpfYE/mqdefault.jpg", "description": "", "position": 2 },
+    { "videoId": "g14iWkxRCQs", "title": "Python in Kannada - Pillars of OOP | Inheritance & Polymorphism | Zero To Hero Full Course - #17B", "thumbnail": "https://i.ytimg.com/vi/g14iWkxRCQs/mqdefault.jpg", "description": "", "position": 3 },
+    { "videoId": "3TVZmjMeMKg", "title": "Python in Kannada - Getters Setters, Overloading & Overriding, Abstract Class | Zero To Hero - #18", "thumbnail": "https://i.ytimg.com/vi/3TVZmjMeMKg/mqdefault.jpg", "description": "", "position": 4 },
+    { "videoId": "30OXOSqQeds", "title": "Python in Kannada - Homework-3 Questions Solved (OOP) | Zero To Hero Full Course", "thumbnail": "https://i.ytimg.com/vi/30OXOSqQeds/mqdefault.jpg", "description": "", "position": 5 },
+    { "videoId": "XEv2PA1kPtA", "title": "Python in Kannada - Menu Driven Programs | Simple Calculator | Zero To Hero - #19", "thumbnail": "https://i.ytimg.com/vi/XEv2PA1kPtA/mqdefault.jpg", "description": "", "position": 6 },
+    { "videoId": "F_8vYeu7ORU", "title": "Python in Kannada - OOP Challenge - Banking System Simulation | Zero To Hero Full Course - #20.1", "thumbnail": "https://i.ytimg.com/vi/F_8vYeu7ORU/mqdefault.jpg", "description": "", "position": 7 },
+    { "videoId": "ZmskD3FohFc", "title": "Python in Kannada - OOP Challenge - Students Report Generation | Zero To Hero Full Course - #20.2", "thumbnail": "https://i.ytimg.com/vi/ZmskD3FohFc/mqdefault.jpg", "description": "", "position": 8 },
+    { "videoId": "8rrdrJQdcvM", "title": "Python in Kannada - SOLID Principles in Object Oriented Programming | Zero To Hero Full Course - #21", "thumbnail": "https://i.ytimg.com/vi/8rrdrJQdcvM/mqdefault.jpg", "description": "", "position": 9 }
+  ]
+}

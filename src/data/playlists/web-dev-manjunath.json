@@ -1,0 +1,13 @@
+{
+  "courseId": "web-dev-manjunath",
+  "videos": [
+    { "videoId": "mVbsESNhDAk", "title": "Web Development in Kannada - Introduction to HTML & CSS | Full Course for Beginners - #1", "thumbnail": "https://i.ytimg.com/vi/mVbsESNhDAk/mqdefault.jpg", "description": "", "position": 0 },
+    { "videoId": "kzoveSCMJAU", "title": "Web Development in Kannada - CSS Basics | Cascading Style Sheets | Full Course for Beginners - #2", "thumbnail": "https://i.ytimg.com/vi/kzoveSCMJAU/mqdefault.jpg", "description": "", "position": 1 },
+    { "videoId": "TkpulmeSEqI", "title": "Web Development in Kannada - CSS Grid & Flexbox Explained | Full Course for Beginners - #3", "thumbnail": "https://i.ytimg.com/vi/TkpulmeSEqI/mqdefault.jpg", "description": "", "position": 2 },
+    { "videoId": "rEootTokgu4", "title": "Web Development in Kannada - Media Queries in CSS | Responsiveness | Full Course for Beginners - #4", "thumbnail": "https://i.ytimg.com/vi/rEootTokgu4/mqdefault.jpg", "description": "", "position": 3 },
+    { "videoId": "eCwXvcJuYi8", "title": "Web Development in Kannada - Animation in CSS | Full Course for Beginners - #5", "thumbnail": "https://i.ytimg.com/vi/eCwXvcJuYi8/mqdefault.jpg", "description": "", "position": 4 },
+    { "videoId": "5W73TFVgcmo", "title": "Web Development in Kannada - Basic Website Project | Full Course for Beginners - #6", "thumbnail": "https://i.ytimg.com/vi/5W73TFVgcmo/mqdefault.jpg", "description": "", "position": 5 },
+    { "videoId": "16eg-s66txE", "title": "Web Development in Kannada - Basic Website Project Part 2 | Full Course for Beginners - #6", "thumbnail": "https://i.ytimg.com/vi/16eg-s66txE/mqdefault.jpg", "description": "", "position": 6 },
+    { "videoId": "dNhiaWNLgcA", "title": "Will AI Replace Web Developers? | Future Scope of Web Development & How to Stay Safe", "thumbnail": "https://i.ytimg.com/vi/dNhiaWNLgcA/mqdefault.jpg", "description": "", "position": 7 }
+  ]
+}

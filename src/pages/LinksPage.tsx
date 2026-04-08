@@ -1,16 +1,14 @@
+import * as LucideIcons from 'lucide-react';
+import { ExternalLink, ArrowRight } from 'lucide-react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import * as LucideIcons from 'lucide-react';
-import { ExternalLink } from 'lucide-react';
+import { ScrollToTop } from '../components/ScrollToTop';
 import linksData from '../data/links.json';
 import { LinkCategory } from '../types';
-import { ScrollToTop } from "../components/ScrollToTop"; 
 
-
-// Dynamic icon component
 const DynamicIcon = ({ iconName }: { iconName: string }) => {
   const IconComponent = (LucideIcons as any)[iconName] || ExternalLink;
-  return <IconComponent className="w-6 h-6 text-primary" />;
+  return <IconComponent className="h-4 w-4 text-primary" />;
 };
 
 export function LinksPage() {
@@ -20,101 +18,66 @@ export function LinksPage() {
     <div className="min-h-screen bg-dark">
       <ScrollToTop />
       <Header />
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-yellow-400 to-primary bg-clip-text text-transparent pb-2">
-              Connect With Me
-            </h1>
-            <p className="text-gray-300 mt-4">
-              Find all my profiles and resources in one place
-            </p>
-          </div>
-          
+
+      <div className="mx-auto max-w-5xl px-4 pt-28 pb-16 page-enter">
+        {/* Page heading */}
+        <div className="mb-10">
+          <h1 className="text-3xl font-bold text-white">Links</h1>
+          <p className="mt-1 text-sm text-gray-400">
+            All profiles and resources in one place
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-10">
           {categories.map((category) => (
-            <div key={category.id} className="mb-12">
-              <h2 className="text-2xl font-bold text-white mb-6 border-l-4 border-primary pl-4">
+            <div key={category.id}>
+              {/* Category label */}
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-3 pl-1">
                 {category.title}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              </p>
+
+              <div className="flex flex-col gap-3">
                 {category.links.map((link) => (
-                  link.coverImage ? (
-                    // Card with cover image
-                    <a
-                      key={link.id}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group cursor-pointer overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:bg-white/20"
-                    >
-                      <div className="relative h-48 overflow-hidden">
-                        <img
-                          src={link.coverImage}
-                          alt={link.title}
-                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = `https://dummyimage.com/800x400/1a1a1a/ffffff&text=${encodeURIComponent(link.title)}`;
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
-                        <div className="absolute bottom-4 left-4">
-                          <span className="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-sm font-medium text-primary backdrop-blur-sm">
-                            {category.title}
-                          </span>
-                        </div>
+                  <a
+                    key={link.id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4
+                               rounded-2xl bg-dark-2 border border-white/10 px-6 py-5
+                               hover:border-primary/40 hover:bg-dark-3 transition-all duration-200"
+                  >
+                    {/* Left */}
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      {/* Icon badge */}
+                      <div className="shrink-0 w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+                        {link.icon
+                          ? <DynamicIcon iconName={link.icon} />
+                          : <ExternalLink className="h-4 w-4 text-primary" />
+                        }
                       </div>
-                      <div className="p-6">
-                        <div className="flex items-center gap-2">
-                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                            {link.icon ? <DynamicIcon iconName={link.icon} /> : <ExternalLink className="w-4 h-4 text-primary" />}
-                          </div>
-                          {/* <span className="text-sm text-gray-400">{link.id}</span> */}
-                        </div>
-                        <h3 className="mt-2 text-xl font-semibold text-white flex items-center gap-2">
+
+                      <div className="min-w-0">
+                        <h2 className="text-base font-semibold text-white group-hover:text-primary transition-colors">
                           {link.title}
-                          <ExternalLink className="h-4 w-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </h3>
-                        <p className="mt-2 text-gray-400">{link.description}</p>
+                        </h2>
+                        <p className="mt-0.5 text-sm text-gray-400 truncate">
+                          {link.description}
+                        </p>
                       </div>
-                    </a>
-                  ) : (
-                    // Enhanced tile without cover image
-                    <a
-                      key={link.id}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group cursor-pointer rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-[1.02] hover:bg-white/20 flex flex-col h-full"
-                    >
-                      <div className="p-6 flex-1 flex flex-col">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                            {link.icon ? <DynamicIcon iconName={link.icon} /> : <ExternalLink className="w-6 h-6 text-primary" />}
-                          </div>
-                          <div>
-                            <h3 className="text-xl font-semibold text-white">
-                              {link.title}
-                            </h3>
-                            <span className="text-sm text-gray-400">{category.title}</span>
-                          </div>
-                        </div>
-                        <p className="text-gray-400 mt-2 flex-grow">{link.description}</p>
-                        <div className="mt-6 pt-4 border-t border-white/10 flex justify-between items-center">
-                          <span className="text-sm text-primary">Visit</span>
-                          <ExternalLink className="h-4 w-4 text-primary opacity-70 group-hover:opacity-100" />
-                        </div>
-                      </div>
-                    </a>
-                  )
+                    </div>
+
+                    {/* Arrow */}
+                    <ArrowRight className="h-4 w-4 text-gray-600 group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
+                  </a>
                 ))}
               </div>
             </div>
           ))}
         </div>
       </div>
+
       <Footer />
     </div>
   );
 }
-
