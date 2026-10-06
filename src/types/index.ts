@@ -1,3 +1,5 @@
+export type Difficulty = "Beginner" | "Intermediate" | "Advanced";
+
 export interface Video {
   id: string;
   title: string;
@@ -12,8 +14,7 @@ export interface Course {
   title: string;
   description: string;
   thumbnail: string;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
-  starred?: boolean;
+  difficulty: Difficulty;
 }
 
 export interface CoursesData {
@@ -35,22 +36,6 @@ export interface AnnouncementItem {
 
 export interface AnnouncementsData {
   items: AnnouncementItem[];
-}
-
-export interface Contributor {
-  id: string;
-  name: string;
-  avatar: string;
-  prs: number;
-  issues: number;
-  commits: number;
-  githubUrl?: string;
-  linkedinUrl?: string;
-  portfolioUrl?: string;
-}
-
-export interface ContributorsData {
-  contributors: Contributor[];
 }
 
 export interface BlogMetadata {

@@ -2,13 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-progress {
-    background: #FFD700;
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-dark font-sans text-neutral-200 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    @apply bg-primary text-dark;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-dark;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+  }
 }
 
-.custom-toast {
-    @apply bg-dark text-white rounded-lg shadow-lg;
-    @media (min-width: 768px) {
-    margin-top: 10vh;
-    }
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .card {
+    @apply rounded-2xl border border-white/[0.08] bg-white/[0.03] shadow-card;
+  }
+  .card-hover {
+    @apply transition duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-white/[0.05];
+  }
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-dark hover:bg-primary-300 hover:shadow-glow;
+  }
+  .btn-secondary {
+    @apply btn border border-white/10 bg-white/[0.06] text-white hover:border-white/20 hover:bg-white/[0.1];
+  }
+  .btn-ghost {
+    @apply btn text-neutral-300 hover:bg-white/[0.06] hover:text-white;
+  }
+  .icon-btn {
+    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-neutral-400 transition duration-200 hover:bg-white/[0.08] hover:text-white active:scale-90;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary ring-1 ring-inset ring-primary/20;
+  }
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-primary;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white to-primary-200 bg-clip-text text-transparent;
+  }
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-primary-300 via-primary to-primary-600 bg-clip-text text-transparent;
+  }
+  .skeleton {
+    @apply relative overflow-hidden rounded-lg bg-white/[0.06] after:absolute after:inset-0 after:-translate-x-full after:animate-shimmer after:bg-gradient-to-r after:from-transparent after:via-white/[0.06] after:to-transparent;
+  }
+  .bg-grid {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

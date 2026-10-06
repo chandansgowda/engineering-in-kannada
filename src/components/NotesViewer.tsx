@@ -1,84 +1,105 @@
-import React, { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { X, Loader2 } from "lucide-react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { AlertTriangle, ExternalLink, FileText, RotateCw, X } from "lucide-react";
+import { Modal } from "./Modal";
+
+const Markdown = lazy(() => import("./Markdown"));
+
+const cache = new Map<string, string>();
+
+function toRawUrl(url: string) {
+  return url.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/");
+}
 
 interface NotesViewerProps {
   url: string;
+  title: string;
   onClose: () => void;
 }
 
-export function NotesViewer({ url, onClose }: NotesViewerProps) {
-  const [content, setContent] = useState<string>("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export function NotesViewer({ url, title, onClose }: NotesViewerProps) {
+  const [content, setContent] = useState<string | null>(cache.get(url) ?? null);
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const rawUrl = url
-          .replace("github.com", "raw.githubusercontent.com")
-          .replace("/blob/", "/");
-
-        const response = await fetch(rawUrl);
-        if (!response.ok) {
-          throw new Error("Failed to fetch content");
-        }
-        const text = await response.text();
+    if (cache.has(url)) return;
+    const controller = new AbortController();
+    setError(false);
+    fetch(toRawUrl(url), { signal: controller.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.text();
+      })
+      .then((text) => {
+        cache.set(url, text);
         setContent(text);
-      } catch (err) {
-        setError("Failed to load notes. Please try again later.");
-        console.error("Error fetching notes:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (url) {
-      fetchContent();
-    }
-  }, [url]);
-
-  if (loading) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div className="flex flex-col items-center gap-4 rounded-lg bg-dark p-8 text-white">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-lg font-medium">Loading notes...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div className="text-center p-8 bg-red-500/10 rounded-xl border border-red-500/20">
-          <p className="text-red-400">{error}</p>
-          <button
-            onClick={onClose}
-            className="mt-4 rounded-lg bg-primary px-4 py-2 text-dark"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    );
-  }
+      })
+      .catch((err) => {
+        if (err.name !== "AbortError") setError(true);
+      });
+    return () => controller.abort();
+  }, [url, attempt]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="relative h-[80vh] w-[90vw] max-w-4xl overflow-auto rounded-lg bg-dark p-6 text-white">
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+    <Modal open onClose={onClose} label={`Notes: ${title}`} className="flex h-[88vh] max-w-4xl flex-col sm:h-[85vh]">
+      <div className="flex items-center gap-3 border-b border-white/[0.08] px-4 py-3 sm:px-6">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <FileText className="h-4 w-4" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">Notes</p>
+          <p className="truncate text-sm font-semibold text-white">{title}</p>
+        </div>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ghost hidden px-3 py-2 sm:inline-flex"
         >
+          <ExternalLink className="h-4 w-4" /> Open on GitHub
+        </a>
+        <button onClick={onClose} className="icon-btn" aria-label="Close notes">
           <X className="h-5 w-5" />
         </button>
-        <div className="prose prose-invert max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
-        </div>
       </div>
+      <div className="flex-1 overflow-y-auto px-5 py-6 sm:px-10 sm:py-8">
+        {error ? (
+          <div className="flex h-full flex-col items-center justify-center text-center">
+            <AlertTriangle className="h-8 w-8 text-red-400" />
+            <p className="mt-3 font-semibold text-white">Couldn't load these notes</p>
+            <p className="mt-1 text-sm text-neutral-400">Check your connection and try again.</p>
+            <div className="mt-5 flex gap-2">
+              <button className="btn-primary" onClick={() => setAttempt((a) => a + 1)}>
+                <RotateCw className="h-4 w-4" /> Retry
+              </button>
+              <a className="btn-secondary" href={url} target="_blank" rel="noopener noreferrer">
+                Open on GitHub
+              </a>
+            </div>
+          </div>
+        ) : content === null ? (
+          <NotesSkeleton />
+        ) : (
+          <article className="prose prose-invert max-w-none prose-headings:scroll-mt-4 prose-img:rounded-xl">
+            <Suspense fallback={<NotesSkeleton />}>
+              <Markdown>{content}</Markdown>
+            </Suspense>
+          </article>
+        )}
+      </div>
+    </Modal>
+  );
+}
+
+function NotesSkeleton() {
+  return (
+    <div className="space-y-4" aria-label="Loading notes">
+      <div className="skeleton h-8 w-1/2" />
+      <div className="skeleton h-4 w-full" />
+      <div className="skeleton h-4 w-11/12" />
+      <div className="skeleton h-4 w-4/5" />
+      <div className="skeleton mt-6 h-32 w-full rounded-xl" />
+      <div className="skeleton h-4 w-3/4" />
     </div>
   );
 }

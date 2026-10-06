@@ -1,45 +1,36 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation  } from "react-router-dom";
+import { lazy } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout";
 import { HomePage } from "./pages/HomePage";
-import { CoursePage } from "./pages/CoursePage";
-import { LeaderboardPage } from "./pages/LeaderboardPage";
-import BackToTop from "./components/BackToTop";
-import { Blogs } from './pages/Blogs';
-import { BlogPost } from './pages/BlogPost';
-import { LinksPage } from './pages/LinksPage';
-import * as ga from './utils/analytics';
 
-//Google analytics 
-function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
-  const location = useLocation();
+// The home page ships in the main bundle; every other route is code-split.
+const named = <T extends string>(loader: () => Promise<Record<T, React.ComponentType>>, name: T) =>
+  lazy(() => loader().then((m) => ({ default: m[name] })));
 
-  useEffect(() => {
-    ga.pageview(location.pathname + location.search);
-  }, [location]);
+const CoursePage = named(() => import("./pages/CoursePage"), "CoursePage");
+const LearningPage = named(() => import("./pages/LearningPage"), "LearningPage");
+const LeaderboardPage = named(() => import("./pages/LeaderboardPage"), "LeaderboardPage");
+const BlogsPage = named(() => import("./pages/BlogsPage"), "BlogsPage");
+const BlogPostPage = named(() => import("./pages/BlogPostPage"), "BlogPostPage");
+const LinksPage = named(() => import("./pages/LinksPage"), "LinksPage");
+const NotFoundPage = named(() => import("./pages/NotFoundPage"), "NotFoundPage");
 
-  return <>{children}</>;
-}
-
-
-
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
-      <AnalyticsWrapper>
-        <Routes>
+      <Routes>
+        <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/courses" element={<HomePage />} />
           <Route path="/course/:courseId" element={<CoursePage />} />
+          <Route path="/learning" element={<LearningPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blogs/:slug" element={<BlogPost />} />
-        <Route path="/links" element={<LinksPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </AnalyticsWrapper>
-      <BackToTop />
+          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/blogs/:slug" element={<BlogPostPage />} />
+          <Route path="/links" element={<LinksPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
-
-export default App;

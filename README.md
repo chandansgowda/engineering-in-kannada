@@ -171,19 +171,35 @@ npm run build
 
 ## Features
 
-- Browse available courses
-- Track video progress
-- Bookmark favorite videos
-- View course materials and coding exercises
-- Read technical blogs and articles
-- Responsive design for all devices
-- Contributor leaderboard
+- Browse courses with search (by title or topic) and filters — difficulty, in progress, starred
+- Track lesson progress, with confetti 🎉 and a course-complete celebration
+- Resume where you left off ("Continue learning" on the home page and course pages)
+- **My Learning** dashboard: in-progress courses, saved lessons, starred courses
+- Export / import progress to move between devices (progress is stored in the browser)
+- Read lesson notes in-app (GitHub markdown) and open practice questions
+- Site-wide search for courses, lessons, blogs and links — press `Ctrl/⌘ + K` or `/`
+- Technical blogs with tag filters, reading time and reading progress
+- Contributor leaderboard (cached, rate-limit friendly)
+- Responsive, accessible (keyboard navigation, focus states, reduced-motion support)
+- Route-level code splitting: only the home page ships in the initial bundle
+
+## Project Structure
+
+```
+src/
+  components/   Reusable UI (Header, Footer, CourseCard, LessonRow, Modal, CommandPalette…)
+  pages/        Route components (Home, Course, My Learning, Leaderboard, Blogs, Links…)
+  lib/          Data helpers (catalog, blog, github, analytics, share…)
+  store/        Zustand stores (progress — persisted, toast, ui)
+  data/         Course, video, link and announcement JSON (edit these to add content)
+  blogs/        Markdown blog posts
+```
 
 ## Technologies Used
 
-- React
-- TypeScript
+- React 18 + TypeScript
 - Vite
-- Tailwind CSS
+- Tailwind CSS (+ typography plugin)
 - React Router
-- Zustand (State Management)
+- Zustand (state management, persisted to localStorage)
+- react-markdown + remark-gfm (lazy-loaded)
