@@ -3,8 +3,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowRight,
   BookOpen,
-  CheckCircle2,
   FileText,
+  GitBranch,
   Github,
   Languages,
   LineChart,
@@ -17,7 +17,7 @@ import {
 import { CourseCard } from "../components/CourseCard";
 import { KarnatakaMap } from "../components/KarnatakaMap";
 import { EmptyState } from "../components/EmptyState";
-import { YOUTUBE_CHANNEL } from "../lib/socials";
+import { GITNAADU_URL, YOUTUBE_CHANNEL } from "../lib/socials";
 import { courses, findLesson, getVideos } from "../lib/catalog";
 import { blogPosts, formatDate } from "../lib/blog";
 import { REPO_URL } from "../lib/github";
@@ -64,16 +64,14 @@ function Hero() {
 
       <div className="container-page relative grid items-center gap-10 pb-16 pt-10 sm:pt-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 lg:pb-24 lg:pt-16">
         <div className="animate-fade-up text-center lg:text-left">
-          <span className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1 pl-1.5 pr-3.5 text-xs font-semibold text-neutral-300">
+          <span className="inline-flex h-9 items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] pl-2 pr-4">
             <span className="flex h-5 w-5 overflow-hidden rounded-full ring-1 ring-white/20" aria-hidden="true">
               <span className="h-full w-1/2 bg-primary" />
               <span className="h-full w-1/2 bg-[#E8112D]" />
             </span>
-            <span className="font-kannada text-primary" translate="no">
+            <span className="kn-line notranslate font-kannada text-[13px] font-semibold text-primary" translate="no">
               ನಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ತಂತ್ರಜ್ಞಾನ
             </span>
-            <span className="text-neutral-600">·</span>
-            Tech in our language
           </span>
           <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.25rem]">
             Learn engineering
@@ -103,24 +101,13 @@ function Hero() {
 
         <div className="relative mx-auto w-full max-w-[280px] animate-fade-in sm:max-w-[340px] lg:max-w-[360px]">
           <KarnatakaMap className="aspect-[400/621] w-full" />
-          <div className="absolute -left-24 top-[1%] hidden animate-fade-up items-center gap-2.5 rounded-2xl border border-white/10 bg-dark-700/90 px-3.5 py-2.5 shadow-2xl backdrop-blur [animation-delay:2600ms] sm:flex lg:-left-36">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500 text-dark">
-              <CheckCircle2 className="h-4 w-4" />
+          <p className="mt-6 flex items-center justify-center gap-2 text-xs font-semibold text-neutral-500">
+            <span className="h-px w-6 bg-gradient-to-r from-transparent to-primary/60" />
+            <span className="kn-line notranslate font-kannada text-sm text-neutral-300" translate="no">
+              31 ಜಿಲ್ಲೆಗಳು · ಒಂದೇ ಕನ್ನಡ
             </span>
-            <span className="text-left">
-              <span className="block text-xs font-bold text-white">Lesson complete!</span>
-              <span className="block text-[11px] text-neutral-500">Progress saved automatically</span>
-            </span>
-          </div>
-          <div className="absolute -bottom-12 -right-4 hidden animate-fade-up items-center gap-2.5 rounded-2xl border border-white/10 bg-dark-700/90 px-3.5 py-2.5 shadow-2xl backdrop-blur [animation-delay:3000ms] sm:flex lg:-right-16">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-dark">
-              <Languages className="h-4 w-4" />
-            </span>
-            <span className="text-left">
-              <span className="block text-xs font-bold text-white">Python · C · DSA · Web</span>
-              <span className="block text-[11px] text-neutral-500">Explained in Kannada</span>
-            </span>
-          </div>
+            <span className="h-px w-6 bg-gradient-to-l from-transparent to-[#E8112D]/60" />
+          </p>
         </div>
       </div>
     </section>
@@ -284,6 +271,21 @@ function Community() {
             View leaderboard
           </Link>
         </div>
+        <a
+          href={GITNAADU_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-6 flex items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-3 transition hover:border-primary/30"
+        >
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <GitBranch className="h-4 w-4" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-bold text-white">GitNaadu</span>
+            <span className="block truncate text-xs text-neutral-500">Another open-source project from Engineering in Kannada</span>
+          </span>
+          <ArrowRight className="h-4 w-4 shrink-0 text-neutral-500 transition group-hover:translate-x-0.5 group-hover:text-primary" />
+        </a>
       </div>
       {latest && (
         <Link to={`/blogs/${latest.slug}`} className="card card-hover group relative flex flex-col overflow-hidden p-8">

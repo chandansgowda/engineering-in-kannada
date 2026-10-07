@@ -53,6 +53,19 @@
       ]
     },
     {
+      "id": "open-source",
+      "title": "Open Source",
+      "links": [
+        {
+          "id": "gitnaadu",
+          "title": "GitNaadu",
+          "description": "An open-source project from Engineering in Kannada",
+          "url": "https://gitnaadu.engineeringinkannada.in/",
+          "icon": "GitBranch"
+        }
+      ]
+    },
+    {
       "id": "python-notes-1",
       "title": "Python Notes",
       "links": [

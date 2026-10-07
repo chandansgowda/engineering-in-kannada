@@ -12,4 +12,6 @@ export const SOCIALS = [
   },
 ] as const;
 
+export const GITNAADU_URL = "https://gitnaadu.engineeringinkannada.in/";
+
 export const YOUTUBE_CHANNEL = SOCIALS[0].href;

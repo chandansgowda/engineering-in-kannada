@@ -5,11 +5,11 @@ import { NamedIcon } from "../components/icons";
 import { SOCIALS } from "../lib/socials";
 import { Img } from "../components/Img";
 import { useDocumentTitle } from "../lib/useDocumentTitle";
-import { totalLessons, courses } from "../lib/catalog";
+import { BRAND } from "../lib/brand";
 
 const categories = linksData.categories as LinkCategory[];
 
-const BRAND: Record<string, string> = {
+const TINT: Record<string, string> = {
   Youtube: "from-red-600/40",
   Instagram: "from-pink-600/40",
   Twitter: "from-neutral-400/30",
@@ -27,16 +27,17 @@ export function LinksPage() {
 
       <div className="container-page relative max-w-5xl pt-14 sm:pt-20">
         <div className="flex animate-fade-up flex-col items-center text-center">
-          <div className="rounded-[1.75rem] bg-gradient-to-br from-primary to-primary-700 p-[3px] shadow-glow">
-            <img src="/images/logo.jpg" alt="" width={96} height={96} className="h-24 w-24 rounded-[1.6rem] object-cover" />
-          </div>
+          <img
+            src={BRAND.logo}
+            alt="Engineering in Kannada logo"
+            width={70}
+            height={81}
+            className="h-24 w-auto drop-shadow-[0_8px_30px_rgba(255,215,0,0.35)]"
+          />
           <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl">
             <span className="text-gradient-gold">Connect With Me</span>
           </h1>
           <p className="mt-3 text-neutral-400">Find all my profiles and resources in one place</p>
-          <p className="mt-4 text-xs font-semibold text-neutral-500">
-            {courses.length} courses · {totalLessons} lessons · <span className="font-kannada">ಕನ್ನಡದಲ್ಲಿ</span>
-          </p>
           <div className="mt-6 flex gap-2">
             {SOCIALS.map(({ label, href, icon: Icon }) => (
               <a
@@ -74,7 +75,7 @@ export function LinksPage() {
 }
 
 function LinkCard({ link, index }: { link: LinkItem; index: number }) {
-  const tint = (link.icon && BRAND[link.icon]) || "from-primary/30";
+  const tint = (link.icon && TINT[link.icon]) || "from-primary/30";
   const fallback = (
     <div className={`h-full w-full bg-gradient-to-br ${tint} via-dark-600 to-dark-700`}>
       <div className="flex h-full items-center justify-center">

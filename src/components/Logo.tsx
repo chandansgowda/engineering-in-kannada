@@ -1,29 +1,36 @@
 import { Link } from "react-router-dom";
+import { BRAND } from "../lib/brand";
+import { cn } from "../lib/cn";
 
-export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
+/** The logo icon as-is: transparent background, no frame. */
+export function LogoMark({ className = "h-9" }: { className?: string }) {
+  return <img src={BRAND.logo} alt="" width={70} height={81} className={cn("w-auto shrink-0", className)} />;
+}
+
+/** English + Kannada name, stacked; shared by the header and footer. */
+export function LogoText({ size = "md" }: { size?: "md" | "lg" }) {
   return (
-    <img
-      src="/images/logo.jpg"
-      alt=""
-      width={36}
-      height={36}
-      className={`${className} rounded-xl object-cover ring-1 ring-white/10`}
-    />
+    <span className="notranslate relative -top-px flex flex-col justify-center gap-[9px]" translate="no">
+      <span
+        className={cn(
+          "whitespace-nowrap font-extrabold leading-none tracking-tight text-white",
+          size === "lg" ? "text-base" : "text-[15px]"
+        )}
+      >
+        Engineering <span className="text-primary">in Kannada</span>
+      </span>
+      <span className={cn("kn-line font-kannada font-semibold text-neutral-400", size === "lg" ? "text-xs" : "text-[11px]")}>
+        {BRAND.nameKannada}
+      </span>
+    </span>
   );
 }
 
 export function Logo() {
   return (
-    <Link to="/" className="group flex items-center gap-2.5" aria-label="Engineering in Kannada — home">
+    <Link to="/" className="flex items-center gap-2.5" aria-label={`${BRAND.name} — home`}>
       <LogoMark />
-      <span className="flex flex-col gap-1.5 notranslate" translate="no">
-        <span className="whitespace-nowrap text-[15px] font-extrabold leading-none tracking-tight text-white">
-          Engineering <span className="text-primary">in Kannada</span>
-        </span>
-        <span className="font-kannada text-[11px] font-semibold leading-none text-neutral-400">
-          ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್
-        </span>
-      </span>
+      <LogoText />
     </Link>
   );
 }

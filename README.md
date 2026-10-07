@@ -185,6 +185,11 @@ npm run build
 - Responsive, accessible (keyboard navigation, focus states, reduced-motion support)
 - Route-level code splitting: only the home page ships in the initial bundle
 
+## Changing the Logo
+
+The logo lives in one place. Replace `public/images/logo.svg` (transparent background), or point `logo` in
+`src/lib/brand.ts` at a new file — the header, footer, links page and favicon all update.
+
 ## Project Structure
 
 ```

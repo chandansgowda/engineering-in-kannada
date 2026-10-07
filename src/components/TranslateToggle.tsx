@@ -48,7 +48,7 @@ export function TranslateToggle() {
       )}
     >
       {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Languages className="h-4 w-4" />}
-      <span className={cn("hidden sm:inline", !kannada && "font-kannada")}>{kannada ? "EN" : "ಕನ್ನಡ"}</span>
+      <span className={cn("hidden sm:inline", !kannada && "kn-line font-kannada")}>{kannada ? "EN" : "ಕನ್ನಡ"}</span>
     </button>
   );
 }

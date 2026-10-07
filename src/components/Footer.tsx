@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Github, Heart } from "lucide-react";
-import { LogoMark } from "./Logo";
-import { SOCIALS } from "../lib/socials";
+import { GitBranch, Github, Heart } from "lucide-react";
+import { LogoMark, LogoText } from "./Logo";
+import { GITNAADU_URL, SOCIALS } from "../lib/socials";
 import { NAV } from "../lib/nav";
 import { REPO_URL } from "../lib/github";
 import { courses } from "../lib/catalog";
@@ -13,11 +13,8 @@ export function Footer() {
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            <LogoMark className="h-10 w-10" />
-            <div className="flex flex-col gap-2 notranslate" translate="no">
-              <p className="font-extrabold leading-none text-white">Engineering in Kannada</p>
-              <p className="font-kannada text-xs font-semibold leading-none text-neutral-500">ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್</p>
-            </div>
+            <LogoMark className="h-10" />
+            <LogoText size="lg" />
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-neutral-400">
             Empowering Kannada-speaking students with quality engineering education. Learn at your
@@ -64,6 +61,16 @@ export function Footer() {
               className="inline-flex items-center gap-2 text-sm text-neutral-400 transition hover:text-primary"
             >
               <Github className="h-4 w-4" /> Contribute on GitHub
+            </a>
+          </li>
+          <li>
+            <a
+              href={GITNAADU_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-neutral-400 transition hover:text-primary"
+            >
+              <GitBranch className="h-4 w-4" /> GitNaadu
             </a>
           </li>
           <FooterLink to="/leaderboard">Contributors</FooterLink>

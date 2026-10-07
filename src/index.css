@@ -66,6 +66,13 @@
   .skeleton {
     @apply relative overflow-hidden rounded-lg bg-white/[0.06] after:absolute after:inset-0 after:-translate-x-full after:animate-shimmer after:bg-gradient-to-r after:from-transparent after:via-white/[0.06] after:to-transparent;
   }
+  /* Noto Sans Kannada's glyphs sit ~0.07em above the centre of their line box;
+     nudge them down so Kannada text looks centred in chips and buttons. */
+  .kn-line {
+    position: relative;
+    top: 0.07em;
+    line-height: 1.15;
+  }
   .bg-grid {
     background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
@@ -119,7 +126,8 @@
   }
   .ka-map .ka-link {
     opacity: 0;
-    animation: ka-link-in 0.8s ease-out forwards, ka-link-flow 1.6s linear infinite;
+    transition: stroke-opacity 0.5s, stroke-width 0.5s;
+    animation: ka-link-in 0.8s ease-out forwards, ka-link-flow 2.4s linear infinite;
   }
   .ka-map .ka-city {
     opacity: 0;
@@ -129,7 +137,10 @@
   }
   .ka-map .ka-ping {
     opacity: 0;
-    animation: ka-ping 2.8s ease-out infinite;
+    animation: ka-ping 1.9s ease-out infinite;
+  }
+  .ka-map .ka-spot-label {
+    animation: ka-label-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   .ka-map .ka-packet {
     opacity: 0;
@@ -191,7 +202,7 @@
 }
 @keyframes ka-link-flow {
   to {
-    stroke-dashoffset: -0.06;
+    stroke-dashoffset: -0.14;
   }
 }
 @keyframes ka-pop {
@@ -213,6 +224,16 @@
   100% {
     opacity: 0;
     transform: scale(3.2);
+  }
+}
+@keyframes ka-label-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 @keyframes ka-fade-in-simple {
@@ -260,4 +281,19 @@ body {
 .goog-text-highlight {
   background: none !important;
   box-shadow: none !important;
+}
+
+/* ---------- Announcement marquee ---------- */
+.announce-marquee {
+  animation-name: announce-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes announce-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--marquee-distance));
+  }
 }

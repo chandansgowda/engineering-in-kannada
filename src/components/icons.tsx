@@ -2,6 +2,7 @@ import type { SVGProps } from "react";
 import {
   ExternalLink,
   FileText,
+  GitBranch,
   Github,
   Instagram,
   Linkedin,
@@ -29,6 +30,7 @@ const ICONS: Record<string, IconComponent> = {
   Twitter: XLogo,
   X: XLogo,
   Github,
+  GitBranch,
   Linkedin,
   FileText,
   ExternalLink,
