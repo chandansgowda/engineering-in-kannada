@@ -326,6 +326,8 @@ html[lang="kn"] .hero-title {
 }
 .hero-title-kn {
   display: block;
+  /* Stacked conjuncts (ನ್ನ, ಲ್ಲಿ) hang well below the baseline; give lines room. */
+  line-height: 1.55;
   font-family: "Noto Sans Kannada", "Plus Jakarta Sans", sans-serif;
 }
 html.translated-ltr main p,

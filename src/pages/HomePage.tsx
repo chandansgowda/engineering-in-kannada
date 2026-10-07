@@ -77,7 +77,7 @@ function Hero() {
             {translated ? (
               <span className="hero-title-kn notranslate" translate="no">
                 <span className="block">ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್</span>
-                <span className="text-gradient-gold -my-[0.22em] block text-[1.3em] leading-[1.15]">ಕಲಿಯಿರಿ</span>
+                <span className="text-gradient-gold -mb-[0.6em] mt-[0.04em] block text-[1.3em] leading-[1.1]">ಕಲಿಯಿರಿ</span>
               </span>
             ) : (
               <>
