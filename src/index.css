@@ -57,11 +57,20 @@
   .eyebrow {
     @apply text-xs font-bold uppercase tracking-[0.18em] text-primary;
   }
+  /* Vertical padding widens the painted background so tall scripts (Kannada
+     vowel signs and conjuncts) aren't clipped by background-clip: text. */
+  .text-gradient,
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    padding-block: 0.22em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
   .text-gradient {
-    @apply bg-gradient-to-br from-white via-white to-primary-200 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-white via-white to-primary-200;
   }
   .text-gradient-gold {
-    @apply bg-gradient-to-r from-primary-300 via-primary to-primary-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-300 via-primary to-primary-600;
   }
   .skeleton {
     @apply relative overflow-hidden rounded-lg bg-white/[0.06] after:absolute after:inset-0 after:-translate-x-full after:animate-shimmer after:bg-gradient-to-r after:from-transparent after:via-white/[0.06] after:to-transparent;
@@ -296,4 +305,26 @@ body {
   to {
     transform: translateX(var(--marquee-distance));
   }
+}
+
+/* ---------- Kannada (Google-translated) pages ----------
+   Kannada glyphs are taller than Latin ones, so headings tuned for English
+   need more line height, normal tracking and a slightly smaller hero. */
+html.translated-ltr h1,
+html.translated-ltr h2,
+html.translated-ltr h3,
+html[lang="kn"] h1,
+html[lang="kn"] h2,
+html[lang="kn"] h3 {
+  line-height: 1.35;
+  letter-spacing: normal;
+}
+html.translated-ltr .hero-title,
+html[lang="kn"] .hero-title {
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  line-height: 1.4;
+}
+html.translated-ltr main p,
+html[lang="kn"] main p {
+  line-height: 1.85;
 }

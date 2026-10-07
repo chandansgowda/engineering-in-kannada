@@ -72,7 +72,7 @@ function Hero() {
               ನಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ತಂತ್ರಜ್ಞಾನ
             </span>
           </span>
-          <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.25rem]">
+          <h1 className="hero-title mt-6 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.25rem]">
             Learn engineering
             <br />
             in <span className="text-gradient-gold">Kannada.</span>
@@ -98,7 +98,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[280px] animate-fade-in sm:max-w-[340px] lg:max-w-[360px]">
+        <div className="relative mx-auto w-full max-w-[240px] animate-fade-in sm:max-w-[290px] lg:max-w-[310px]">
           <KarnatakaMap className="aspect-[400/621] w-full" />
         </div>
       </div>

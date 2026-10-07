@@ -28,7 +28,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ['"Plus Jakarta Sans"', '"Noto Sans Kannada"', "ui-sans-serif", "system-ui", "sans-serif"],
         kannada: ['"Noto Sans Kannada"', '"Plus Jakarta Sans"', "sans-serif"],
       },
       boxShadow: {

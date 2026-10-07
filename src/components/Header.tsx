@@ -36,7 +36,7 @@ export function Header() {
           : "border-transparent bg-dark/0"
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between gap-2 sm:gap-4">
+      <div className="container-page flex h-16 items-center justify-between gap-2 sm:h-[72px] sm:gap-4">
         <Logo />
 
         <nav className="hidden items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.03] p-1 lg:flex" aria-label="Main">
