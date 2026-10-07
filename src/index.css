@@ -2,13 +2,335 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-progress {
-    background: #FFD700;
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-dark font-sans text-neutral-200 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    @apply bg-primary text-dark;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-dark;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+  }
 }
 
-.custom-toast {
-    @apply bg-dark text-white rounded-lg shadow-lg;
-    @media (min-width: 768px) {
-    margin-top: 10vh;
-    }
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .card {
+    @apply rounded-2xl border border-white/[0.08] bg-white/[0.03] shadow-card;
+  }
+  .card-hover {
+    @apply transition duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-white/[0.05];
+  }
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-dark hover:bg-primary-300 hover:shadow-glow;
+  }
+  .btn-secondary {
+    @apply btn border border-white/10 bg-white/[0.06] text-white hover:border-white/20 hover:bg-white/[0.1];
+  }
+  .btn-ghost {
+    @apply btn text-neutral-300 hover:bg-white/[0.06] hover:text-white;
+  }
+  .icon-btn {
+    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-neutral-400 transition duration-200 hover:bg-white/[0.08] hover:text-white active:scale-90;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary ring-1 ring-inset ring-primary/20;
+  }
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-primary;
+  }
+  /* Vertical padding widens the painted background so tall scripts (Kannada
+     vowel signs and conjuncts) aren't clipped by background-clip: text. */
+  .text-gradient,
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    padding-block: 0.22em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white to-primary-200;
+  }
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-primary-300 via-primary to-primary-600;
+  }
+  .skeleton {
+    @apply relative overflow-hidden rounded-lg bg-white/[0.06] after:absolute after:inset-0 after:-translate-x-full after:animate-shimmer after:bg-gradient-to-r after:from-transparent after:via-white/[0.06] after:to-transparent;
+  }
+  /* Noto Sans Kannada's glyphs sit ~0.07em above the centre of their line box;
+     nudge them down so Kannada text looks centred in chips and buttons. */
+  .kn-line {
+    position: relative;
+    top: 0.07em;
+    line-height: 1.15;
+  }
+  .bg-grid {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Animated Karnataka map (hero) ---------- */
+@layer components {
+  .ka-map .ka-outline {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: ka-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
+    filter: drop-shadow(0 0 6px rgba(255, 200, 0, 0.55));
+  }
+  .ka-map .ka-tint {
+    opacity: 0;
+    animation: ka-fade-tint 1.2s ease-out 1.2s forwards;
+  }
+  .ka-map .ka-dots {
+    opacity: 0;
+    animation: ka-fade-dots 1.4s ease-out 1.4s forwards;
+  }
+  .ka-map .ka-aura {
+    opacity: 0;
+    animation: ka-aura 6s ease-in-out 1.6s infinite;
+  }
+  .ka-map .ka-scan {
+    animation: ka-scan 5.5s linear 2.6s infinite;
+    opacity: 0;
+  }
+  .ka-map .ka-link {
+    opacity: 0;
+    transition: stroke-opacity 0.5s, stroke-width 0.5s;
+    animation: ka-link-in 0.8s ease-out forwards, ka-link-flow 2.4s linear infinite;
+  }
+  .ka-map .ka-city {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ka-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .ka-map .ka-ping {
+    opacity: 0;
+    animation: ka-ping 1.9s ease-out infinite;
+  }
+  .ka-map .ka-spot-label {
+    animation: ka-label-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .ka-map .ka-packet {
+    opacity: 0;
+    animation: ka-fade-in-simple 0.2s ease-out forwards;
+    filter: drop-shadow(0 0 4px #ffd700);
+  }
+  .ka-map .ka-label {
+    paint-order: stroke;
+    stroke: #1a1a1a;
+    stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+}
+
+@keyframes ka-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ka-fade-tint {
+  to {
+    opacity: 0.1;
+  }
+}
+@keyframes ka-fade-dots {
+  to {
+    opacity: 0.85;
+  }
+}
+@keyframes ka-aura {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.32;
+  }
+}
+@keyframes ka-scan {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(780px);
+    opacity: 0;
+  }
+}
+@keyframes ka-link-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes ka-link-flow {
+  to {
+    stroke-dashoffset: -0.14;
+  }
+}
+@keyframes ka-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes ka-ping {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+@keyframes ka-label-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ka-fade-in-simple {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: show the finished map, no movement. */
+@media (prefers-reduced-motion: reduce) {
+  .ka-map * {
+    animation: none !important;
+  }
+  .ka-map .ka-outline {
+    stroke-dashoffset: 0;
+  }
+  .ka-map .ka-tint {
+    opacity: 0.1;
+  }
+  .ka-map .ka-dots {
+    opacity: 0.85;
+  }
+  .ka-map .ka-aura {
+    opacity: 0.22;
+  }
+  .ka-map .ka-link,
+  .ka-map .ka-city {
+    opacity: 1;
+  }
+}
+
+/* ---------- Google Translate: keep its UI out of the way ---------- */
+iframe.skiptranslate,
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-yAWNEb-L7lbkb {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Announcement marquee ---------- */
+.announce-marquee {
+  animation-name: announce-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes announce-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--marquee-distance));
+  }
+}
+
+/* ---------- Kannada (Google-translated) pages ----------
+   Kannada glyphs are taller than Latin ones, so headings tuned for English
+   need more line height, normal tracking and a slightly smaller hero. */
+html.translated-ltr h1,
+html.translated-ltr h2,
+html.translated-ltr h3,
+html[lang="kn"] h1,
+html[lang="kn"] h2,
+html[lang="kn"] h3 {
+  line-height: 1.35;
+  letter-spacing: normal;
+}
+html.translated-ltr .hero-title,
+html[lang="kn"] .hero-title {
+  font-size: clamp(2rem, 4vw, 3.15rem);
+  line-height: 1.3;
+}
+.hero-title-kn {
+  display: block;
+  /* Stacked conjuncts (ನ್ನ, ಲ್ಲಿ) hang well below the baseline; give lines room. */
+  line-height: 1.55;
+  font-family: "Noto Sans Kannada", "Plus Jakarta Sans", sans-serif;
+}
+html.translated-ltr main p,
+html[lang="kn"] main p {
+  line-height: 1.85;
 }

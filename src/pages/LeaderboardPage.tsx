@@ -1,181 +1,243 @@
-import React from "react";
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-import { ScrollToTop } from "../components/ScrollToTop"; 
-import { Github, Loader2 } from "lucide-react";
-import { fetchLeaderboardData, GitHubContributor } from "../services/github";
+import { useCallback, useEffect, useState } from "react";
+import { AlertTriangle, Crown, GitCommitHorizontal, GitPullRequest, Github, RotateCw, CircleDot, Users } from "lucide-react";
+import { PageHeader } from "../components/PageHeader";
+import { EmptyState } from "../components/EmptyState";
+import {
+  fetchLeaderboard,
+  getCachedLeaderboard,
+  GitHubContributor,
+  LeaderboardResult,
+  REPO_URL,
+} from "../lib/github";
+import { cn } from "../lib/cn";
+
+function timeAgo(ts: number) {
+  const mins = Math.round((Date.now() - ts) / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins} min ago`;
+  const hrs = Math.round(mins / 60);
+  return hrs < 24 ? `${hrs}h ago` : `${Math.round(hrs / 24)}d ago`;
+}
+
+function avatarFallback(c: GitHubContributor) {
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(c.name || c.github)}&background=FFD700&color=1A1A1A&bold=true`;
+}
+
+function Avatar({ c, className }: { c: GitHubContributor; className: string }) {
+  const [src, setSrc] = useState(c.profileImage ? `${c.profileImage}${c.profileImage.includes("?") ? "&" : "?"}s=160` : avatarFallback(c));
+  return (
+    <img
+      src={src}
+      alt=""
+      loading="lazy"
+      className={cn("rounded-full bg-dark-600 object-cover", className)}
+      onError={() => src !== avatarFallback(c) && setSrc(avatarFallback(c))}
+    />
+  );
+}
 
 export function LeaderboardPage() {
-  const [contributors, setContributors] = React.useState<GitHubContributor[]>(
-    []
-  );
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
+  const [data, setData] = useState<LeaderboardResult | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  React.useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await fetchLeaderboardData();
-        setContributors(data.slice(0, 10));
-      } catch (err) {
-        setError("Failed to load contributor data. Please try again later.");
-        console.error("Error loading contributors:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
+  const load = useCallback(async (force = false) => {
+    setLoading(true);
+    setError(null);
+    try {
+      setData(await fetchLeaderboard({ force }));
+    } catch (err) {
+      setError(
+        (err as Error).message === "rate-limited"
+          ? "GitHub's API rate limit was reached. Please try again in a little while."
+          : "Failed to load contributor data. Please try again later."
+      );
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  return (
-    <div className="min-h-screen bg-dark">
-      <ScrollToTop /> {/* 🟢 Add ScrollToTop component */}
-      <Header />
-      <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-white sm:text-4xl">
-            Contributor Leaderboard
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-300">
-            Celebrating our amazing contributors who help make engineering
-            education accessible in Kannada.
-          </p>
-        </div>
+  useEffect(() => {
+    // Show any cached result immediately, then refresh if it is stale.
+    const cached = getCachedLeaderboard();
+    if (cached) setData(cached);
+    if (!cached || cached.stale) load();
+    else setLoading(false);
+  }, [load]);
 
-        {loading ? (
-          <div className="flex justify-center items-center min-h-[400px]">
-            <Loader2 className="h-8 w-8 text-primary animate-spin" />
-          </div>
-        ) : error ? (
-          <div className="text-center p-8 bg-red-500/10 rounded-xl border border-red-500/20">
-            <p className="text-red-400">{error}</p>
-          </div>
+  const list = data?.contributors ?? [];
+  const podium = list.slice(0, 3);
+  const rest = list.slice(3);
+
+  return (
+    <>
+      <PageHeader
+        eyebrow="Open source"
+        title={
+          <>
+            Contributor <span className="text-gradient-gold">Leaderboard</span>
+          </>
+        }
+        description="Celebrating our amazing contributors who help make engineering education accessible in Kannada."
+      >
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+            <Github className="h-4 w-4" /> Start contributing
+          </a>
+          <button onClick={() => load(true)} disabled={loading} className="btn-secondary">
+            <RotateCw className={cn("h-4 w-4", loading && "animate-spin")} /> Refresh
+          </button>
+          {data && (
+            <span className="text-xs text-neutral-500">
+              Updated {timeAgo(data.fetchedAt)}
+              {data.stale && !loading && " · showing saved results"}
+            </span>
+          )}
+        </div>
+      </PageHeader>
+
+      <div className="container-page pt-12">
+        {error && !list.length ? (
+          <EmptyState
+            icon={AlertTriangle}
+            title="Couldn't load the leaderboard"
+            action={
+              <button onClick={() => load(true)} className="btn-primary">
+                <RotateCw className="h-4 w-4" /> Try again
+              </button>
+            }
+          >
+            {error}
+          </EmptyState>
+        ) : !list.length && loading ? (
+          <LeaderboardSkeleton />
+        ) : !list.length ? (
+          <EmptyState icon={Users} title="No contributors yet">
+            Be the first: open a pull request!
+          </EmptyState>
         ) : (
-          <div className="mt-8 overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-white/10">
-                <thead>
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-4 text-left text-sm font-semibold text-white"
+          <>
+            <ol className="grid items-end gap-4 sm:grid-cols-3">
+              {[podium[1], podium[0], podium[2]].map((c, i) => {
+                if (!c) return <li key={i} className="hidden sm:block" />;
+                const rank = list.indexOf(c) + 1;
+                return <PodiumCard key={c.github} c={c} rank={rank} />;
+              })}
+            </ol>
+
+            {rest.length > 0 && (
+              <ol className="card mt-6 divide-y divide-white/[0.06] overflow-hidden">
+                {rest.map((c, i) => (
+                  <li key={c.github}>
+                    <a
+                      href={c.githubProfile}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-4 px-4 py-3.5 transition hover:bg-white/[0.03] sm:px-6"
                     >
-                      Rank
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4 text-left text-sm font-semibold text-white"
-                    >
-                      Contributor
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4 text-center text-sm font-semibold text-white"
-                    >
-                      PRs
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4 text-center text-sm font-semibold text-white"
-                    >
-                      Issues
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4 text-center text-sm font-semibold text-white"
-                    >
-                      Commits
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4 text-right text-sm font-semibold text-white"
-                    >
-                      Profile
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10">
-                  {contributors.map((contributor, index) => (
-                    <tr key={contributor.github} className="hover:bg-white/5">
-                      <td className="whitespace-nowrap px-6 py-4">
-                        <div className="flex items-center">
-                          <span
-                            className={`inline-flex items-center justify-center h-8 w-8 rounded-full ${
-                              index === 0
-                                ? "bg-yellow-500/20 text-yellow-500"
-                                : index === 1
-                                ? "bg-gray-400/20 text-gray-400"
-                                : index === 2
-                                ? "bg-amber-600/20 text-amber-600"
-                                : "bg-white/10 text-gray-400"
-                            } text-sm font-semibold`}
-                          >
-                            #{index + 1}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4">
-                        <div className="flex items-center">
-                          <img
-                            src={contributor.profileImage}
-                            alt={contributor.name}
-                            className="h-10 w-10 rounded-full"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                                contributor.name || contributor.github
-                              )}&background=random`;
-                            }}
-                          />
-                          <div className="ml-4">
-                            <div className="font-medium text-white">
-                              {contributor.name || contributor.github}
-                            </div>
-                            <div className="text-sm text-gray-400">
-                              @{contributor.github}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-300">
-                        <span className="inline-flex items-center rounded-full bg-primary/20 px-2.5 py-0.5 text-sm font-medium text-primary">
-                          {contributor.prs}
-                        </span>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-300">
-                        <span className="inline-flex items-center rounded-full bg-primary/20 px-2.5 py-0.5 text-sm font-medium text-primary">
-                          {contributor.issues}
-                        </span>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-300">
-                        <span className="inline-flex items-center rounded-full bg-primary/20 px-2.5 py-0.5 text-sm font-medium text-primary">
-                          {contributor.commits}
-                        </span>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-300">
-                        <div className="flex items-center justify-end space-x-3">
-                          <a
-                            href={contributor.githubProfile}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-primary transition-colors"
-                          >
-                            <Github className="h-5 w-5" />
-                          </a>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      <span className="w-6 text-center text-sm font-bold text-neutral-500">{i + 4}</span>
+                      <Avatar c={c} className="h-10 w-10" />
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate font-semibold text-white">{c.name}</span>
+                        <span className="block truncate text-xs text-neutral-500">@{c.github}</span>
+                      </span>
+                      <Stats c={c} className="hidden md:flex" />
+                      <span className="text-right">
+                        <span className="block text-lg font-extrabold text-primary">{c.score}</span>
+                        <span className="block text-[10px] font-semibold uppercase tracking-wider text-neutral-500">points</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )}
+            <p className="mt-6 text-center text-xs text-neutral-500">
+              Points = merged/open PRs + closed self-assigned issues + commits on the main branch. Top 10 shown.
+            </p>
+          </>
+        )}
+      </div>
+    </>
+  );
+}
+
+function Stats({ c, className }: { c: GitHubContributor; className?: string }) {
+  return (
+    <span className={cn("items-center gap-4 text-xs text-neutral-400", className)}>
+      <span className="inline-flex items-center gap-1.5" title="Pull requests">
+        <GitPullRequest className="h-3.5 w-3.5 text-primary" /> {c.prs}
+      </span>
+      <span className="inline-flex items-center gap-1.5" title="Issues">
+        <CircleDot className="h-3.5 w-3.5 text-primary" /> {c.issues}
+      </span>
+      <span className="inline-flex items-center gap-1.5" title="Commits">
+        <GitCommitHorizontal className="h-3.5 w-3.5 text-primary" /> {c.commits}
+      </span>
+    </span>
+  );
+}
+
+const MEDAL = [
+  "",
+  "from-primary/25 border-primary/50 sm:pb-10 sm:pt-10",
+  "from-neutral-300/15 border-neutral-300/30",
+  "from-amber-700/20 border-amber-700/40",
+];
+const MEDAL_TEXT = ["", "bg-primary text-dark", "bg-neutral-300 text-dark", "bg-amber-600 text-dark"];
+
+function PodiumCard({ c, rank }: { c: GitHubContributor; rank: number }) {
+  return (
+    <li className={cn(rank === 1 ? "order-first sm:order-none" : "")}>
+      <a
+        href={c.githubProfile}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(
+          "relative flex animate-fade-up flex-col items-center rounded-2xl border bg-gradient-to-b to-transparent px-5 pb-6 pt-8 text-center transition hover:-translate-y-1",
+          MEDAL[rank]
+        )}
+      >
+        {rank === 1 && <Crown className="absolute -top-4 h-8 w-8 fill-primary text-primary drop-shadow-[0_0_12px_rgba(255,215,0,0.6)]" />}
+        <div className="relative">
+          <Avatar c={c} className={cn("ring-4 ring-dark", rank === 1 ? "h-24 w-24" : "h-20 w-20")} />
+          <span
+            className={cn(
+              "absolute -bottom-2 left-1/2 flex h-7 w-7 -translate-x-1/2 items-center justify-center rounded-full text-sm font-extrabold ring-4 ring-dark",
+              MEDAL_TEXT[rank]
+            )}
+          >
+            {rank}
+          </span>
+        </div>
+        <p className="mt-5 max-w-full truncate text-lg font-bold text-white">{c.name}</p>
+        <p className="max-w-full truncate text-xs text-neutral-500">@{c.github}</p>
+        <p className="mt-3 text-3xl font-extrabold text-primary">{c.score}</p>
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500">points</p>
+        <Stats c={c} className="mt-4 flex" />
+      </a>
+    </li>
+  );
+}
+
+function LeaderboardSkeleton() {
+  return (
+    <div aria-label="Loading leaderboard">
+      <div className="grid items-end gap-4 sm:grid-cols-3">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className={cn("skeleton rounded-2xl", i === 1 ? "h-72" : "h-64")} />
+        ))}
+      </div>
+      <div className="card mt-6 space-y-1 p-2">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="flex items-center gap-4 p-3">
+            <div className="skeleton h-10 w-10 rounded-full" />
+            <div className="flex-1 space-y-2">
+              <div className="skeleton h-4 w-40" />
+              <div className="skeleton h-3 w-24" />
             </div>
           </div>
-        )}
-      </main>
-      <Footer />
+        ))}
+      </div>
     </div>
   );
 }
