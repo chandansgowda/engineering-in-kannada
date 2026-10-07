@@ -53,9 +53,15 @@ const DISTRICTS: { kn: string; en: string; lat: number; lon: number }[] = [
 
 const NODES = DISTRICTS.map((d) => ({ ...d, ...project(d.lat, d.lon) }));
 
-// Pop the nodes in as a ripple from the middle of the state.
-const CENTER = { x: 200, y: 330 };
-const RIPPLE_DELAY = NODES.map((n) => Math.hypot(n.x - CENTER.x, n.y - CENTER.y) / 260);
+const MYSURU = NODES.findIndex((n) => n.en === "Mysuru");
+const BENGALURU = NODES.findIndex((n) => n.en === "Bengaluru");
+
+// Pop the nodes in as a ripple spreading out from Mysuru and Bengaluru.
+const ORIGIN = {
+  x: (NODES[MYSURU].x + NODES[BENGALURU].x) / 2,
+  y: (NODES[MYSURU].y + NODES[BENGALURU].y) / 2,
+};
+const RIPPLE_DELAY = NODES.map((n) => Math.hypot(n.x - ORIGIN.x, n.y - ORIGIN.y) / 380);
 
 /** Mesh: every district links to its two nearest neighbours. */
 const EDGES: [number, number][] = (() => {
@@ -77,16 +83,16 @@ const EDGES: [number, number][] = (() => {
   return out;
 })();
 
-/** Spotlight order: a fixed shuffle so consecutive districts are far apart. */
+/** Spotlight order: Mysuru, Bengaluru, then a fixed shuffle of the rest. */
 const SPOTLIGHT = (() => {
-  const order = NODES.map((_, i) => i);
+  const order = NODES.map((_, i) => i).filter((i) => i !== MYSURU && i !== BENGALURU);
   let seed = 7;
   for (let i = order.length - 1; i > 0; i--) {
     seed = (seed * 9301 + 49297) % 233280;
     const j = Math.floor((seed / 233280) * (i + 1));
     [order[i], order[j]] = [order[j], order[i]];
   }
-  return order;
+  return [MYSURU, BENGALURU, ...order];
 })();
 
 function arc(a: { x: number; y: number }, b: { x: number; y: number }) {

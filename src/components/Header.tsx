@@ -36,7 +36,7 @@ export function Header() {
           : "border-transparent bg-dark/0"
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between gap-4">
+      <div className="container-page flex h-16 items-center justify-between gap-2 sm:gap-4">
         <Logo />
 
         <nav className="hidden items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.03] p-1 lg:flex" aria-label="Main">
@@ -63,7 +63,8 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <TranslateToggle />
+          {/* On the narrowest phones this moves into the menu to make room for the logo. */}
+          <TranslateToggle className="hidden min-[360px]:flex" />
           <button
             onClick={() => openSearch(true)}
             className="group flex h-9 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] pl-3 pr-2 text-sm text-neutral-400 transition hover:border-white/20 hover:text-white"
@@ -96,6 +97,9 @@ export function Header() {
       >
         <nav className="min-h-0" aria-label="Mobile">
           <div className="container-page grid grid-cols-2 gap-2 pb-4 pt-1">
+            <div className="col-span-2 min-[360px]:hidden">
+              <TranslateToggle showLabel className="h-11 w-full justify-center rounded-xl" />
+            </div>
             {NAV.map(({ to, label, icon: Icon, match }) => {
               const active = match(pathname);
               return (

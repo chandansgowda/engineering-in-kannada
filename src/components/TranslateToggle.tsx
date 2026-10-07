@@ -6,7 +6,7 @@ import { trackEvent } from "../lib/analytics";
 import { cn } from "../lib/cn";
 
 /** Header button that switches the whole site between English and Kannada. */
-export function TranslateToggle() {
+export function TranslateToggle({ className, showLabel = false }: { className?: string; showLabel?: boolean }) {
   const [kannada, setKannada] = useState(false);
   const [busy, setBusy] = useState(false);
 
@@ -42,13 +42,14 @@ export function TranslateToggle() {
       aria-label={kannada ? "Show the site in English" : "Translate this site to Kannada"}
       className={cn(
         "notranslate flex h-9 items-center gap-1.5 rounded-full border px-2.5 text-sm font-semibold transition sm:px-3",
+        className,
         kannada
           ? "border-primary/40 bg-primary/10 text-primary hover:bg-primary/15"
           : "border-white/10 bg-white/[0.04] text-neutral-300 hover:border-white/20 hover:text-white"
       )}
     >
       {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Languages className="h-4 w-4" />}
-      <span className={cn("hidden sm:inline", !kannada && "kn-line font-kannada")}>{kannada ? "EN" : "ಕನ್ನಡ"}</span>
+      <span className={cn(!showLabel && "hidden sm:inline", !kannada && "kn-line font-kannada")}>{kannada ? "EN" : "ಕನ್ನಡ"}</span>
     </button>
   );
 }

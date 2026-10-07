@@ -4,7 +4,6 @@ import {
   ArrowRight,
   BookOpen,
   FileText,
-  GitBranch,
   Github,
   Languages,
   LineChart,
@@ -17,7 +16,7 @@ import {
 import { CourseCard } from "../components/CourseCard";
 import { KarnatakaMap } from "../components/KarnatakaMap";
 import { EmptyState } from "../components/EmptyState";
-import { GITNAADU_URL, YOUTUBE_CHANNEL } from "../lib/socials";
+import { YOUTUBE_CHANNEL } from "../lib/socials";
 import { courses, findLesson, getVideos } from "../lib/catalog";
 import { blogPosts, formatDate } from "../lib/blog";
 import { REPO_URL } from "../lib/github";
@@ -101,13 +100,6 @@ function Hero() {
 
         <div className="relative mx-auto w-full max-w-[280px] animate-fade-in sm:max-w-[340px] lg:max-w-[360px]">
           <KarnatakaMap className="aspect-[400/621] w-full" />
-          <p className="mt-6 flex items-center justify-center gap-2 text-xs font-semibold text-neutral-500">
-            <span className="h-px w-6 bg-gradient-to-r from-transparent to-primary/60" />
-            <span className="kn-line notranslate font-kannada text-sm text-neutral-300" translate="no">
-              31 ಜಿಲ್ಲೆಗಳು · ಒಂದೇ ಕನ್ನಡ
-            </span>
-            <span className="h-px w-6 bg-gradient-to-l from-transparent to-[#E8112D]/60" />
-          </p>
         </div>
       </div>
     </section>
@@ -271,21 +263,6 @@ function Community() {
             View leaderboard
           </Link>
         </div>
-        <a
-          href={GITNAADU_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group mt-6 flex items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-3 transition hover:border-primary/30"
-        >
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <GitBranch className="h-4 w-4" />
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block text-sm font-bold text-white">GitNaadu</span>
-            <span className="block truncate text-xs text-neutral-500">Another open-source project from Engineering in Kannada</span>
-          </span>
-          <ArrowRight className="h-4 w-4 shrink-0 text-neutral-500 transition group-hover:translate-x-0.5 group-hover:text-primary" />
-        </a>
       </div>
       {latest && (
         <Link to={`/blogs/${latest.slug}`} className="card card-hover group relative flex flex-col overflow-hidden p-8">
