@@ -111,9 +111,12 @@ New courses and posts are picked up automatically by routes, search, sitemap and
 ## Testing the build
 
 `vite preview` falls back to the home page for every URL, so it can't test hydration. To check prerendered
-pages, serve `dist/` with a static server that maps `/path` to `/path/index.html` and serves `404.html` with
-status 404 (what Netlify, Cloudflare Pages and Vercel do), then check the browser console for React errors
+pages, serve `dist/` with a static server that maps `/path` to `/path.html` and serves `404.html` with
+status 404 (what Netlify and Cloudflare Pages do), then check the browser console for React errors
 #418/#423/#425 (hydration mismatches).
+
+Pages are written as `path.html`, not `path/index.html`: hosts serve `/path` from it directly, while
+directory indexes make Netlify 301-redirect to `/path/`, away from the canonical URL. Keep it that way.
 
 ## Environment variables
 

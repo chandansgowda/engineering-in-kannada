@@ -46,8 +46,9 @@ function render(url) {
   });
 }
 
-const fileFor = (path) =>
-  path === "/" ? join(dist, "index.html") : path === "/404" ? join(dist, "404.html") : join(dist, path, "index.html");
+// "/course/x" -> course/x.html (not course/x/index.html): static hosts serve it at
+// /course/x with no trailing-slash redirect, matching the canonical URLs.
+const fileFor = (path) => (path === "/" ? join(dist, "index.html") : join(dist, `${path}.html`));
 
 const routes = prerenderRoutes();
 for (const { path } of routes) {
