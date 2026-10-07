@@ -31,6 +31,8 @@ export interface AnnouncementItem {
   type: "quote" | "announcement";
   content: string;
   author?: string;
+  /** Optional call to action shown after the message. */
+  link?: { label: string; url: string };
   isActive: boolean;
 }
 

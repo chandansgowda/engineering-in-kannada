@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Megaphone, Quote, X } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Megaphone, Quote, X } from "lucide-react";
 import announcementsData from "../data/announcements.json";
 import { AnnouncementItem, AnnouncementsData } from "../types";
 
@@ -18,13 +18,26 @@ function wasDismissed() {
   }
 }
 
-function Message({ item }: { item: AnnouncementItem }) {
+/** `copy` marks the duplicate used for seamless scrolling: hidden from assistive tech and keyboard. */
+function Message({ item, copy = false }: { item: AnnouncementItem; copy?: boolean }) {
   const Icon = item.type === "quote" ? Quote : Megaphone;
   return (
     <span className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap">
       <Icon className="h-3.5 w-3.5 shrink-0 text-primary" />
       {item.content}
       {item.author && <span className="text-neutral-500"> — {item.author}</span>}
+      {item.link && (
+        <a
+          href={item.link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={copy ? -1 : undefined}
+          className="ml-1 inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-dark transition hover:bg-primary-300"
+        >
+          {item.link.label}
+          <ArrowUpRight className="h-3 w-3" />
+        </a>
+      )}
     </span>
   );
 }
@@ -108,7 +121,7 @@ export function AnnouncementBar() {
         >
           {/* Invisible copy used only to measure the message's natural width. */}
           <span ref={measureRef} className="pointer-events-none invisible absolute left-0 top-0 whitespace-nowrap" aria-hidden="true">
-            <Message item={item} />
+            <Message item={item} copy />
           </span>
           {marquee ? (
             <div
@@ -126,7 +139,7 @@ export function AnnouncementBar() {
                 <Message item={item} />
               </span>
               <span className="pr-16" aria-hidden="true">
-                <Message item={item} />
+                <Message item={item} copy />
               </span>
             </div>
           ) : (

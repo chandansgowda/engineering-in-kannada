@@ -321,8 +321,20 @@ html[lang="kn"] h3 {
 }
 html.translated-ltr .hero-title,
 html[lang="kn"] .hero-title {
-  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
-  line-height: 1.4;
+  font-size: clamp(2rem, 4vw, 3.15rem);
+  line-height: 1.3;
+}
+.hero-title-kn {
+  display: none;
+}
+html.translated-ltr .hero-title-en,
+html[lang="kn"] .hero-title-en {
+  display: none;
+}
+html.translated-ltr .hero-title-kn,
+html[lang="kn"] .hero-title-kn {
+  display: block;
+  font-family: "Noto Sans Kannada", "Plus Jakarta Sans", sans-serif;
 }
 html.translated-ltr main p,
 html[lang="kn"] main p {

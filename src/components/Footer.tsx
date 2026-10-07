@@ -12,7 +12,7 @@ export function Footer() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <LogoLockup size="lg" />
+          <LogoLockup size="lg" anchor="body" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-neutral-400">
             Empowering Kannada-speaking students with quality engineering education. Learn at your
             own pace, in the language you think in.

@@ -8,22 +8,37 @@ export function LogoMark({ className = "h-9" }: { className?: string }) {
 }
 
 /*
- * Proportions (all relative to the English line's font size) were tuned so the
- * name sits beside the TV body and ends level with the bottom of the icon; the
- * antennas rise above. Because everything is in `em`, the header and footer
- * are exact scaled copies of each other.
+ * The icon's weight sits low (the TV body is the bottom ~63%; the antennas are
+ * thin), so the name is always lined up with the TV body, not the whole image.
+ * All sizes are in `em` of the English line, so every variant scales together.
+ *
+ * - `text` (header): the name stays on the container's centre line — level
+ *   with the nav links — and the icon is raised so its TV body matches it.
+ * - `body` (footer): the icon stays put and the name is lowered onto its body.
  */
 const SIZE = {
   md: "text-[13.5px] min-[400px]:text-[15px]",
   lg: "text-base",
 } as const;
 
+const ANCHOR = {
+  text: { icon: "relative -top-[0.54em] h-[2.9em]", text: "" },
+  body: { icon: "h-[3.125em]", text: "relative top-[0.5625em]" },
+} as const;
+
 /** Icon + English and Kannada names; shared by the header and footer. */
-export function LogoLockup({ size = "md" }: { size?: keyof typeof SIZE }) {
+export function LogoLockup({
+  size = "md",
+  anchor = "text",
+}: {
+  size?: keyof typeof SIZE;
+  anchor?: keyof typeof ANCHOR;
+}) {
+  const a = ANCHOR[anchor];
   return (
     <span className={cn("flex items-center gap-[0.75em]", SIZE[size])}>
-      <LogoMark className="h-[3.125em]" />
-      <span className="notranslate relative top-[0.5625em] flex flex-col gap-[0.5625em]" translate="no">
+      <LogoMark className={a.icon} />
+      <span className={cn("notranslate flex flex-col gap-[0.5625em]", a.text)} translate="no">
         <span className="whitespace-nowrap text-[1em] font-extrabold leading-none tracking-tight text-white">
           Engineering <span className="text-primary">in Kannada</span>
         </span>

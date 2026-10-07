@@ -1,22 +1,30 @@
 {
   "items": [
     {
-      "id": "quote-1",
-      "type": "quote",
-      "content": "The only way to do great work is to love what you do.",
+      "id": "site-v2",
+      "type": "announcement",
+      "content": "Our new website is live — track your progress, save lessons and learn in Kannada.",
       "isActive": true
     },
     {
-      "id": "announcement-1",
+      "id": "instagram",
       "type": "announcement",
-      "content": "DSA in Python course coming soon! Stay tuned for updates.",
+      "content": "Follow us on Instagram for short-form tutorials and tech updates.",
+      "link": {
+        "label": "Follow",
+        "url": "https://www.instagram.com/engineering_in_kannada/"
+      },
       "isActive": true
     },
     {
-      "id": "announcement-2",
+      "id": "new-course-soon",
       "type": "announcement",
-      "content": "Follow me on Instagram for short form tutorials and tech updates.",
+      "content": "A new free course is launching soon. Subscribe on YouTube to get notified.",
+      "link": {
+        "label": "Subscribe",
+        "url": "https://www.youtube.com/@EngineeringinKannada?sub_confirmation=1"
+      },
       "isActive": true
     }
   ]
-} 
+}

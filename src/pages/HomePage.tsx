@@ -73,9 +73,16 @@ function Hero() {
             </span>
           </span>
           <h1 className="hero-title mt-6 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.25rem]">
-            Learn engineering
-            <br />
-            in <span className="text-gradient-gold">Kannada.</span>
+            {/* English title; Google Translate mangles the <br>, so Kannada gets its own version below. */}
+            <span className="hero-title-en">
+              Learn engineering
+              <br />
+              in <span className="text-gradient-gold">Kannada.</span>
+            </span>
+            <span className="hero-title-kn notranslate" translate="no">
+              <span className="block">ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್</span>
+              <span className="text-gradient-gold -my-[0.22em] block text-[1.3em] leading-[1.15]">ಕಲಿಯಿರಿ</span>
+            </span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-neutral-400 lg:mx-0">
             Quality technical education in Kannada, accessible to everyone. Start your learning
