@@ -8,13 +8,14 @@ export function LogoMark({ className = "h-9" }: { className?: string }) {
 }
 
 /*
- * The icon's weight sits low (the TV body is the bottom ~63%; the antennas are
- * thin), so the name is always lined up with the TV body, not the whole image.
- * All sizes are in `em` of the English line, so every variant scales together.
+ * Two layouts, all sizes in `em` of the English line so they scale together.
  *
- * - `text` (header): the name stays on the container's centre line — level
- *   with the nav links — and the icon is raised so its TV body matches it.
- * - `body` (footer): the icon stays put and the name is lowered onto its body.
+ * - `center` (header): the name and the icon are both centred on the header's
+ *   centre line, level with the nav links. The icon is centred on its visual
+ *   centre of mass (54% down, measured from the artwork), not its box, so it
+ *   is nudged up by 4% of its height.
+ * - `body` (footer): a larger icon with the name lowered to sit beside the TV
+ *   body (the bottom ~63% of the icon), antennas rising above.
  */
 const SIZE = {
   md: "text-[13.5px] min-[400px]:text-[15px]",
@@ -22,14 +23,14 @@ const SIZE = {
 } as const;
 
 const ANCHOR = {
-  text: { icon: "relative -top-[0.54em] h-[2.9em]", text: "" },
+  center: { icon: "relative -top-[0.1em] h-[2.5em]", text: "" },
   body: { icon: "h-[3.125em]", text: "relative top-[0.5625em]" },
 } as const;
 
 /** Icon + English and Kannada names; shared by the header and footer. */
 export function LogoLockup({
   size = "md",
-  anchor = "text",
+  anchor = "center",
 }: {
   size?: keyof typeof SIZE;
   anchor?: keyof typeof ANCHOR;
@@ -50,7 +51,7 @@ export function LogoLockup({
 
 export function Logo() {
   return (
-    <Link to="/" aria-label={`${BRAND.name} — home`}>
+    <Link to="/" aria-label={`${BRAND.name} home`}>
       <LogoLockup />
     </Link>
   );

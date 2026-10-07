@@ -20,18 +20,22 @@ function brandHtml(): Plugin {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
+// `npm run build` makes the client bundle, then an SSR bundle of src/entry-server.tsx
+// that scripts/prerender.mjs uses to write static HTML for every route.
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), brandHtml()],
   base: '/',
   build: {
     target: 'es2020',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          markdown: ['react-markdown', 'remark-gfm'],
+    rollupOptions: isSsrBuild
+      ? {}
+      : {
+          output: {
+            manualChunks: {
+              react: ['react', 'react-dom', 'react-router-dom'],
+              markdown: ['react-markdown', 'remark-gfm'],
+            },
+          },
         },
-      },
-    },
   },
-});
+}));

@@ -18,12 +18,10 @@ import { EmptyState } from "../components/EmptyState";
 import { ProgressRing } from "../components/ProgressRing";
 import { Img } from "../components/Img";
 import { allLessons, courses, getVideos, lessonTitle, youtubeThumb } from "../lib/catalog";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { useProgressStore } from "../store/progress";
 import { toast } from "../store/toast";
 
 export function LearningPage() {
-  useDocumentTitle("My Learning");
   const completed = useProgressStore((s) => s.completedVideos);
   const starredVideos = useProgressStore((s) => s.starredVideos);
   const starredCourses = useProgressStore((s) => s.starredCourses);
@@ -50,7 +48,7 @@ export function LearningPage() {
             My <span className="text-gradient-gold">Learning</span>
           </>
         }
-        description="Everything you've watched, saved and finished — in one place. Progress is saved in this browser."
+        description="Everything you've watched, saved and finished, all in one place. Progress is saved in this browser."
       >
         <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
@@ -79,7 +77,7 @@ export function LearningPage() {
               </Link>
             }
           >
-            Mark lessons as done, star courses and save lessons for later — they'll all show up here.
+            Mark lessons as done, star courses and save lessons for later. They'll all show up here.
           </EmptyState>
         )}
 

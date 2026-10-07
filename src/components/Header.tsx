@@ -9,7 +9,6 @@ import { useProgressStore } from "../store/progress";
 import { cn } from "../lib/cn";
 
 
-const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
 
 export function Header() {
   const { pathname } = useLocation();
@@ -17,6 +16,9 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const openSearch = useUIStore((s) => s.setSearchOpen);
   const savedCount = useProgressStore((s) => s.starredVideos.length);
+  // Detected after mount so the prerendered HTML and first client render match.
+  const [isMac, setIsMac] = useState(false);
+  useEffect(() => setIsMac(/Mac|iPhone|iPad/.test(navigator.platform)), []);
 
   useEffect(() => setMenuOpen(false), [pathname]);
 

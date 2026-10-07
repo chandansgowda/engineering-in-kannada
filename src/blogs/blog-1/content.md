@@ -1,5 +1,5 @@
 
-## Getting involved in open-source projects is a fantastic way to improve your skills, collaborate with others, and give back to the developer community. This guide walks you through the complete workflow—from forking a repository to submitting a pull request.
+## Getting involved in open-source projects is a fantastic way to improve your skills, collaborate with others, and give back to the developer community. This guide walks you through the complete workflow, from forking a repository to submitting a pull request.
 
 
 
@@ -103,7 +103,7 @@ The project maintainers will review your PR. If changes are requested:
 1. Make the edits locally.
 2. Commit and push them again to the same branch.
 
-Your PR will automatically update—no need to create a new one.
+Your PR will automatically update, so there’s no need to create a new one.
 
 ---
 
@@ -132,6 +132,6 @@ Doing this regularly avoids conflicts when contributing again in the future.
 
 ##  Conclusion
 
-You’ve just walked through the full cycle of contributing to an open-source project—forking, branching, committing, and creating a pull request. Understanding and practicing this process helps you become a valuable part of the developer community.
+You’ve just walked through the full cycle of contributing to an open-source project: forking, branching, committing, and creating a pull request. Understanding and practicing this process helps you become a valuable part of the developer community.
 
 Keep coding and keep contributing! 🚀

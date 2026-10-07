@@ -160,7 +160,7 @@ export async function fetchLeaderboard({ force = false } = {}): Promise<Leaderbo
       .sort((a, b) => b.score - a.score || b.prs - a.prs || a.github.localeCompare(b.github))
       .slice(0, TOP_N);
 
-    // Display names are a nicety — fetch them only for the people we show.
+    // Display names are a nicety, so fetch them only for the people we show.
     await Promise.all(
       ranked.map(async (c) => {
         try {

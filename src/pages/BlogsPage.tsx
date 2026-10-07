@@ -5,13 +5,11 @@ import { PageHeader } from "../components/PageHeader";
 import { EmptyState } from "../components/EmptyState";
 import { blogPosts, formatDate } from "../lib/blog";
 import { REPO_URL } from "../lib/github";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { cn } from "../lib/cn";
 
 const allTags = Array.from(new Set(blogPosts.flatMap((p) => p.metadata.tags))).sort();
 
 export function BlogsPage() {
-  useDocumentTitle("Blogs");
   const [query, setQuery] = useState("");
   const [tag, setTag] = useState<string | null>(null);
 

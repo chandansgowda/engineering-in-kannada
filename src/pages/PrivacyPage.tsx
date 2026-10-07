@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { LegalLayout, LegalSection } from "../components/LegalLayout";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { REPO_URL } from "../lib/github";
 
 const UPDATED = "7 October 2026";
@@ -11,7 +10,7 @@ const sections: LegalSection[] = [
     title: "The short version",
     body: (
       <ul>
-        <li>There are no accounts — we don’t ask for your name, email or password.</li>
+        <li>There are no accounts. We don’t ask for your name, email or password.</li>
         <li>Your learning progress stays in your own browser.</li>
         <li>We use Google Analytics to understand, in aggregate, how the Site is used.</li>
         <li>Some features load content from third parties such as YouTube, GitHub and Google.</li>
@@ -27,15 +26,15 @@ const sections: LegalSection[] = [
         <p>The Site uses your browser’s local storage and cookies to make features work:</p>
         <ul>
           <li>
-            <strong>Learning progress</strong> — completed lessons, saved lessons, starred courses and the last
+            <strong>Learning progress:</strong> completed lessons, saved lessons, starred courses and the last
             lesson you opened.
           </li>
           <li>
-            <strong>Preferences and caches</strong> — dismissed announcements and a short-lived copy of the
+            <strong>Preferences and caches:</strong> dismissed announcements and a short-lived copy of the
             contributor leaderboard.
           </li>
           <li>
-            <strong>Translation choice</strong> — if you switch the Site to Kannada, a <code>googtrans</code>{" "}
+            <strong>Translation choice:</strong> if you switch the Site to Kannada, a <code>googtrans</code>{" "}
             cookie remembers it.
           </li>
         </ul>
@@ -74,29 +73,26 @@ const sections: LegalSection[] = [
         <p>When you use the Site your browser may connect directly to:</p>
         <ul>
           <li>
-            <strong>YouTube</strong> — thumbnails are loaded from YouTube, and videos open on YouTube.
+            <strong>YouTube:</strong> thumbnails are loaded from YouTube, and videos open on YouTube.
           </li>
           <li>
-            <strong>GitHub</strong> — lesson notes and the contributor leaderboard are fetched from GitHub.
+            <strong>GitHub:</strong> lesson notes and the contributor leaderboard are fetched from GitHub.
           </li>
           <li>
-            <strong>Google Fonts</strong> — the Site’s typefaces.
+            <strong>Google Fonts:</strong> the Site’s typefaces.
           </li>
           <li>
-            <strong>Google Translate</strong> — only if you turn on Kannada translation, in which case the
+            <strong>Google Translate:</strong> only if you turn on Kannada translation, in which case the
             page text is sent to Google to be translated.
           </li>
           <li>
             <strong>Image hosts</strong> such as Unsplash and UI Avatars for some images.
           </li>
-          <li>
-            <strong>Netlify</strong> — our hosting provider, which may log standard request data such as IP
-            address and browser type for security and operations.
-          </li>
         </ul>
         <p>
           These providers receive the technical information any website request includes (such as your IP
-          address) and handle it under their own privacy policies.
+          address) and handle it under their own privacy policies. Like any website, the servers that host
+          the Site may also keep standard request logs for security and reliability.
         </p>
       </>
     ),
@@ -166,7 +162,6 @@ const sections: LegalSection[] = [
 ];
 
 export function PrivacyPage() {
-  useDocumentTitle("Privacy Policy");
   return (
     <LegalLayout
       eyebrow="Legal"

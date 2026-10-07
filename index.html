@@ -3,25 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Engineering in Kannada — Learn engineering in Kannada</title>
+    <!--seo:start-->
+    <title>Engineering in Kannada | Learn Programming in Kannada</title>
     <meta
       name="description"
-      content="Structured engineering courses in Kannada — Python, C, DSA and Web Development. Track your progress, read notes and practise along."
+      content="Learn programming in Kannada with structured video courses on Python, C, Data Structures and Algorithms and Web Development, plus notes and progress tracking."
     />
+    <!--seo:end-->
     <meta name="theme-color" content="#1A1A1A" />
     <meta name="color-scheme" content="dark" />
+    <meta name="author" content="Engineering in Kannada" />
     <link rel="icon" type="%BRAND_LOGO_TYPE%" href="%BRAND_LOGO%" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Engineering in Kannada" />
-    <meta property="og:title" content="Engineering in Kannada" />
-    <meta
-      property="og:description"
-      content="Structured engineering courses in Kannada. Learn at your own pace."
-    />
-    <meta property="og:image" content="%BRAND_WORDMARK%" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@chandansgowdru" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site summary" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,10 +26,18 @@
     />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
+    <script>
+      // Hide the announcement bar before first paint if this set was dismissed.
+      try {
+        var bar = document.querySelector("[data-announcements]");
+        if (bar && localStorage.getItem("eik-announcements-dismissed") === bar.getAttribute("data-announcements"))
+          bar.style.display = "none";
+      } catch (e) {}
+    </script>
     <noscript>
       <p style="color:#fff;font-family:sans-serif;text-align:center;padding:2rem">
-        Engineering in Kannada needs JavaScript to run.
+        Engineering in Kannada works best with JavaScript enabled.
       </p>
     </noscript>
     <script type="module" src="/src/main.tsx"></script>

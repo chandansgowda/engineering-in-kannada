@@ -4,7 +4,6 @@ import { LinkCategory, Link as LinkItem } from "../types";
 import { NamedIcon } from "../components/icons";
 import { SOCIALS } from "../lib/socials";
 import { Img } from "../components/Img";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { BRAND } from "../lib/brand";
 
 const categories = linksData.categories as LinkCategory[];
@@ -18,7 +17,6 @@ const TINT: Record<string, string> = {
 };
 
 export function LinksPage() {
-  useDocumentTitle("Links");
 
   return (
     <div className="relative overflow-hidden">

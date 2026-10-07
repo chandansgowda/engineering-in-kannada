@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import { AnnouncementBar } from "./AnnouncementBar";
+import { SeoHead } from "./SeoHead";
 import { Footer } from "./Footer";
 import { Toaster } from "./Toaster";
 import { BackToTop } from "./BackToTop";
@@ -73,6 +74,7 @@ export function Layout() {
       >
         Skip to content
       </a>
+      <SeoHead />
       <AnnouncementBar />
       <Header />
       <main id="main" className="flex-1">

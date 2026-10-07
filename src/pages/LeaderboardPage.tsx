@@ -9,7 +9,6 @@ import {
   LeaderboardResult,
   REPO_URL,
 } from "../lib/github";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { cn } from "../lib/cn";
 
 function timeAgo(ts: number) {
@@ -38,9 +37,8 @@ function Avatar({ c, className }: { c: GitHubContributor; className: string }) {
 }
 
 export function LeaderboardPage() {
-  useDocumentTitle("Contributor Leaderboard");
-  const [data, setData] = useState<LeaderboardResult | null>(() => getCachedLeaderboard());
-  const [loading, setLoading] = useState(!data || !!data.stale);
+  const [data, setData] = useState<LeaderboardResult | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(async (force = false) => {
@@ -60,7 +58,11 @@ export function LeaderboardPage() {
   }, []);
 
   useEffect(() => {
-    load();
+    // Show any cached result immediately, then refresh if it is stale.
+    const cached = getCachedLeaderboard();
+    if (cached) setData(cached);
+    if (!cached || cached.stale) load();
+    else setLoading(false);
   }, [load]);
 
   const list = data?.contributors ?? [];
@@ -111,7 +113,7 @@ export function LeaderboardPage() {
           <LeaderboardSkeleton />
         ) : !list.length ? (
           <EmptyState icon={Users} title="No contributors yet">
-            Be the first — open a pull request!
+            Be the first: open a pull request!
           </EmptyState>
         ) : (
           <>

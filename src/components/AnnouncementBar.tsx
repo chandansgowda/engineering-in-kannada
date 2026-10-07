@@ -1,4 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 import { ArrowUpRight, ChevronLeft, ChevronRight, Megaphone, Quote, X } from "lucide-react";
 import announcementsData from "../data/announcements.json";
 import { AnnouncementItem, AnnouncementsData } from "../types";
@@ -25,7 +27,7 @@ function Message({ item, copy = false }: { item: AnnouncementItem; copy?: boolea
     <span className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap">
       <Icon className="h-3.5 w-3.5 shrink-0 text-primary" />
       {item.content}
-      {item.author && <span className="text-neutral-500"> — {item.author}</span>}
+      {item.author && <span className="text-neutral-500">, {item.author}</span>}
       {item.link && (
         <a
           href={item.link.url}
@@ -44,7 +46,14 @@ function Message({ item, copy = false }: { item: AnnouncementItem; copy?: boolea
 
 /** Slim, dismissible announcement strip; long messages scroll as a marquee. */
 export function AnnouncementBar() {
-  const [hidden, setHidden] = useState(wasDismissed);
+  // Read after mount so prerendered HTML matches; an inline script in index.html
+  // hides the bar before first paint for people who already dismissed it.
+  const [hidden, setHidden] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useIsomorphicLayoutEffect(() => {
+    setHidden(wasDismissed());
+    setMounted(true);
+  }, []);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [marquee, setMarquee] = useState<{ distance: number } | null>(null);
@@ -54,7 +63,7 @@ export function AnnouncementBar() {
   const item = items[index];
 
   // Decide whether the current message fits; re-check when the bar resizes.
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (hidden || !item) return;
     const check = () => {
       const viewport = viewportRef.current;
@@ -68,7 +77,7 @@ export function AnnouncementBar() {
     const ro = new ResizeObserver(check);
     if (viewportRef.current) ro.observe(viewportRef.current);
     return () => ro.disconnect();
-  }, [hidden, item]);
+  }, [hidden, item, mounted]);
 
   // Rotate: static messages stay 6s; scrolling ones finish a full pass first.
   useEffect(() => {
@@ -97,6 +106,7 @@ export function AnnouncementBar() {
       onMouseLeave={() => setPaused(false)}
       role="region"
       aria-label="Announcements"
+      data-announcements={signature}
     >
       <div className="container-page flex h-10 items-center gap-2 text-[13px] text-neutral-200">
         {items.length > 1 && (
@@ -119,10 +129,12 @@ export function AnnouncementBar() {
           }
           aria-live="polite"
         >
-          {/* Invisible copy used only to measure the message's natural width. */}
-          <span ref={measureRef} className="pointer-events-none invisible absolute left-0 top-0 whitespace-nowrap" aria-hidden="true">
-            <Message item={item} copy />
-          </span>
+          {/* Invisible copy used only to measure the message's natural width (browser only). */}
+          {mounted && (
+            <span ref={measureRef} className="pointer-events-none invisible absolute left-0 top-0 whitespace-nowrap" aria-hidden="true">
+              <Message item={item} copy />
+            </span>
+          )}
           {marquee ? (
             <div
               key={item.id}

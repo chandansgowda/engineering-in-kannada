@@ -190,6 +190,17 @@ npm run build
 The logo lives in one place. Replace `public/images/logo.svg` (transparent background), or point `logo` in
 `src/lib/brand.ts` at a new file — the header, footer, links page and favicon all update.
 
+## SEO and Prerendering
+
+`npm run build` builds the app, then prerenders every route to static HTML (`scripts/prerender.mjs`) so
+search engines and AI assistants see real content without running JavaScript. It also writes `sitemap.xml`,
+`robots.txt`, `llms.txt` and `llms-full.txt`.
+
+- Page titles, descriptions and structured data live in `src/lib/seo.ts`.
+- The public URL defaults to `https://engineeringinkannada.in`; set `VITE_SITE_URL` to change it.
+- New courses and blog posts are picked up automatically on the next build.
+- Unknown URLs are served `404.html` with a 404 status by any static host.
+
 ## Project Structure
 
 ```

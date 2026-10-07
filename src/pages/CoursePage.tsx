@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { getCourse, getVideos, courses, lessonTitle } from "../lib/catalog";
 import { useCourseProgress, useProgressStore } from "../store/progress";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { shareLink } from "../lib/share";
 import { trackEvent } from "../lib/analytics";
 import { toast } from "../store/toast";
@@ -33,7 +32,6 @@ type Tab = "all" | "remaining" | "completed" | "saved";
 export function CoursePage() {
   const { courseId } = useParams<{ courseId: string }>();
   const course = getCourse(courseId);
-  useDocumentTitle(course?.title ?? "Course not found");
 
   if (!course) {
     return (
@@ -197,7 +195,7 @@ function CourseView({ courseId }: { courseId: string }) {
                 <ProgressRing percent={percent} size={64} stroke={6} />
                 <div className="min-w-0 flex-1">
                   <p className="font-bold text-white">
-                    {done === total && total > 0 ? "All done — great work!" : "Your progress"}
+                    {done === total && total > 0 ? "All done. Great work!" : "Your progress"}
                   </p>
                   <p className="text-sm text-neutral-400">
                     {done} of {total} lessons completed
@@ -210,7 +208,10 @@ function CourseView({ courseId }: { courseId: string }) {
         </div>
       </div>
 
-      <section className="container-page pt-10">
+      <section className="container-page pt-10" aria-labelledby="lessons-heading">
+        <h2 id="lessons-heading" className="sr-only">
+          Lessons
+        </h2>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="no-scrollbar -mx-4 flex gap-1 overflow-x-auto px-4 sm:mx-0 sm:px-0" role="tablist" aria-label="Filter lessons">
             {(["all", "remaining", "completed", "saved"] as Tab[]).map((t) => (

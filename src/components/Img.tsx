@@ -1,4 +1,4 @@
-import { useState, type ImgHTMLAttributes, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ImgHTMLAttributes, type ReactNode } from "react";
 import { cn } from "../lib/cn";
 
 interface ImgProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -9,11 +9,19 @@ interface ImgProps extends ImgHTMLAttributes<HTMLImageElement> {
 /** Lazy image that fades in once decoded and degrades gracefully on error. */
 export function Img({ className, fallback, onLoad, onError, src, ...rest }: ImgProps) {
   const [state, setState] = useState<"loading" | "loaded" | "error">(src ? "loading" : "error");
+  const ref = useRef<HTMLImageElement>(null);
+
+  // With prerendered HTML the image can finish loading before React attaches.
+  useEffect(() => {
+    const img = ref.current;
+    if (img?.complete) setState(img.naturalWidth > 0 ? "loaded" : "error");
+  }, []);
 
   if (state === "error") return <>{fallback ?? null}</>;
 
   return (
     <img
+      ref={ref}
       loading="lazy"
       decoding="async"
       src={src}

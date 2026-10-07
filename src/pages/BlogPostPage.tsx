@@ -1,9 +1,9 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
-import { formatDate, getBlogSummary, loadBlogContent, readingTime, blogPosts } from "../lib/blog";
+import { formatDate, getBlogSummary, readingTime, blogPosts } from "../lib/blog";
+import { blogContent } from "../lib/blogContent";
 import { shareLink } from "../lib/share";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { NotFoundPage } from "./NotFoundPage";
 
 const Markdown = lazy(() => import("../components/Markdown"));
@@ -29,18 +29,7 @@ function ReadingProgress() {
 export function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = getBlogSummary(slug);
-  const [content, setContent] = useState<string | null>(null);
-  useDocumentTitle(post?.metadata.title ?? "Post not found");
-
-  useEffect(() => {
-    if (!post) return;
-    let alive = true;
-    setContent(null);
-    loadBlogContent(post.slug)?.then((c) => alive && setContent(c));
-    return () => {
-      alive = false;
-    };
-  }, [post]);
+  const content = post ? blogContent(post.slug) : null;
 
   if (!post) {
     return <NotFoundPage title="Blog post not found" message="This post may have moved. Check out our other blogs instead." />;

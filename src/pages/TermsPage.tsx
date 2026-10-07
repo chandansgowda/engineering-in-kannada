@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { LegalLayout, LegalSection } from "../components/LegalLayout";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { REPO_URL } from "../lib/github";
 
 const UPDATED = "7 October 2026";
@@ -23,8 +22,8 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          The Site organises Engineering in Kannada educational content — course playlists, notes, practice
-          links and blog posts — and lets you track your own learning progress. Video lessons are hosted on
+          The Site organises Engineering in Kannada educational content, including course playlists, notes,
+          practice links and blog posts, and lets you track your own learning progress. Video lessons are hosted on
           YouTube and open on YouTube; notes and practice material may be hosted on GitHub or other
           third-party services.
         </p>
@@ -167,7 +166,6 @@ const sections: LegalSection[] = [
 ];
 
 export function TermsPage() {
-  useDocumentTitle("Terms & Conditions");
   return (
     <LegalLayout
       eyebrow="Legal"

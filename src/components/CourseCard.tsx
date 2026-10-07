@@ -44,7 +44,7 @@ export const CourseCard = memo(function CourseCard({ course, index = 0 }: { cour
       <div className="relative aspect-video overflow-hidden bg-dark-600">
         <Img
           src={course.thumbnail}
-          alt=""
+          alt={`${course.title} course thumbnail`}
           width={480}
           height={270}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"

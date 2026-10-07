@@ -15,12 +15,12 @@ import {
 } from "lucide-react";
 import { CourseCard } from "../components/CourseCard";
 import { KarnatakaMap } from "../components/KarnatakaMap";
+import { useIsTranslated } from "../lib/useIsTranslated";
 import { EmptyState } from "../components/EmptyState";
 import { YOUTUBE_CHANNEL } from "../lib/socials";
 import { courses, findLesson, getVideos } from "../lib/catalog";
 import { blogPosts, formatDate } from "../lib/blog";
 import { REPO_URL } from "../lib/github";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { useProgressStore } from "../store/progress";
 import { Difficulty } from "../types";
 import { cn } from "../lib/cn";
@@ -37,7 +37,6 @@ const FILTERS: { value: Filter; label: string }[] = [
 ];
 
 export function HomePage() {
-  useDocumentTitle();
 
   return (
     <>
@@ -52,6 +51,7 @@ export function HomePage() {
 }
 
 function Hero() {
+  const translated = useIsTranslated();
   const lastWatched = useProgressStore((s) => s.lastWatched);
   const resume = lastWatched && findLesson(lastWatched.videoId);
 
@@ -73,16 +73,19 @@ function Hero() {
             </span>
           </span>
           <h1 className="hero-title mt-6 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.25rem]">
-            {/* English title; Google Translate mangles the <br>, so Kannada gets its own version below. */}
-            <span className="hero-title-en">
-              Learn engineering
-              <br />
-              in <span className="text-gradient-gold">Kannada.</span>
-            </span>
-            <span className="hero-title-kn notranslate" translate="no">
-              <span className="block">ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್</span>
-              <span className="text-gradient-gold -my-[0.22em] block text-[1.3em] leading-[1.15]">ಕಲಿಯಿರಿ</span>
-            </span>
+            {/* Google Translate mangles the <br>, so the Kannada page gets a hand-written title. */}
+            {translated ? (
+              <span className="hero-title-kn notranslate" translate="no">
+                <span className="block">ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್</span>
+                <span className="text-gradient-gold -my-[0.22em] block text-[1.3em] leading-[1.15]">ಕಲಿಯಿರಿ</span>
+              </span>
+            ) : (
+              <>
+                Learn engineering
+                <br />
+                in <span className="text-gradient-gold">Kannada.</span>
+              </>
+            )}
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-neutral-400 lg:mx-0">
             Quality technical education in Kannada, accessible to everyone. Start your learning
@@ -221,7 +224,7 @@ function CourseCatalog() {
 }
 
 const FEATURES = [
-  { icon: Languages, title: "Taught in Kannada", body: "Concepts explained in the language you think in — no more getting lost in translation." },
+  { icon: Languages, title: "Taught in Kannada", body: "Concepts explained in the language you think in, so nothing gets lost in translation." },
   { icon: LineChart, title: "Track your progress", body: "Mark lessons done, save favourites and resume right where you stopped." },
   { icon: FileText, title: "Notes & practice", body: "Read lesson notes right here and sharpen your skills with practice problems." },
   { icon: BookOpen, title: "Structured paths", body: "Go from zero to confident with carefully ordered lessons for every topic." },
@@ -260,7 +263,7 @@ function Community() {
         <Github className="h-8 w-8 text-white" />
         <h3 className="mt-5 text-2xl font-extrabold text-white">This site is open source</h3>
         <p className="mt-2 max-w-md text-neutral-400">
-          Add a course, fix a bug or write a blog — and climb the contributor leaderboard.
+          Add a course, fix a bug or write a blog, and climb the contributor leaderboard.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">

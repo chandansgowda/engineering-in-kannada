@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, Search } from "lucide-react";
-import { useDocumentTitle } from "../lib/useDocumentTitle";
 import { useUIStore } from "../store/ui";
 
 export function NotFoundPage({
@@ -10,7 +9,6 @@ export function NotFoundPage({
   title?: string;
   message?: string;
 }) {
-  useDocumentTitle(title);
   const openSearch = useUIStore((s) => s.setSearchOpen);
   return (
     <section className="container-page flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
