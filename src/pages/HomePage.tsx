@@ -10,18 +10,15 @@ import {
   LineChart,
   PlayCircle,
   Search,
-  Sparkles,
   Star,
   X,
   Youtube,
 } from "lucide-react";
 import { CourseCard } from "../components/CourseCard";
-import { AnnouncementTicker } from "../components/AnnouncementTicker";
+import { KarnatakaMap } from "../components/KarnatakaMap";
 import { EmptyState } from "../components/EmptyState";
-import { ProgressRing } from "../components/ProgressRing";
-import { Img } from "../components/Img";
 import { YOUTUBE_CHANNEL } from "../lib/socials";
-import { courses, findLesson, getVideos, lessonTitle, totalLessons, youtubeThumb } from "../lib/catalog";
+import { courses, findLesson, getVideos } from "../lib/catalog";
 import { blogPosts, formatDate } from "../lib/blog";
 import { REPO_URL } from "../lib/github";
 import { useDocumentTitle } from "../lib/useDocumentTitle";
@@ -46,11 +43,7 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <div className="container-page -mt-4 sm:-mt-8">
-        <AnnouncementTicker />
-      </div>
-      <ContinueLearning />
-      <section id="courses" className="container-page scroll-mt-20 pt-20">
+      <section id="courses" className="container-page scroll-mt-20 pt-8 sm:pt-12">
         <CourseCatalog />
       </section>
       <Features />
@@ -60,20 +53,27 @@ export function HomePage() {
 }
 
 function Hero() {
-  const completedCount = useProgressStore((s) => s.completedVideos.length);
   const lastWatched = useProgressStore((s) => s.lastWatched);
   const resume = lastWatched && findLesson(lastWatched.videoId);
 
   return (
     <section className="relative overflow-hidden">
       <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]" />
-      <div className="pointer-events-none absolute -top-48 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-primary/[0.12] blur-[120px] lg:left-[70%]" />
+      <div className="pointer-events-none absolute -top-48 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-primary/[0.12] blur-[120px] lg:left-[72%]" />
+      <div className="pointer-events-none absolute bottom-0 right-[10%] hidden h-72 w-72 rounded-full bg-[#E8112D]/[0.08] blur-[100px] lg:block" />
 
-      <div className="container-page relative grid items-center gap-12 pb-20 pt-10 sm:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 lg:pb-28 lg:pt-20">
+      <div className="container-page relative grid items-center gap-10 pb-16 pt-10 sm:pt-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 lg:pb-24 lg:pt-16">
         <div className="animate-fade-up text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.08] px-3 py-1 text-xs font-semibold text-primary">
-            <Sparkles className="h-3.5 w-3.5" />
-            100% free · <span className="font-kannada">ಕನ್ನಡದಲ್ಲಿ</span>
+          <span className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1 pl-1.5 pr-3.5 text-xs font-semibold text-neutral-300">
+            <span className="flex h-5 w-5 overflow-hidden rounded-full ring-1 ring-white/20" aria-hidden="true">
+              <span className="h-full w-1/2 bg-primary" />
+              <span className="h-full w-1/2 bg-[#E8112D]" />
+            </span>
+            <span className="font-kannada text-primary" translate="no">
+              ನಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ತಂತ್ರಜ್ಞಾನ
+            </span>
+            <span className="text-neutral-600">·</span>
+            Tech in our language
           </span>
           <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.25rem]">
             Learn engineering
@@ -82,7 +82,7 @@ function Hero() {
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-neutral-400 lg:mx-0">
             Quality technical education in Kannada, accessible to everyone. Start your learning
-            journey today with my free and carefully curated content.
+            journey today with carefully curated courses, notes and practice.
           </p>
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
@@ -99,35 +99,11 @@ function Hero() {
               <Youtube className="h-5 w-5 text-red-500" /> YouTube channel
             </a>
           </div>
-
-          <dl className="mt-12 grid grid-cols-3 gap-4 border-t border-white/[0.06] pt-8 sm:max-w-lg lg:max-w-none">
-            {[
-              { value: courses.length, label: "Courses" },
-              { value: totalLessons, label: "Video lessons" },
-              { value: completedCount ? completedCount : "₹0", label: completedCount ? "You've completed" : "Forever free" },
-            ].map((s) => (
-              <div key={s.label} className="text-center lg:text-left">
-                <dt className="sr-only">{s.label}</dt>
-                <dd className="text-3xl font-extrabold text-white sm:text-4xl">{s.value}</dd>
-                <dd className="mt-1 text-xs font-medium text-neutral-500 sm:text-sm">{s.label}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
-        <div className="relative mx-auto w-full max-w-md animate-fade-up [animation-delay:120ms] lg:max-w-none">
-          <div className="relative rounded-[2rem] border border-white/[0.08] bg-gradient-to-br from-white/[0.06] to-white/[0.01] p-10 shadow-card backdrop-blur sm:p-14">
-            <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_30%_20%,rgba(255,215,0,0.14),transparent_60%)]" />
-            <img
-              src="/images/logo.png"
-              alt="ಕನ್ನಡದಲ್ಲಿ Engineering"
-              width={420}
-              height={180}
-              {...{ fetchpriority: "high" }}
-              className="relative mx-auto w-full max-w-[340px] animate-float drop-shadow-[0_10px_40px_rgba(255,215,0,0.25)]"
-            />
-          </div>
-          <div className="absolute -left-3 top-6 hidden animate-fade-up items-center gap-2.5 rounded-2xl border border-white/10 bg-dark-700/90 px-3.5 py-2.5 shadow-2xl backdrop-blur [animation-delay:400ms] sm:flex lg:-left-8">
+        <div className="relative mx-auto w-full max-w-[280px] animate-fade-in sm:max-w-[340px] lg:max-w-[360px]">
+          <KarnatakaMap className="aspect-[400/621] w-full" />
+          <div className="absolute -left-24 top-[1%] hidden animate-fade-up items-center gap-2.5 rounded-2xl border border-white/10 bg-dark-700/90 px-3.5 py-2.5 shadow-2xl backdrop-blur [animation-delay:2600ms] sm:flex lg:-left-36">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500 text-dark">
               <CheckCircle2 className="h-4 w-4" />
             </span>
@@ -136,7 +112,7 @@ function Hero() {
               <span className="block text-[11px] text-neutral-500">Progress saved automatically</span>
             </span>
           </div>
-          <div className="absolute -bottom-5 -right-2 hidden animate-fade-up items-center gap-2.5 rounded-2xl border border-white/10 bg-dark-700/90 px-3.5 py-2.5 shadow-2xl backdrop-blur [animation-delay:550ms] sm:flex lg:-right-6">
+          <div className="absolute -bottom-12 -right-4 hidden animate-fade-up items-center gap-2.5 rounded-2xl border border-white/10 bg-dark-700/90 px-3.5 py-2.5 shadow-2xl backdrop-blur [animation-delay:3000ms] sm:flex lg:-right-16">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-dark">
               <Languages className="h-4 w-4" />
             </span>
@@ -147,52 +123,6 @@ function Hero() {
           </div>
         </div>
       </div>
-    </section>
-  );
-}
-
-function ContinueLearning() {
-  const lastWatched = useProgressStore((s) => s.lastWatched);
-  const completed = useProgressStore((s) => s.completedVideos);
-  const resume = lastWatched && findLesson(lastWatched.videoId);
-  if (!resume) return null;
-
-  const videos = getVideos(resume.course.id);
-  const done = videos.filter((v) => completed.includes(v.id)).length;
-  const percent = Math.round((done / videos.length) * 100);
-  const thumb = youtubeThumb(resume.video.youtubeUrl);
-
-  return (
-    <section className="container-page pt-16">
-      <div className="mb-5 flex items-end justify-between">
-        <h2 className="text-xl font-bold text-white">Pick up where you left off</h2>
-        <Link to="/learning" className="text-sm font-semibold text-primary hover:underline">
-          My Learning →
-        </Link>
-      </div>
-      <Link
-        to={`/course/${resume.course.id}#lesson-${resume.video.id}`}
-        className="card card-hover group flex items-center gap-4 p-3 sm:gap-6 sm:p-4"
-      >
-        <div className="relative aspect-video w-28 shrink-0 overflow-hidden rounded-xl bg-dark-600 sm:w-48">
-          {thumb && <Img src={thumb} alt="" className="h-full w-full object-cover" />}
-          <span className="absolute inset-0 flex items-center justify-center bg-black/30">
-            <PlayCircle className="h-8 w-8 text-white transition group-hover:scale-110 group-hover:text-primary" />
-          </span>
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary">{resume.course.title}</p>
-          <p className="mt-1 truncate text-base font-bold text-white sm:text-lg">
-            Lesson {resume.index + 1}: {lessonTitle(resume.video.title)}
-          </p>
-          <p className="mt-1 text-sm text-neutral-500">
-            {done} of {videos.length} lessons completed
-          </p>
-        </div>
-        <div className="hidden pr-2 sm:block">
-          <ProgressRing percent={percent} size={60} />
-        </div>
-      </Link>
     </section>
   );
 }
@@ -306,7 +236,7 @@ function CourseCatalog() {
 
 const FEATURES = [
   { icon: Languages, title: "Taught in Kannada", body: "Concepts explained in the language you think in — no more getting lost in translation." },
-  { icon: LineChart, title: "Track your progress", body: "Mark lessons done, save favourites and resume right where you stopped. Stored on your device." },
+  { icon: LineChart, title: "Track your progress", body: "Mark lessons done, save favourites and resume right where you stopped." },
   { icon: FileText, title: "Notes & practice", body: "Read lesson notes right here and sharpen your skills with practice problems." },
   { icon: BookOpen, title: "Structured paths", body: "Go from zero to confident with carefully ordered lessons for every topic." },
 ];

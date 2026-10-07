@@ -59,7 +59,7 @@
         {
           "id": "notes-1",
           "title": "Study Notes",
-          "description": "Free learning resources and notes",
+          "description": "Learning resources and notes",
           "coverImage": "https://images.unsplash.com/photo-1517842645767-c639042777db",
           "url": "https://github.com/chandansgowda/learn-python-in-kannada",
           "icon": "FileText"

@@ -35,7 +35,7 @@ export function LinksPage() {
           </h1>
           <p className="mt-3 text-neutral-400">Find all my profiles and resources in one place</p>
           <p className="mt-4 text-xs font-semibold text-neutral-500">
-            {courses.length} free courses · {totalLessons} lessons · <span className="font-kannada">ಕನ್ನಡದಲ್ಲಿ</span>
+            {courses.length} courses · {totalLessons} lessons · <span className="font-kannada">ಕನ್ನಡದಲ್ಲಿ</span>
           </p>
           <div className="mt-6 flex gap-2">
             {SOCIALS.map(({ label, href, icon: Icon }) => (

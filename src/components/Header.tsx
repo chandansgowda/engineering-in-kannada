@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Menu, Search, X } from "lucide-react";
 import { NAV } from "../lib/nav";
 import { Logo } from "./Logo";
+import { TranslateToggle } from "./TranslateToggle";
 import { useUIStore } from "../store/ui";
 import { useProgressStore } from "../store/progress";
 import { cn } from "../lib/cn";
@@ -62,6 +63,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1.5">
+          <TranslateToggle />
           <button
             onClick={() => openSearch(true)}
             className="group flex h-9 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] pl-3 pr-2 text-sm text-neutral-400 transition hover:border-white/20 hover:text-white"

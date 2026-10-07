@@ -8,18 +8,11 @@ import { Img } from "./Img";
 import { ProgressBar } from "./ProgressRing";
 import { cn } from "../lib/cn";
 
-const DIFFICULTY_STYLE: Record<Course["difficulty"], string> = {
-  Beginner: "bg-emerald-400/15 text-emerald-300 ring-emerald-400/30",
-  Intermediate: "bg-primary/15 text-primary ring-primary/30",
-  Advanced: "bg-orange-400/15 text-orange-300 ring-orange-400/30",
-};
-
 export function DifficultyBadge({ level, className }: { level: Course["difficulty"]; className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide ring-1 ring-inset backdrop-blur-md",
-        DIFFICULTY_STYLE[level],
+        "inline-flex items-center rounded-full bg-dark/60 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-primary ring-1 ring-inset ring-primary/40 backdrop-blur-md",
         className
       )}
     >

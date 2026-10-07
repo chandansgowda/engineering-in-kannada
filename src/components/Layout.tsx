@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
+import { AnnouncementBar } from "./AnnouncementBar";
 import { Footer } from "./Footer";
 import { Toaster } from "./Toaster";
 import { BackToTop } from "./BackToTop";
@@ -72,6 +73,7 @@ export function Layout() {
       >
         Skip to content
       </a>
+      <AnnouncementBar />
       <Header />
       <main id="main" className="flex-1">
         <Suspense fallback={<PageFallback />}>
@@ -81,6 +83,7 @@ export function Layout() {
       <Footer />
       <BackToTop />
       <Toaster />
+      <div id="google_translate_element" className="hidden" aria-hidden="true" />
       {searchOpen && (
         <Suspense fallback={null}>
           <CommandPalette onClose={() => setSearchOpen(false)} />

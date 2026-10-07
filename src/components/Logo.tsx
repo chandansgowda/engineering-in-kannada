@@ -16,11 +16,11 @@ export function Logo() {
   return (
     <Link to="/" className="group flex items-center gap-2.5" aria-label="Engineering in Kannada — home">
       <LogoMark />
-      <span className="flex flex-col leading-none">
-        <span className="text-[15px] font-extrabold tracking-tight text-white">
+      <span className="flex flex-col gap-1.5 notranslate" translate="no">
+        <span className="whitespace-nowrap text-[15px] font-extrabold leading-none tracking-tight text-white">
           Engineering <span className="text-primary">in Kannada</span>
         </span>
-        <span className="mt-1 font-kannada text-[11px] font-semibold text-neutral-400">
+        <span className="font-kannada text-[11px] font-semibold leading-none text-neutral-400">
           ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್
         </span>
       </span>

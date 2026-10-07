@@ -180,6 +180,8 @@ npm run build
 - Site-wide search for courses, lessons, blogs and links — press `Ctrl/⌘ + K` or `/`
 - Technical blogs with tag filters, reading time and reading progress
 - Contributor leaderboard (cached, rate-limit friendly)
+- One-click Kannada translation of the whole site (Google Translate, loaded on demand)
+- Announcement bar (edit `src/data/announcements.json`), Terms & Conditions and Privacy Policy pages
 - Responsive, accessible (keyboard navigation, focus states, reduced-motion support)
 - Route-level code splitting: only the home page ships in the initial bundle
 

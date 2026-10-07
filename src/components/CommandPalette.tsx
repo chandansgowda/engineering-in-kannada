@@ -40,6 +40,17 @@ const INDEX: Item[] = [
     to: n.to,
     haystack: n.label.toLowerCase(),
   })),
+  ...[
+    { to: "/terms", label: "Terms & Conditions" },
+    { to: "/privacy", label: "Privacy Policy" },
+  ].map((n) => ({
+    id: `page-${n.to}`,
+    group: "Pages" as const,
+    title: n.label,
+    icon: FileText,
+    to: n.to,
+    haystack: `${n.label} legal`.toLowerCase(),
+  })),
   ...courses.map((c) => ({
     id: `course-${c.id}`,
     group: "Courses" as const,
@@ -85,7 +96,9 @@ const GROUP_ORDER: Item["group"][] = ["Pages", "Courses", "Lessons", "Blogs", "L
 function search(query: string): Item[] {
   const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   if (!terms.length) {
-    return INDEX.filter((i) => i.group === "Pages" || i.group === "Courses");
+    return INDEX.filter(
+      (i) => (i.group === "Pages" && !/terms|privacy/.test(i.to ?? "")) || i.group === "Courses"
+    );
   }
   return INDEX.filter((i) => terms.every((t) => i.haystack.includes(t)))
     .sort((a, b) => GROUP_ORDER.indexOf(a.group) - GROUP_ORDER.indexOf(b.group))

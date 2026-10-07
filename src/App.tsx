@@ -13,6 +13,8 @@ const LeaderboardPage = named(() => import("./pages/LeaderboardPage"), "Leaderbo
 const BlogsPage = named(() => import("./pages/BlogsPage"), "BlogsPage");
 const BlogPostPage = named(() => import("./pages/BlogPostPage"), "BlogPostPage");
 const LinksPage = named(() => import("./pages/LinksPage"), "LinksPage");
+const TermsPage = named(() => import("./pages/TermsPage"), "TermsPage");
+const PrivacyPage = named(() => import("./pages/PrivacyPage"), "PrivacyPage");
 const NotFoundPage = named(() => import("./pages/NotFoundPage"), "NotFoundPage");
 
 export default function App() {
@@ -28,6 +30,8 @@ export default function App() {
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/blogs/:slug" element={<BlogPostPage />} />
           <Route path="/links" element={<LinksPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

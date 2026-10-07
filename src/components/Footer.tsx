@@ -14,14 +14,14 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <LogoMark className="h-10 w-10" />
-            <div>
-              <p className="font-extrabold text-white">Engineering in Kannada</p>
-              <p className="font-kannada text-xs font-semibold text-neutral-500">ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್</p>
+            <div className="flex flex-col gap-2 notranslate" translate="no">
+              <p className="font-extrabold leading-none text-white">Engineering in Kannada</p>
+              <p className="font-kannada text-xs font-semibold leading-none text-neutral-500">ಕನ್ನಡದಲ್ಲಿ ಎಂಜಿನಿಯರಿಂಗ್</p>
             </div>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-neutral-400">
             Empowering Kannada-speaking students with quality engineering education. Learn at your
-            own pace, completely free.
+            own pace, in the language you think in.
           </p>
           <div className="mt-6 flex gap-2">
             {SOCIALS.map(({ label, href, icon: Icon }) => (
@@ -81,7 +81,15 @@ export function Footer() {
       </div>
       <div className="border-t border-white/[0.06]">
         <div className="container-page flex flex-col items-center justify-between gap-2 py-6 text-xs text-neutral-500 sm:flex-row">
-          <p>© {new Date().getFullYear()} Engineering in Kannada. All rights reserved.</p>
+          <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <span>© {new Date().getFullYear()} Engineering in Kannada. All rights reserved.</span>
+            <Link to="/terms" className="transition hover:text-primary">
+              Terms
+            </Link>
+            <Link to="/privacy" className="transition hover:text-primary">
+              Privacy
+            </Link>
+          </p>
           <p className="inline-flex items-center gap-1.5">
             Made with <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" /> for the Kannada tech community
           </p>

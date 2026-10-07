@@ -92,3 +92,172 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Animated Karnataka map (hero) ---------- */
+@layer components {
+  .ka-map .ka-outline {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: ka-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
+    filter: drop-shadow(0 0 6px rgba(255, 200, 0, 0.55));
+  }
+  .ka-map .ka-tint {
+    opacity: 0;
+    animation: ka-fade-tint 1.2s ease-out 1.2s forwards;
+  }
+  .ka-map .ka-dots {
+    opacity: 0;
+    animation: ka-fade-dots 1.4s ease-out 1.4s forwards;
+  }
+  .ka-map .ka-aura {
+    opacity: 0;
+    animation: ka-aura 6s ease-in-out 1.6s infinite;
+  }
+  .ka-map .ka-scan {
+    animation: ka-scan 5.5s linear 2.6s infinite;
+    opacity: 0;
+  }
+  .ka-map .ka-link {
+    opacity: 0;
+    animation: ka-link-in 0.8s ease-out forwards, ka-link-flow 1.6s linear infinite;
+  }
+  .ka-map .ka-city {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ka-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .ka-map .ka-ping {
+    opacity: 0;
+    animation: ka-ping 2.8s ease-out infinite;
+  }
+  .ka-map .ka-packet {
+    opacity: 0;
+    animation: ka-fade-in-simple 0.2s ease-out forwards;
+    filter: drop-shadow(0 0 4px #ffd700);
+  }
+  .ka-map .ka-label {
+    paint-order: stroke;
+    stroke: #1a1a1a;
+    stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+}
+
+@keyframes ka-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ka-fade-tint {
+  to {
+    opacity: 0.1;
+  }
+}
+@keyframes ka-fade-dots {
+  to {
+    opacity: 0.85;
+  }
+}
+@keyframes ka-aura {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.32;
+  }
+}
+@keyframes ka-scan {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(780px);
+    opacity: 0;
+  }
+}
+@keyframes ka-link-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes ka-link-flow {
+  to {
+    stroke-dashoffset: -0.06;
+  }
+}
+@keyframes ka-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes ka-ping {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+@keyframes ka-fade-in-simple {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: show the finished map, no movement. */
+@media (prefers-reduced-motion: reduce) {
+  .ka-map * {
+    animation: none !important;
+  }
+  .ka-map .ka-outline {
+    stroke-dashoffset: 0;
+  }
+  .ka-map .ka-tint {
+    opacity: 0.1;
+  }
+  .ka-map .ka-dots {
+    opacity: 0.85;
+  }
+  .ka-map .ka-aura {
+    opacity: 0.22;
+  }
+  .ka-map .ka-link,
+  .ka-map .ka-city {
+    opacity: 1;
+  }
+}
+
+/* ---------- Google Translate: keep its UI out of the way ---------- */
+iframe.skiptranslate,
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-yAWNEb-L7lbkb {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
