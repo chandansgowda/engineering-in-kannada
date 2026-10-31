@@ -1,0 +1,61 @@
+{
+  "courseId": "git-github",
+  "videos": [
+    {
+      "id": "git-github-1",
+      "title": "1. Introduction to Git",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/watch?v=cXP6xrAZm64",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/1/notes.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "git-github-2",
+      "title": "2. Installing Git, Terminal Commands and First Repository",
+      "type": "Hands-On",
+      "youtubeUrl": "https://www.youtube.com/watch?v=uH-LmsmMUNc",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/2/notes.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "git-github-3",
+      "title": "3. The Commit Cycle: status, add, commit, diff and log",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JdZFGY8in3s",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/3/notes.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "git-github-4",
+      "title": "4. Branching, Merging and Merge Conflicts",
+      "type": "Concept",
+      "youtubeUrl": "https://www.youtube.com/watch?v=J1ym2828DRI",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/4/notes.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "git-github-5",
+      "title": "5. GitHub Profile Setup, Push and Pull Changes",
+      "type": "Hands-On",
+      "youtubeUrl": "https://www.youtube.com/watch?v=fHW6h7KmDvA",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/5/notes.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "git-github-6",
+      "title": "6. Clone, Fork and Pull Requests",
+      "type": "Hands-On",
+      "youtubeUrl": "https://www.youtube.com/watch?v=pvsnfwk3Ids",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/6/notes.md",
+      "codingQuestionUrl": ""
+    },
+    {
+      "id": "git-github-7",
+      "title": "7. Code Review and Merging Pull Requests",
+      "type": "Hands-On",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JiLivmWY8_o",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/7/notes.md",
+      "codingQuestionUrl": ""
+    }
+  ]
+}

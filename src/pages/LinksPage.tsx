@@ -33,9 +33,9 @@ export function LinksPage() {
             className="h-24 w-auto drop-shadow-[0_8px_30px_rgba(255,215,0,0.35)]"
           />
           <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl">
-            <span className="text-gradient-gold">Connect With Me</span>
+            <span className="text-gradient-gold">Links &amp; Resources</span>
           </h1>
-          <p className="mt-3 text-neutral-400">Find all my profiles and resources in one place</p>
+          <p className="mt-3 text-neutral-400">Courses, notes, tools and profiles in one place</p>
           <div className="mt-6 flex gap-2">
             {SOCIALS.map(({ label, href, icon: Icon }) => (
               <a
@@ -87,10 +87,15 @@ function LinkCard({ link, index }: { link: LinkItem; index: number }) {
       href={link.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="card card-hover group flex animate-fade-up flex-col overflow-hidden"
+      className="card card-hover group flex animate-fade-up items-center gap-4 overflow-hidden p-4 sm:flex-col sm:items-stretch sm:gap-0 sm:p-0"
       style={{ animationDelay: `${index * 60}ms` }}
     >
-      <div className="relative">
+      {/* Mobile: compact icon row */}
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-dark-700 text-primary transition group-hover:bg-primary group-hover:text-dark sm:hidden">
+        <NamedIcon name={link.icon} className="h-5 w-5" />
+      </span>
+      {/* Desktop: cover image with overlapping icon chip */}
+      <div className="relative hidden sm:block">
         <div className="relative h-36 overflow-hidden bg-dark-600">
           {link.coverImage ? (
             <Img
@@ -108,7 +113,7 @@ function LinkCard({ link, index }: { link: LinkItem; index: number }) {
           <NamedIcon name={link.icon} className="h-5 w-5" />
         </span>
       </div>
-      <div className="flex flex-1 items-end justify-between gap-3 px-5 pb-5 pt-9">
+      <div className="flex min-w-0 flex-1 items-center justify-between gap-3 sm:items-end sm:px-5 sm:pb-5 sm:pt-9">
         <div className="min-w-0">
           <h3 className="font-bold text-white">{link.title}</h3>
           <p className="mt-1 text-sm text-neutral-400">{link.description}</p>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { GitBranch, Github, Heart } from "lucide-react";
+import { ChevronDown, GitBranch, Github, Heart } from "lucide-react";
 import { LogoLockup } from "./Logo";
 import { GITNAADU_URL, SOCIALS } from "../lib/socials";
 import { NAV } from "../lib/nav";
@@ -10,8 +10,8 @@ export function Footer() {
   return (
     <footer className="relative mt-24 border-t border-white/[0.06] bg-dark-900">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-      <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-        <div>
+      <div className="container-page grid grid-cols-2 gap-x-8 gap-y-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="col-span-2 md:col-span-1">
           <LogoLockup size="lg" anchor="body" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-neutral-400">
             Empowering Kannada-speaking students with quality engineering education. Learn at your
@@ -34,14 +34,29 @@ export function Footer() {
         </div>
 
         <FooterCol title="Explore">
-          {NAV.map((n) => (
+          {NAV.filter((n) => n.to !== "/leaderboard").map((n) => (
             <FooterLink key={n.to} to={n.to}>
               {n.label}
             </FooterLink>
           ))}
         </FooterCol>
 
-        <FooterCol title="Courses">
+        {/* Mobile: the course list collapses so the footer stays short */}
+        <details className="group md:hidden">
+          <summary className="mb-4 flex cursor-pointer list-none items-center justify-between text-xs font-bold uppercase tracking-[0.16em] text-neutral-400 [&::-webkit-details-marker]:hidden">
+            Courses
+            <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+          </summary>
+          <ul className="space-y-2.5">
+            {courses.map((c) => (
+              <FooterLink key={c.id} to={`/course/${c.id}`}>
+                {c.title}
+              </FooterLink>
+            ))}
+          </ul>
+        </details>
+        {/* Desktop: the full course list stays visible */}
+        <FooterCol title="Courses" className="hidden md:block">
           {courses.map((c) => (
             <FooterLink key={c.id} to={`/course/${c.id}`}>
               {c.title}
@@ -84,7 +99,7 @@ export function Footer() {
         </FooterCol>
       </div>
       <div className="border-t border-white/[0.06]">
-        <div className="container-page flex flex-col items-center justify-between gap-2 py-6 text-xs text-neutral-500 sm:flex-row">
+        <div className="container-page flex flex-col items-center justify-between gap-2 py-6 pr-16 text-xs text-neutral-400 sm:flex-row sm:pr-24">
           <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             <span>© {new Date().getFullYear()} Engineering in Kannada. All rights reserved.</span>
             <Link to="/terms" className="transition hover:text-primary">
@@ -103,10 +118,18 @@ export function Footer() {
   );
 }
 
-function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
+function FooterCol({
+  title,
+  children,
+  className,
+}: {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div>
-      <p className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-neutral-500">{title}</p>
+    <div className={className}>
+      <p className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-neutral-400">{title}</p>
       <ul className="space-y-2.5">{children}</ul>
     </div>
   );

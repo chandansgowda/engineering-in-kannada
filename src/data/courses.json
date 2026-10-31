@@ -15,6 +15,13 @@
       "difficulty": "Intermediate"
     },
     {
+      "id": "git-github",
+      "title": "Git & GitHub in Kannada",
+      "description": "Learn Git and GitHub from scratch in Kannada, from zero to your first open source contribution.",
+      "thumbnail": "https://i3.ytimg.com/vi/cXP6xrAZm64/hqdefault.jpg",
+      "difficulty": "Beginner"
+    },
+    {
       "id": "web-dev-manjunath",
       "title": "Web Development in Kannada",
       "description": "Learn HTML, CSS and JS basics with Manjunath in Kannada with hands-on project.",
