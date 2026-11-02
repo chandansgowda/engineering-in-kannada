@@ -119,7 +119,8 @@ function Hero() {
 function CourseCatalog() {
   const [params, setParams] = useSearchParams();
   const query = params.get("q") ?? "";
-  const filter = (params.get("level") as Filter) || "all";
+  const level = params.get("level");
+  const filter: Filter = FILTERS.some((f) => f.value === level) ? (level as Filter) : "all";
   const starredCourses = useProgressStore((s) => s.starredCourses);
   const completed = useProgressStore((s) => s.completedVideos);
 
