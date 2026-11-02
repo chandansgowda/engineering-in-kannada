@@ -5,6 +5,27 @@
 @layer base {
   :root {
     color-scheme: dark;
+    --color-white: 255 255 255;
+    --color-neutral-50: 250 250 250;
+    --color-neutral-100: 245 245 245;
+    --color-neutral-200: 229 229 229;
+    --color-neutral-300: 212 212 212;
+    --color-neutral-400: 163 163 163;
+    --color-neutral-500: 115 115 115;
+    --color-neutral-600: 82 82 82;
+    --color-neutral-700: 64 64 64;
+    --color-neutral-800: 38 38 38;
+    --color-neutral-900: 23 23 23;
+    --color-neutral-950: 10 10 10;
+    --color-primary: 255 215 0;
+    --color-primary-50: 255 251 230;
+    --color-primary-100: 255 244 179;
+    --color-primary-200: 255 235 128;
+    --color-primary-300: 255 226 77;
+    --color-primary-400: 255 219 38;
+    --color-primary-500: 255 215 0;
+    --color-primary-600: 230 194 0;
+    --color-primary-700: 179 151 0;
   }
   html {
     -webkit-tap-highlight-color: transparent;
@@ -95,6 +116,104 @@
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  html[data-theme="light"] {
+    color-scheme: light;
+    --color-white: 28 25 23;
+    --color-neutral-50: 250 250 249;
+    --color-neutral-100: 245 245 244;
+    --color-neutral-200: 87 83 78;
+    --color-neutral-300: 68 64 60;
+    --color-neutral-400: 87 83 78;
+    --color-neutral-500: 120 113 108;
+    --color-neutral-600: 168 162 158;
+    --color-neutral-700: 214 211 209;
+    --color-neutral-800: 231 229 228;
+    --color-neutral-900: 245 245 244;
+    --color-neutral-950: 250 250 249;
+    --color-primary: 135 107 0;
+    --color-primary-50: 255 251 230;
+    --color-primary-100: 255 243 179;
+    --color-primary-200: 255 230 128;
+    --color-primary-300: 212 169 0;
+    --color-primary-400: 181 139 0;
+    --color-primary-500: 135 107 0;
+    --color-primary-600: 111 86 0;
+    --color-primary-700: 89 68 0;
+  }
+
+  html[data-theme="light"] body {
+    background-color: #fafaf9;
+    color: #292524;
+  }
+
+  html[data-theme="light"] :focus-visible {
+    --tw-ring-offset-color: #fafaf9;
+  }
+
+  html[data-theme="light"] [class~="bg-dark"] {
+    background-color: #fafaf9;
+  }
+  html[data-theme="light"] [class~="bg-dark-950"] {
+    background-color: #f5f5f4;
+  }
+  html[data-theme="light"] [class~="bg-dark-900"] {
+    background-color: #f5f5f4;
+  }
+  html[data-theme="light"] [class~="bg-dark-800"] {
+    background-color: #fafaf9;
+  }
+  html[data-theme="light"] [class~="bg-dark-700"] {
+    background-color: #f5f5f4;
+  }
+  html[data-theme="light"] [class~="bg-dark-600"] {
+    background-color: #e7e5e4;
+  }
+  html[data-theme="light"] [class~="bg-dark-500"] {
+    background-color: #d6d3d1;
+  }
+  html[data-theme="light"] [class~="bg-dark/80"] {
+    background-color: rgb(250 250 249 / 0.88);
+  }
+  html[data-theme="light"] [class~="bg-dark/60"] {
+    background-color: rgb(41 37 36 / 0.6);
+  }
+  html[data-theme="light"] [class~="bg-dark-600/95"] {
+    background-color: rgb(245 245 244 / 0.96);
+  }
+  html[data-theme="light"] .card {
+    border-color: rgb(41 37 36 / 0.1);
+    background-color: rgb(255 255 255 / 0.82);
+    box-shadow: 0 1px 2px rgb(28 25 23 / 0.04), 0 12px 30px -24px rgb(28 25 23 / 0.25);
+  }
+  html[data-theme="light"] .card-hover:hover {
+    background-color: #fff;
+  }
+  html[data-theme="light"] .text-gradient {
+    background-image: linear-gradient(to bottom right, #292524, #44403c, #876b00);
+  }
+  html[data-theme="light"] .prose {
+    --tw-prose-body: #44403c;
+    --tw-prose-headings: #1c1917;
+    --tw-prose-lead: #57534e;
+    --tw-prose-links: #6f5600;
+    --tw-prose-bold: #1c1917;
+    --tw-prose-counters: #6f5600;
+    --tw-prose-bullets: #6f5600;
+    --tw-prose-hr: rgb(41 37 36 / 0.15);
+    --tw-prose-quotes: #44403c;
+    --tw-prose-quote-borders: #876b00;
+    --tw-prose-captions: #78716c;
+    --tw-prose-code: #6f5600;
+    --tw-prose-pre-code: #292524;
+    --tw-prose-pre-bg: #f5f5f4;
+    --tw-prose-th-borders: rgb(41 37 36 / 0.15);
+    --tw-prose-td-borders: rgb(41 37 36 / 0.1);
+  }
+  html[data-theme="light"] .bg-grid {
+    background-image: linear-gradient(rgb(41 37 36 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(41 37 36 / 0.05) 1px, transparent 1px);
   }
 }
 

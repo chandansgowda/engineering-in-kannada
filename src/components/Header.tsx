@@ -4,6 +4,7 @@ import { Menu, Search, X } from "lucide-react";
 import { NAV } from "../lib/nav";
 import { Logo } from "./Logo";
 import { TranslateToggle } from "./TranslateToggle";
+import { ThemeToggle } from "./ThemeToggle";
 import { useUIStore } from "../store/ui";
 import { useProgressStore } from "../store/progress";
 import { cn } from "../lib/cn";
@@ -78,6 +79,7 @@ export function Header() {
               {isMac ? "⌘" : "Ctrl"} K
             </kbd>
           </button>
+          <ThemeToggle />
           <button
             className="icon-btn lg:hidden"
             onClick={() => setMenuOpen((o) => !o)}
