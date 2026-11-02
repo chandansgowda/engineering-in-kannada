@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { youtubeId } from "../lib/catalog";
-import { localDateKey } from "../lib/dashboard";
-import { useDashboardStore } from "../store/dashboard";
 import type { Video } from "../types";
 
 interface YouTubePlayer {
@@ -22,9 +20,6 @@ interface YouTubeApi {
     }
   ) => YouTubePlayer;
   PlayerState: {
-    PLAYING: number;
-    PAUSED: number;
-    BUFFERING: number;
     ENDED: number;
   };
 }
@@ -72,41 +67,12 @@ export function YouTubeLessonPlayer({
 }) {
   const videoId = youtubeId(video.youtubeUrl);
   const playerElement = useRef<HTMLDivElement>(null);
-  const lastTick = useRef<number | null>(null);
-  const isPlaying = useRef(false);
-  const addStudySeconds = useDashboardStore((state) => state.addStudySeconds);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     if (!videoId || !playerElement.current) return;
     let player: YouTubePlayer | null = null;
-    let interval = 0;
     let disposed = false;
-
-    const recordPlayback = (countElapsed = document.visibilityState === "visible") => {
-      const now = Date.now();
-      const start = lastTick.current;
-      lastTick.current = now;
-      if (start === null || !countElapsed) return;
-
-      let cursor = start;
-      while (cursor < now) {
-        const date = new Date(cursor);
-        const nextDay = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1).getTime();
-        const segmentEnd = Math.min(now, nextDay);
-        const seconds = Math.floor((segmentEnd - cursor) / 1000);
-        if (seconds > 0) addStudySeconds(localDateKey(date), seconds);
-        cursor = segmentEnd;
-      }
-    };
-
-    const onVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        recordPlayback(true);
-      } else if (isPlaying.current) {
-        lastTick.current = Date.now();
-      }
-    };
 
     loadYouTubeApi()
       .then((api) => {
@@ -122,29 +88,9 @@ export function YouTubeLessonPlayer({
           },
           events: {
             onStateChange: ({ data }) => {
-              if (!window.YT) return;
-              if (data === window.YT.PlayerState.PLAYING) {
-                isPlaying.current = true;
-                lastTick.current = Date.now();
-                window.clearInterval(interval);
-                interval = window.setInterval(recordPlayback, 10_000);
-              } else if (
-                data === window.YT.PlayerState.PAUSED ||
-                data === window.YT.PlayerState.BUFFERING
-              ) {
-                recordPlayback();
-                isPlaying.current = false;
-                window.clearInterval(interval);
-              } else if (data === window.YT.PlayerState.ENDED) {
-                recordPlayback();
-                isPlaying.current = false;
-                window.clearInterval(interval);
-                onEnded();
-              }
+              if (window.YT && data === window.YT.PlayerState.ENDED) onEnded();
             },
             onError: () => {
-              isPlaying.current = false;
-              window.clearInterval(interval);
               setError(true);
             },
           },
@@ -155,16 +101,11 @@ export function YouTubeLessonPlayer({
         if (!disposed) setError(true);
       });
 
-    document.addEventListener("visibilitychange", onVisibilityChange);
     return () => {
       disposed = true;
-      recordPlayback();
-      isPlaying.current = false;
-      window.clearInterval(interval);
-      document.removeEventListener("visibilitychange", onVisibilityChange);
       player?.destroy();
     };
-  }, [videoId, addStudySeconds, onEnded]);
+  }, [videoId, onEnded]);
 
   if (!videoId) {
     return (

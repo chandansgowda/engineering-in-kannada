@@ -29,10 +29,8 @@ export interface WeeklyGoals {
 interface DashboardState {
   profile: StudentProfile | null;
   weeklyGoals: WeeklyGoals;
-  studySecondsByDate: Record<string, number>;
   saveProfile: (profile: StudentProfile) => void;
   setWeeklyGoals: (goals: WeeklyGoals) => void;
-  addStudySeconds: (date: string, seconds: number) => void;
 }
 
 export const useDashboardStore = create<DashboardState>()(
@@ -40,29 +38,23 @@ export const useDashboardStore = create<DashboardState>()(
     (set) => ({
       profile: null,
       weeklyGoals: { lessons: 5, learningDays: 5 },
-      studySecondsByDate: {},
       saveProfile: (profile) => set({ profile }),
       setWeeklyGoals: (weeklyGoals) => set({ weeklyGoals }),
-      addStudySeconds: (date, seconds) =>
-        set((state) => ({
-          studySecondsByDate: {
-            ...state.studySecondsByDate,
-            [date]: (state.studySecondsByDate[date] ?? 0) + seconds,
-          },
-        })),
     }),
     {
       name: "student-dashboard",
       storage: createJSONStorage(() => localStorage),
-      version: 3,
+      version: 4,
       migrate: (persisted) => {
         const state = {
           ...(persisted as Partial<DashboardState> & {
             studySessionStartedAt?: number | null;
+            studySecondsByDate?: Record<string, number>;
             weeklyGoals?: { lessons?: number; learningDays?: number };
           }),
         };
         delete state.studySessionStartedAt;
+        delete state.studySecondsByDate;
         state.weeklyGoals = {
           lessons: state.weeklyGoals?.lessons ?? 5,
           learningDays: state.weeklyGoals?.learningDays ?? 5,

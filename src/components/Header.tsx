@@ -54,7 +54,7 @@ export function Header() {
                 )}
               >
                 {label}
-                {to === "/learning" && savedCount > 0 && !active && (
+                {to === "/progress" && savedCount > 0 && !active && (
                   <span className="ml-1.5 rounded-full bg-primary/15 px-1.5 text-[10px] font-bold text-primary">
                     {savedCount}
                   </span>

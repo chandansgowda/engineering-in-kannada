@@ -30,7 +30,7 @@ export function WeeklyGoals() {
   const setGoals = useDashboardStore((state) => state.setWeeklyGoals);
   const lessonActivityByDate = useProgressStore((state) => state.activityByDate);
   const learningDaysByDate = useProgressStore((state) => state.learningDaysByDate);
-  const lessonActivity = getWeeklyActivity(lessonActivityByDate, {}).lessons;
+  const lessonActivity = getWeeklyActivity(lessonActivityByDate).lessons;
   const [editing, setEditing] = useState(false);
   const [lessonTarget, setLessonTarget] = useState(String(goals.lessons));
   const [learningDaysTarget, setLearningDaysTarget] = useState(String(goals.learningDays));

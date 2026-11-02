@@ -53,14 +53,9 @@ export function getLearningStreak(activityByDate: Record<string, string[]>, toda
   return { current, longest };
 }
 
-export function getWeeklyActivity(
-  activityByDate: Record<string, string[]>,
-  studySecondsByDate: Record<string, number>,
-  weekKeys = getCurrentWeekKeys()
-) {
+export function getWeeklyActivity(activityByDate: Record<string, string[]>, weekKeys = getCurrentWeekKeys()) {
   const lessons = new Set(weekKeys.flatMap((date) => activityByDate[date] ?? []));
-  const seconds = weekKeys.reduce((total, date) => total + (studySecondsByDate[date] ?? 0), 0);
-  return { lessons: lessons.size, seconds, weekKeys };
+  return { lessons: lessons.size, weekKeys };
 }
 
 const branchTopics: Record<EngineeringBranch, string[]> = {

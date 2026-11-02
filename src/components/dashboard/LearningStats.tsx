@@ -1,11 +1,10 @@
-import { BookOpenCheck, CheckCircle2, Clock3, GraduationCap, Layers3 } from "lucide-react";
+import { BookOpenCheck, CheckCircle2, GraduationCap, Layers3 } from "lucide-react";
 
 export interface LearningStatistics {
   enrolledCourses: number;
   completedCourses: number;
   completedLessons: number;
   overallProgress: number;
-  learningHours: number;
 }
 
 export function LearningStats({ stats }: { stats: LearningStatistics }) {
@@ -14,7 +13,6 @@ export function LearningStats({ stats }: { stats: LearningStatistics }) {
     { label: "Courses completed", value: stats.completedCourses, icon: BookOpenCheck },
     { label: "Lessons completed", value: stats.completedLessons, icon: CheckCircle2 },
     { label: "Overall progress", value: `${stats.overallProgress}%`, icon: Layers3 },
-    { label: "Study hours", value: `${stats.learningHours.toFixed(1)}h`, icon: Clock3 },
   ];
 
   return (
@@ -23,7 +21,7 @@ export function LearningStats({ stats }: { stats: LearningStatistics }) {
         <p className="eyebrow">Your progress</p>
         <h2 id="learning-stats-title" className="mt-2 text-xl font-extrabold text-white">Learning at a glance</h2>
       </div>
-      <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
+      <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
         {cards.map(({ label, value, icon: Icon }) => (
           <div key={label} className="card card-hover p-4 sm:p-5">
             <div className="flex items-center justify-between gap-2">

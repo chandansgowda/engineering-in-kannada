@@ -130,7 +130,7 @@ const sections: LegalSection[] = [
         <li>Clear your browser’s site data to remove progress and preferences.</li>
         <li>Block cookies or analytics through your browser or extensions; the Site keeps working.</li>
         <li>
-          Export your progress from <Link to="/learning">My Learning</Link> before clearing data if you want
+          Export your progress from <Link to="/progress">My Learning</Link> before clearing data if you want
           to keep it.
         </li>
       </ul>
