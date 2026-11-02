@@ -1,15 +1,12 @@
-import { useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BookmarkX,
   CheckCircle2,
-  Download,
   GraduationCap,
   Play,
   Star,
   Trophy,
-  Upload,
   Flame,
 } from "lucide-react";
 import { PageHeader } from "../components/PageHeader";
@@ -19,7 +16,6 @@ import { ProgressRing } from "../components/ProgressRing";
 import { Img } from "../components/Img";
 import { allLessons, courses, getVideos, lessonTitle, youtubeThumb } from "../lib/catalog";
 import { useProgressStore } from "../store/progress";
-import { toast } from "../store/toast";
 
 export function LearningPage() {
   const completed = useProgressStore((s) => s.completedVideos);
@@ -145,16 +141,14 @@ export function LearningPage() {
                     </div>
                     <div className="flex shrink-0 flex-col gap-1 sm:flex-row">
                       {video.youtubeUrl && (
-                        <a
-                          href={video.youtubeUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <Link
+                          to={`/course/${course.id}#lesson-${video.id}`}
                           onClick={() => useProgressStore.getState().setLastWatched(course.id, video.id)}
                           className="icon-btn bg-primary/10 text-primary hover:bg-primary hover:text-dark"
                           aria-label={`Watch “${lessonTitle(video.title)}”`}
                         >
                           <Play className="h-4 w-4" fill="currentColor" />
-                        </a>
+                        </Link>
                       )}
                       <button
                         onClick={() => useProgressStore.getState().toggleVideoStarred(video.id)}
@@ -181,7 +175,6 @@ export function LearningPage() {
           </Section>
         )}
 
-        <BackupCard />
       </div>
     </>
   );
@@ -197,73 +190,6 @@ function Section({ title, count, children }: { title: string; count?: number; ch
         )}
       </h2>
       {children}
-    </section>
-  );
-}
-
-/** Progress lives in localStorage, so let learners carry it between devices. */
-function BackupCard() {
-  const fileRef = useRef<HTMLInputElement>(null);
-
-  const exportProgress = () => {
-    const { completedVideos, starredVideos, starredCourses, lastWatched } = useProgressStore.getState();
-    const blob = new Blob(
-      [JSON.stringify({ app: "engineering-in-kannada", version: 2, completedVideos, starredVideos, starredCourses, lastWatched }, null, 2)],
-      { type: "application/json" }
-    );
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `eik-progress-${new Date().toISOString().slice(0, 10)}.json`;
-    a.click();
-    URL.revokeObjectURL(a.href);
-    toast("Progress exported", "success");
-  };
-
-  const importProgress = async (file: File) => {
-    try {
-      const data = JSON.parse(await file.text());
-      const list = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : []);
-      if (data.app !== "engineering-in-kannada") throw new Error("not ours");
-      const s = useProgressStore.getState();
-      useProgressStore.setState({
-        completedVideos: Array.from(new Set([...s.completedVideos, ...list(data.completedVideos)])),
-        starredVideos: Array.from(new Set([...s.starredVideos, ...list(data.starredVideos)])),
-        starredCourses: Array.from(new Set([...s.starredCourses, ...list(data.starredCourses)])),
-        lastWatched: s.lastWatched ?? data.lastWatched ?? null,
-      });
-      toast("Progress restored", "success");
-    } catch {
-      toast("That file doesn't look like a progress backup", "error");
-    }
-  };
-
-  return (
-    <section className="card flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <h2 className="font-bold text-white">Switching devices?</h2>
-        <p className="mt-1 text-sm text-neutral-400">
-          Export your progress and import it on another browser. Imports are merged, nothing is lost.
-        </p>
-      </div>
-      <div className="flex shrink-0 gap-2">
-        <button onClick={exportProgress} className="btn-secondary">
-          <Download className="h-4 w-4" /> Export
-        </button>
-        <button onClick={() => fileRef.current?.click()} className="btn-secondary">
-          <Upload className="h-4 w-4" /> Import
-        </button>
-        <input
-          ref={fileRef}
-          type="file"
-          accept="application/json,.json"
-          className="hidden"
-          onChange={(e) => {
-            const file = e.target.files?.[0];
-            if (file) importProgress(file);
-            e.target.value = "";
-          }}
-        />
-      </div>
     </section>
   );
 }

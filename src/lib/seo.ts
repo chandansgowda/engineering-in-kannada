@@ -209,6 +209,13 @@ export function getSeo(pathname: string): Seo {
         path,
         robots: "noindex, follow",
       });
+    case "/dashboard":
+      return page({
+        title: `Student Dashboard | ${SITE}`,
+        description: "Your personalized learning progress, weekly goals, study streak and next lessons.",
+        path,
+        robots: "noindex, follow",
+      });
     case "/terms":
       return page({ title: `Terms & Conditions | ${SITE}`, description: `The terms for using the ${SITE} website.`, path });
     case "/privacy":

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { LegalLayout, LegalSection } from "../components/LegalLayout";
 import { REPO_URL } from "../lib/github";
 
-const UPDATED = "7 October 2026";
+const UPDATED = "2 November 2026";
 
 const sections: LegalSection[] = [
   {
@@ -73,7 +73,7 @@ const sections: LegalSection[] = [
         <p>When you use the Site your browser may connect directly to:</p>
         <ul>
           <li>
-            <strong>YouTube:</strong> thumbnails are loaded from YouTube, and videos open on YouTube.
+            <strong>YouTube:</strong> course videos are embedded from YouTube.
           </li>
           <li>
             <strong>GitHub:</strong> lesson notes and the contributor leaderboard are fetched from GitHub.

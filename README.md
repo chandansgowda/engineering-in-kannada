@@ -175,6 +175,7 @@ npm run build
 - Track lesson progress, with confetti 🎉 and a course-complete celebration
 - Resume where you left off ("Continue learning" on the home page and course pages)
 - **My Learning** dashboard: in-progress courses, saved lessons, starred courses
+- Personalized student dashboard with a local profile, weekly goals, video-playback study tracking, learning streak and course recommendations
 - Export / import progress to move between devices (progress is stored in the browser)
 - Read lesson notes in-app (GitHub markdown) and open practice questions
 - Site-wide search for courses, lessons, blogs and links — press `Ctrl/⌘ + K` or `/`
@@ -206,9 +207,9 @@ search engines and AI assistants see real content without running JavaScript. It
 ```
 src/
   components/   Reusable UI (Header, Footer, CourseCard, LessonRow, Modal, CommandPalette…)
-  pages/        Route components (Home, Course, My Learning, Leaderboard, Blogs, Links…)
-  lib/          Data helpers (catalog, blog, github, analytics, share…)
-  store/        Zustand stores (progress — persisted, toast, ui)
+  pages/        Route components (Home, Course, Student Dashboard, My Learning, Leaderboard, Blogs, Links…)
+  lib/          Data helpers (catalog, dashboard, blog, github, analytics, share…)
+  store/        Zustand stores (progress and dashboard — persisted, toast, ui)
   data/         Course, video, link and announcement JSON (edit these to add content)
   blogs/        Markdown blog posts
 ```
