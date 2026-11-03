@@ -202,11 +202,13 @@ export function getSeo(pathname: string): Seo {
         description: "Find Engineering in Kannada on YouTube, Instagram, X, GitHub and LinkedIn, plus our open-source projects and study notes.",
         path,
       });
+    case "/progress":
     case "/learning":
+    case "/dashboard":
       return page({
         title: `My Learning | ${SITE}`,
-        description: "Your course progress, saved lessons and starred courses.",
-        path,
+        description: "Your learning progress, saved lessons, weekly goals, study streak and recommendations.",
+        path: "/progress",
         robots: "noindex, follow",
       });
     case "/terms":

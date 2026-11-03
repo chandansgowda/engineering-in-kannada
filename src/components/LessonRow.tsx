@@ -1,12 +1,11 @@
 import { memo, useRef } from "react";
 import { Check, Code2, ExternalLink, FileText, Play, Share2, Star } from "lucide-react";
 import { Course, Video } from "../types";
-import { getVideos, isGithubMarkdown, lessonTitle, youtubeThumb } from "../lib/catalog";
+import { isGithubMarkdown, lessonTitle, youtubeThumb } from "../lib/catalog";
 import { useProgressStore } from "../store/progress";
-import { celebrateCourse, celebrateLesson } from "../lib/celebrate";
+import { completeLesson } from "../lib/completeLesson";
 import { shareLink } from "../lib/share";
 import { toast } from "../store/toast";
-import { trackEvent } from "../lib/analytics";
 import { Img } from "./Img";
 import { cn } from "../lib/cn";
 
@@ -17,6 +16,7 @@ interface LessonRowProps {
   isNext?: boolean;
   highlighted?: boolean;
   onOpenNotes: (video: Video) => void;
+  onPlayVideo: (video: Video) => void;
 }
 
 export const LessonRow = memo(function LessonRow({
@@ -26,6 +26,7 @@ export const LessonRow = memo(function LessonRow({
   isNext,
   highlighted,
   onOpenNotes,
+  onPlayVideo,
 }: LessonRowProps) {
   const completed = useProgressStore((s) => s.completedVideos.includes(video.id));
   const starred = useProgressStore((s) => s.starredVideos.includes(video.id));
@@ -40,26 +41,12 @@ export const LessonRow = memo(function LessonRow({
       store.markVideoIncomplete(video.id);
       return;
     }
-    store.markVideoComplete(video.id);
-    const ids = getVideos(course.id).map((v) => v.id);
-    const done = useProgressStore.getState().completedVideos;
-    if (ids.every((id) => done.includes(id))) {
-      celebrateCourse();
-      toast(`You finished ${course.title}! 🎉`, "success");
-      trackEvent("course_complete", { course_id: course.id });
-    } else {
-      celebrateLesson(checkRef.current);
-    }
+    completeLesson(course, video, checkRef.current, "manual");
   };
 
   const toggleStar = () => {
     useProgressStore.getState().toggleVideoStarred(video.id);
     toast(starred ? "Removed from saved lessons" : "Saved to My Learning", starred ? "default" : "success");
-  };
-
-  const onWatch = () => {
-    useProgressStore.getState().setLastWatched(course.id, video.id);
-    trackEvent("watch_video", { course_id: course.id, video_id: video.id });
   };
 
   const share = () => {
@@ -99,11 +86,9 @@ export const LessonRow = memo(function LessonRow({
       </button>
 
       {thumb && (
-        <a
-          href={video.youtubeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onWatch}
+        <button
+          type="button"
+          onClick={() => onPlayVideo(video)}
           tabIndex={-1}
           aria-hidden="true"
           className="relative hidden aspect-video w-36 shrink-0 overflow-hidden rounded-xl bg-dark-600 sm:block md:w-44"
@@ -114,7 +99,7 @@ export const LessonRow = memo(function LessonRow({
               <Play className="h-4 w-4 translate-x-px" fill="currentColor" />
             </span>
           </span>
-        </a>
+        </button>
       )}
 
       <div className="min-w-0 flex-1">
@@ -155,15 +140,13 @@ export const LessonRow = memo(function LessonRow({
 
         <div className="mt-3 flex flex-wrap gap-2">
           {video.youtubeUrl ? (
-            <a
-              href={video.youtubeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={onWatch}
+            <button
+              type="button"
+              onClick={() => onPlayVideo(video)}
               className="btn-primary px-3.5 py-2 text-[13px]"
             >
               <Play className="h-3.5 w-3.5" fill="currentColor" /> Watch
-            </a>
+            </button>
           ) : (
             <button onClick={() => toast("🚀 Video coming soon! Stay tuned.")} className="btn-secondary px-3.5 py-2 text-[13px] opacity-60">
               <Play className="h-3.5 w-3.5" /> Coming soon

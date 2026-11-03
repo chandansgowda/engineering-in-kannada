@@ -4,6 +4,7 @@ import { Menu, Search, X } from "lucide-react";
 import { NAV } from "../lib/nav";
 import { Logo } from "./Logo";
 import { TranslateToggle } from "./TranslateToggle";
+import { ThemeToggle } from "./ThemeToggle";
 import { useUIStore } from "../store/ui";
 import { useProgressStore } from "../store/progress";
 import { cn } from "../lib/cn";
@@ -54,7 +55,7 @@ export function Header() {
                 )}
               >
                 {label}
-                {to === "/learning" && savedCount > 0 && !active && (
+                {to === "/progress" && savedCount > 0 && !active && (
                   <span className="ml-1.5 rounded-full bg-primary/15 px-1.5 text-[10px] font-bold text-primary">
                     {savedCount}
                   </span>
@@ -78,6 +79,7 @@ export function Header() {
               {isMac ? "⌘" : "Ctrl"} K
             </kbd>
           </button>
+          <ThemeToggle />
           <button
             className="icon-btn lg:hidden"
             onClick={() => setMenuOpen((o) => !o)}

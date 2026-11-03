@@ -24,6 +24,18 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700;800&display=swap"
     />
+    <script>
+      try {
+        var theme = localStorage.getItem("eik-theme");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.dataset.theme = theme;
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute("content", theme === "dark" ? "#1A1A1A" : "#FAFAF9");
+          document.querySelector('meta[name="color-scheme"]').setAttribute("content", theme);
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"><!--app-html--></div>

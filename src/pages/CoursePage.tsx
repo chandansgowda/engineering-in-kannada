@@ -23,6 +23,8 @@ import { CourseCard, CourseThumbFallback, DifficultyBadge } from "../components/
 import { ProgressBar, ProgressRing } from "../components/ProgressRing";
 import { EmptyState } from "../components/EmptyState";
 import { Img } from "../components/Img";
+import { YouTubeLessonPlayer } from "../components/YouTubeLessonPlayer";
+import { completeLesson } from "../lib/completeLesson";
 import { Video } from "../types";
 import { NotFoundPage } from "./NotFoundPage";
 import { cn } from "../lib/cn";
@@ -52,11 +54,20 @@ function CourseView({ courseId }: { courseId: string }) {
   const completed = useProgressStore((s) => s.completedVideos);
   const saved = useProgressStore((s) => s.starredVideos);
   const starred = useProgressStore((s) => s.starredCourses.includes(courseId));
+  const lastWatched = useProgressStore((s) => s.lastWatched);
   const { hash } = useLocation();
 
   const [tab, setTab] = useState<Tab>("all");
   const [notesFor, setNotesFor] = useState<Video | null>(null);
   const [highlight, setHighlight] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(() => {
+    const hashId = hash.startsWith("#lesson-") ? decodeURIComponent(hash.slice("#lesson-".length)) : null;
+    return (
+      videos.find((video) => video.id === hashId) ??
+      (lastWatched?.courseId === courseId ? videos.find((video) => video.id === lastWatched.videoId) : undefined) ??
+      null
+    );
+  });
 
   const nextIndex = videos.findIndex((v) => !completed.includes(v.id));
   const next = nextIndex >= 0 ? videos[nextIndex] : null;
@@ -67,11 +78,13 @@ function CourseView({ courseId }: { courseId: string }) {
   useEffect(() => {
     if (!hash.startsWith("#lesson-")) return;
     const id = decodeURIComponent(hash.slice("#lesson-".length));
+    const video = videos.find((item) => item.id === id);
+    if (video) setSelectedVideo(video);
     setTab("all");
     setHighlight(id);
     const t = setTimeout(() => setHighlight(null), 2600);
     return () => clearTimeout(t);
-  }, [hash]);
+  }, [hash, videos]);
 
   const counts: Record<Tab, number> = {
     all: total,
@@ -90,6 +103,26 @@ function CourseView({ courseId }: { courseId: string }) {
     });
 
   const openNotes = useCallback((v: Video) => setNotesFor(v), []);
+  const playVideo = useCallback(
+    (video: Video, scrollToPlayer = true) => {
+      if (!video.youtubeUrl) return;
+      window.open(video.youtubeUrl, "_blank", "noopener,noreferrer");
+      setSelectedVideo(video);
+      useProgressStore.getState().setLastWatched(courseId, video.id);
+      useProgressStore.getState().recordLearningDay();
+      trackEvent("watch_video", { course_id: courseId, video_id: video.id });
+      completeLesson(course, video, null, "youtube-open");
+      if (scrollToPlayer) {
+        window.requestAnimationFrame(() =>
+          document.getElementById("lesson-player")?.scrollIntoView({ behavior: "smooth", block: "center" })
+        );
+      }
+    },
+    [course, courseId]
+  );
+  const onVideoEnded = useCallback(() => {
+    if (selectedVideo) completeLesson(course, selectedVideo);
+  }, [course, selectedVideo]);
 
   const resetProgress = () => {
     if (window.confirm(`Reset your progress for “${course.title}”?`)) {
@@ -144,19 +177,14 @@ function CourseView({ courseId }: { courseId: string }) {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 {next?.youtubeUrl ? (
-                  <a
-                    href={next.youtubeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => {
-                      useProgressStore.getState().setLastWatched(courseId, next.id);
-                      trackEvent("watch_video", { course_id: courseId, video_id: next.id });
-                    }}
+                  <button
+                    type="button"
+                    onClick={() => playVideo(next)}
                     className="btn-primary px-5 py-3"
                   >
                     <Play className="h-4 w-4" fill="currentColor" />
                     {done === 0 ? "Start course" : `Continue · Lesson ${nextIndex + 1}`}
-                  </a>
+                  </button>
                 ) : (
                   done === total &&
                   total > 0 && (
@@ -182,22 +210,47 @@ function CourseView({ courseId }: { courseId: string }) {
               </div>
             </div>
 
-            <div className="card animate-fade-up overflow-hidden [animation-delay:100ms]">
-              <div className="relative aspect-video bg-dark-600">
-                <Img
-                  src={course.thumbnail}
-                  alt=""
-                  className="h-full w-full object-cover"
-                  fallback={<CourseThumbFallback title={course.title} />}
+            <div id="lesson-player" className="card animate-fade-up scroll-mt-24 overflow-hidden [animation-delay:100ms]">
+              {selectedVideo ? (
+                <YouTubeLessonPlayer
+                  key={selectedVideo.id}
+                  video={selectedVideo}
+                  onEnded={onVideoEnded}
                 />
-              </div>
+              ) : (
+                <div className="relative aspect-video bg-dark-600">
+                  <Img
+                    src={course.thumbnail}
+                    alt={`${course.title} course thumbnail`}
+                    className="h-full w-full object-cover"
+                    fallback={<CourseThumbFallback title={course.title} />}
+                  />
+                  {next?.youtubeUrl && (
+                    <button
+                      type="button"
+                      onClick={() => playVideo(next, false)}
+                      className="absolute inset-0 flex items-center justify-center bg-black/25 transition hover:bg-black/40"
+                      aria-label={`Play ${lessonTitle(next.title)}`}
+                    >
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-dark shadow-glow">
+                        <Play className="h-6 w-6 translate-x-px" fill="currentColor" />
+                      </span>
+                    </button>
+                  )}
+                </div>
+              )}
               <div className="flex items-center gap-4 p-5">
                 <ProgressRing percent={percent} size={64} stroke={6} />
                 <div className="min-w-0 flex-1">
                   <p className="font-bold text-white">
-                    {done === total && total > 0 ? "All done. Great work!" : "Your progress"}
+                    {selectedVideo
+                      ? lessonTitle(selectedVideo.title)
+                      : done === total && total > 0
+                        ? "All done. Great work!"
+                        : "Your progress"}
                   </p>
                   <p className="text-sm text-neutral-400">
+                    {selectedVideo ? `Lesson ${videos.findIndex((video) => video.id === selectedVideo.id) + 1} · ` : ""}
                     {done} of {total} lessons completed
                   </p>
                   <ProgressBar percent={percent} className="mt-3" />
@@ -255,6 +308,7 @@ function CourseView({ courseId }: { courseId: string }) {
                 isNext={next?.id === video.id && done > 0}
                 highlighted={highlight === video.id}
                 onOpenNotes={openNotes}
+                onPlayVideo={playVideo}
               />
             ))}
           </ol>
