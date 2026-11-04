@@ -3,7 +3,6 @@ export const REPO_NAME = "engineering-in-kannada";
 export const REPO_URL = `https://github.com/${REPO_OWNER}/${REPO_NAME}`;
 
 const API = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
-const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 const CACHE_KEY = "eik-leaderboard-v2";
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour
 const TOP_N = 10;
@@ -52,7 +51,6 @@ export interface LeaderboardResult {
 
 const headers: HeadersInit = {
   Accept: "application/vnd.github+json",
-  ...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
 };
 
 async function get<T>(url: string): Promise<T> {
