@@ -116,28 +116,6 @@ A platform for learning engineering concepts in Kannada through YouTube playlist
 1. Node.js (v16 or higher)
 2. npm or yarn
 3. Git
-4. GitHub Personal Access Token (for contributor leaderboard)
-
-### Setting up GitHub Token
-
-1. Create a GitHub Personal Access Token:
-
-   - Go to GitHub Settings > Developer settings > [Personal access tokens](https://github.com/settings/tokens)
-   - Click "Generate new token (classic)"
-   - Give it a descriptive name (e.g., "Engineering in Kannada Local Dev")
-   - Select the following scopes:
-     - `repo:status`
-     - `public_repo`
-   - Click "Generate token"
-   - **Copy the token immediately** (you won't be able to see it again)
-
-2. Create Environment Variables:
-   - Create a `.env` file in the project root
-   - Add your GitHub token:
-     ```env
-     VITE_GITHUB_TOKEN=your_github_token_here
-     ```
-   - Replace `your_github_token_here` with the token you copied
 
 ### Installation
 
@@ -153,7 +131,6 @@ npm install
 
 # Create environment file
 cp .env.example .env
-# Edit .env and add your GitHub token
 
 # Start development server
 npm run dev
@@ -161,6 +138,8 @@ npm run dev
 # Build for production
 npm run build
 ```
+
+The contributor leaderboard uses the public GitHub API and does not require a personal access token. Results are cached for 1 hour to reduce API requests.
 
 ## Notes for Contributors
 
