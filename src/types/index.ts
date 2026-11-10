@@ -69,3 +69,14 @@ export interface LinkCategory {
   title: string;
   links: Link[];
 }
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  role?: string;
+  companyOrCollege?: string;
+  course: string;
+  rating: number;
+  quote: string;
+  date: string;
+}

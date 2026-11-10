@@ -10,6 +10,7 @@ const named = <T extends string>(loader: () => Promise<Record<T, React.Component
 const CoursePage = named(() => import("./pages/CoursePage"), "CoursePage");
 const LearningPage = named(() => import("./pages/LearningPage"), "LearningPage");
 const LeaderboardPage = named(() => import("./pages/LeaderboardPage"), "LeaderboardPage");
+const TestimonialsPage = named(() => import("./pages/TestimonialsPage"), "TestimonialsPage");
 const BlogsPage = named(() => import("./pages/BlogsPage"), "BlogsPage");
 const BlogPostPage = named(() => import("./pages/BlogPostPage"), "BlogPostPage");
 const LinksPage = named(() => import("./pages/LinksPage"), "LinksPage");
@@ -24,6 +25,7 @@ export function AppRoutes() {
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/courses" element={<HomePage />} />
+        <Route path="/testimonials" element={<TestimonialsPage />} />
         <Route path="/course/:courseId" element={<CoursePage />} />
         <Route path="/learning" element={<LearningPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
