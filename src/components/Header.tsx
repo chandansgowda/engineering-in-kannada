@@ -11,7 +11,7 @@ import { cn } from "../lib/cn";
 
 
 export function Header() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const openSearch = useUIStore((s) => s.setSearchOpen);
@@ -20,7 +20,7 @@ export function Header() {
   const [isMac, setIsMac] = useState(false);
   useEffect(() => setIsMac(/Mac|iPhone|iPad/.test(navigator.platform)), []);
 
-  useEffect(() => setMenuOpen(false), [pathname]);
+  useEffect(() => setMenuOpen(false), [pathname, hash]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -49,7 +49,7 @@ export function Header() {
                 key={to}
                 to={to}
                 className={cn(
-                  "relative rounded-full px-4 py-1.5 text-sm font-semibold transition-colors",
+                  "relative rounded-full px-3.5 xl:px-4 py-1.5 text-[13px] xl:text-sm font-semibold transition-colors",
                   active ? "bg-primary text-dark" : "text-neutral-400 hover:text-white"
                 )}
               >

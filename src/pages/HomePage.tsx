@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowRight,
   BookOpen,
@@ -117,7 +117,9 @@ function Hero() {
 }
 
 function CourseCatalog() {
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const query = params.get("q") ?? "";
   const filter = (params.get("level") as Filter) || "all";
   const starredCourses = useProgressStore((s) => s.starredCourses);
@@ -127,7 +129,15 @@ function CourseCatalog() {
     const next = new URLSearchParams(params);
     if (!value || value === "all") next.delete(key);
     else next.set(key, value);
-    setParams(next, { replace: true, preventScrollReset: true });
+    const search = next.toString() ? `?${next.toString()}` : "";
+    navigate(
+      {
+        pathname: location.pathname,
+        search,
+        hash: location.hash,
+      },
+      { replace: true, preventScrollReset: true }
+    );
   };
 
   const results = useMemo(() => {
@@ -208,7 +218,15 @@ function CourseCatalog() {
             icon={filter === "starred" ? Star : Search}
             title={filter === "starred" && !query ? "No starred courses yet" : "No courses found"}
             action={
-              <button className="btn-secondary" onClick={() => setParams({}, { replace: true, preventScrollReset: true })}>
+              <button
+                className="btn-secondary"
+                onClick={() =>
+                  navigate(
+                    { pathname: location.pathname, search: "", hash: location.hash },
+                    { replace: true, preventScrollReset: true }
+                  )
+                }
+              >
                 Clear filters
               </button>
             }
