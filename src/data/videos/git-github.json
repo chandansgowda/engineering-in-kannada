@@ -57,5 +57,41 @@
       "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/7/notes.md",
       "codingQuestionUrl": ""
     }
+
+    {
+      "id": "git-github-8",
+      "title": "8. Git Inside the IDE (VS Code)",
+      "type": "Hands-On",
+      "youtubeUrl": "https://youtu.be/pbvNL0GTjOE",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/8/notes.md",
+      "codingQuestionUrl": ""
+    }
+
+    {
+      "id": "git-github-9",
+      "title": "9. Rebase, Stash, Merge vs Rebase & Conflict Resolution",
+      "type": "Hands-On",
+      "youtubeUrl": "https://youtu.be/D4CTWjGQUk4",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/9/notes.md",
+      "codingQuestionUrl": ""
+    }
+
+     {
+      "id": "git-github-10",
+      "title": "10. Git Revert, Reset and Cherry-Pick ",
+      "type": "Hands-On",
+      "youtubeUrl": "https://youtu.be/9S8iM0tpeIA",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/10/notes.md",
+      "codingQuestionUrl": ""
+    }
+
+    {
+      "id": "git-github-11",
+      "title": "11. Git Worktrees - add, list & remove",
+      "type": "Hands-On",
+      "youtubeUrl": "https://youtu.be/U7D_SSSC2pY",
+      "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/11/notes.md",
+      "codingQuestionUrl": ""
+    }
   ]
 }
