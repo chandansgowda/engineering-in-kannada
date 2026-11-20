@@ -193,9 +193,9 @@ function PodiumCard({ c, rank }: { c: GitHubContributor; rank: number }) {
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "relative flex animate-fade-up flex-col items-center rounded-2xl border bg-gradient-to-b to-transparent px-5 pb-6 pt-8 text-center transition hover:-translate-y-1",
+          "relative flex animate-fade-up flex-col items-center rounded-2xl border bg-gradient-to-b to-transparent px-5 pb-6 pt-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/[0.03] hover:shadow-lg",
           MEDAL[rank]
-        )}
+          )}
       >
         {rank === 1 && <Crown className="absolute -top-4 h-8 w-8 fill-primary text-primary drop-shadow-[0_0_12px_rgba(255,215,0,0.6)]" />}
         <div className="relative">
