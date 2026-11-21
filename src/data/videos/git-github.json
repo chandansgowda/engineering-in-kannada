@@ -49,6 +49,7 @@
       "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/6/notes.md",
       "codingQuestionUrl": ""
     },
+
     {
       "id": "git-github-7",
       "title": "7. Code Review and Merging Pull Requests",
@@ -56,7 +57,7 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=JiLivmWY8_o",
       "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/7/notes.md",
       "codingQuestionUrl": ""
-    }
+    },
 
     {
       "id": "git-github-8",
@@ -65,7 +66,7 @@
       "youtubeUrl": "https://youtu.be/pbvNL0GTjOE",
       "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/8/notes.md",
       "codingQuestionUrl": ""
-    }
+    },
 
     {
       "id": "git-github-9",
@@ -74,7 +75,7 @@
       "youtubeUrl": "https://youtu.be/D4CTWjGQUk4",
       "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/9/notes.md",
       "codingQuestionUrl": ""
-    }
+    },
 
      {
       "id": "git-github-10",
@@ -83,15 +84,15 @@
       "youtubeUrl": "https://youtu.be/9S8iM0tpeIA",
       "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/10/notes.md",
       "codingQuestionUrl": ""
-    }
+     },
 
-    {
+     {
       "id": "git-github-11",
       "title": "11. Git Worktrees - add, list & remove",
       "type": "Hands-On",
       "youtubeUrl": "https://youtu.be/U7D_SSSC2pY",
       "notesUrl": "https://github.com/chandansgowda/learn-git-in-kannada/blob/main/11/notes.md",
       "codingQuestionUrl": ""
-    }
+     }
   ]
 }
