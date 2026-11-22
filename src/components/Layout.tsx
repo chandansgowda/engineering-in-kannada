@@ -15,15 +15,31 @@ const CommandPalette = lazy(() => import("./CommandPalette"));
 function useScrollManagement() {
   const { pathname, hash } = useLocation();
   const firstRender = useRef(true);
+  const prevPathname = useRef(pathname);
+  const prevHash = useRef(hash);
+
   useEffect(() => {
     const initial = firstRender.current;
     firstRender.current = false;
+    const pathChanged = prevPathname.current !== pathname;
+    const hashChanged = prevHash.current !== hash;
+    prevPathname.current = pathname;
+    prevHash.current = hash;
+
     // `/courses` is the home page scrolled to the catalog.
     const id = hash ? decodeURIComponent(hash.slice(1)) : pathname === "/courses" ? "courses" : null;
     if (!id) {
-      window.scrollTo(0, 0);
+      if (pathChanged || initial) {
+        window.scrollTo(0, 0);
+      }
       return;
     }
+
+    // If neither path nor hash changed, do not re-scroll on search parameter updates.
+    if (!pathChanged && !hashChanged && !initial) {
+      return;
+    }
+
     // Routes are lazy, so the target may not exist yet: poll briefly for it.
     let tries = 0;
     const timer = setInterval(() => {

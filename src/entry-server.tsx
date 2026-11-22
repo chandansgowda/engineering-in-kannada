@@ -32,6 +32,7 @@ export function prerenderRoutes(): { path: string; sitemap: boolean; priority: n
     { path: "/blogs", sitemap: true, priority: 0.7 },
     ...blogPosts.map((p) => ({ path: `/blogs/${p.slug}`, sitemap: true, priority: 0.6 })),
     { path: "/leaderboard", sitemap: true, priority: 0.5 },
+    { path: "/testimonials", sitemap: true, priority: 0.6 },
     { path: "/links", sitemap: true, priority: 0.5 },
     { path: "/terms", sitemap: true, priority: 0.2 },
     { path: "/privacy", sitemap: true, priority: 0.2 },

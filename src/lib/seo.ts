@@ -196,6 +196,12 @@ export function getSeo(pathname: string): Seo {
         description: "Meet the open-source contributors who build the Engineering in Kannada website, ranked by pull requests, issues and commits.",
         path,
       });
+    case "/testimonials":
+      return page({
+        title: `Testimonials | ${SITE}`,
+        description: "Authentic reviews and learning stories from students and engineers learning tech in Kannada.",
+        path,
+      });
     case "/links":
       return page({
         title: `Links | ${SITE}`,
