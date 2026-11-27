@@ -74,7 +74,8 @@ New courses and posts are picked up automatically by routes, search, sitemap and
   - Format dates with `formatDate` in `src/lib/blog.ts` (manual, locale-independent).
   - Blog bodies are bundled synchronously (`src/lib/blogContent.ts`) so posts render on the server.
 - `SITE_URL` is `BRAND.siteUrl` (`VITE_SITE_URL`, default `https://engineeringinkannada.in`).
-- `/learning` and 404 pages are `noindex`. `robots.txt` explicitly welcomes search and AI crawlers.
+- `/progress`, its legacy `/dashboard` and `/learning` URLs, and 404 pages are `noindex`.
+  `robots.txt` explicitly welcomes search and AI crawlers.
 
 ## Brand and design
 

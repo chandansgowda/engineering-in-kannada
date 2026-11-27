@@ -103,7 +103,7 @@ const sections: LegalSection[] = [
       <p>
         Lesson progress, saved lessons and starred courses are stored only in your browser. Clearing your
         browser data, switching browsers or using private browsing can erase it, and we cannot recover it.
-        Use the export option on the <Link to="/learning">My Learning</Link> page to keep a backup.
+        Use the export option on the <Link to="/progress">My Learning</Link> page to keep a backup.
       </p>
     ),
   },

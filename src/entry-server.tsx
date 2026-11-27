@@ -36,6 +36,8 @@ export function prerenderRoutes(): { path: string; sitemap: boolean; priority: n
     { path: "/terms", sitemap: true, priority: 0.2 },
     { path: "/privacy", sitemap: true, priority: 0.2 },
     { path: "/courses", sitemap: false, priority: 0 },
+    { path: "/progress", sitemap: false, priority: 0 },
+    { path: "/dashboard", sitemap: false, priority: 0 },
     { path: "/learning", sitemap: false, priority: 0 },
     { path: "/404", sitemap: false, priority: 0 },
   ];

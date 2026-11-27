@@ -8,7 +8,7 @@ const named = <T extends string>(loader: () => Promise<Record<T, React.Component
   lazy(() => loader().then((m) => ({ default: m[name] })));
 
 const CoursePage = named(() => import("./pages/CoursePage"), "CoursePage");
-const LearningPage = named(() => import("./pages/LearningPage"), "LearningPage");
+const DashboardPage = named(() => import("./pages/DashboardPage"), "DashboardPage");
 const LeaderboardPage = named(() => import("./pages/LeaderboardPage"), "LeaderboardPage");
 const BlogsPage = named(() => import("./pages/BlogsPage"), "BlogsPage");
 const BlogPostPage = named(() => import("./pages/BlogPostPage"), "BlogPostPage");
@@ -25,7 +25,9 @@ export function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/courses" element={<HomePage />} />
         <Route path="/course/:courseId" element={<CoursePage />} />
-        <Route path="/learning" element={<LearningPage />} />
+        <Route path="/progress" element={<DashboardPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/learning" element={<DashboardPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/blogs" element={<BlogsPage />} />
         <Route path="/blogs/:slug" element={<BlogPostPage />} />
