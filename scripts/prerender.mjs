@@ -10,6 +10,7 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { Writable } from "node:stream";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { aiBots } from "./aiBots.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
@@ -84,21 +85,6 @@ ${routes
 `;
 await writeFile(join(dist, "sitemap.xml"), sitemap);
 
-// ---------- robots.txt (search and AI crawlers welcome) ----------
-const aiBots = [
-  "GPTBot",
-  "OAI-SearchBot",
-  "ChatGPT-User",
-  "ClaudeBot",
-  "Claude-SearchBot",
-  "Claude-User",
-  "PerplexityBot",
-  "Perplexity-User",
-  "Google-Extended",
-  "Applebot-Extended",
-  "Bingbot",
-  "DuckAssistBot",
-];
 const robots = `# Engineering in Kannada: search engines and AI assistants are welcome.
 User-agent: *
 Allow: /
@@ -157,7 +143,7 @@ ${content.courses
 
 - URL: ${url(`/course/${c.id}`)}
 - Level: ${c.difficulty}
-- Language of instruction: Kannada
+- Languages of instruction: original_kannada,
 - Lessons: ${c.lessons.length}
 
 ${c.description}
@@ -166,29 +152,5 @@ ${c.description}
 
 ${c.lessons
   .map(
-    (l) =>
-      `${l.number}. ${l.title} (${l.type})${l.youtubeUrl ? `: ${l.youtubeUrl}` : ""}${l.notesUrl ? `\n   Notes: ${l.notesUrl}` : ""}${l.practiceUrl ? `\n   Practice: ${l.practiceUrl}` : ""}`
-  )
-  .join("\n")}`
-  )
-  .join("\n\n")}
+    
 
-# Blog posts
-
-${content.blogs
-  .map(
-    (b) => `## ${b.metadata.title}
-
-- URL: ${url(`/blogs/${b.slug}`)}
-- Author: ${b.metadata.author}
-- Published: ${b.metadata.date}
-- Tags: ${b.metadata.tags.join(", ")}
-
-${b.content.trim()}`
-  )
-  .join("\n\n")}
-`;
-await writeFile(join(dist, "llms-full.txt"), llmsFull);
-
-await rm(ssrDir, { recursive: true, force: true });
-console.log(`  wrote sitemap.xml (${routes.filter((r) => r.sitemap).length} URLs), robots.txt, llms.txt, llms-full.txt`);
