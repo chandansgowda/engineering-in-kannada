@@ -120,6 +120,6 @@ directory indexes make Netlify 301-redirect to `/path/`, away from the canonical
 
 ## Environment variables
 
-- `VITE_GITHUB_TOKEN`: optional; raises the GitHub API limit for the leaderboard (results are cached 1 hour).
 - `VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID`: GA4 id; gtag loads after the page is idle.
 - `VITE_SITE_URL`: public URL for canonical links, sitemap and share tags.
+The contributor leaderboard uses the public GitHub API without authentication. Results are cached for 1 hour to reduce API requests.
