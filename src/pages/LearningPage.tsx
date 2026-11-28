@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  BookOpen,
   BookmarkX,
   CheckCircle2,
   Download,
@@ -10,15 +11,16 @@ import {
   Star,
   Trophy,
   Upload,
-  Flame,
 } from "lucide-react";
 import { PageHeader } from "../components/PageHeader";
 import { CourseCard } from "../components/CourseCard";
 import { EmptyState } from "../components/EmptyState";
 import { ProgressRing } from "../components/ProgressRing";
+import { StreakCard } from "../components/StreakCard";
 import { Img } from "../components/Img";
 import { allLessons, courses, getVideos, lessonTitle, youtubeThumb } from "../lib/catalog";
-import { useProgressStore } from "../store/progress";
+import { mergeDailyCompletions, sanitizeDailyCompletions } from "../lib/streak";
+import { sanitizeMilestones, useProgressStore } from "../store/progress";
 import { toast } from "../store/toast";
 
 export function LearningPage() {
@@ -53,7 +55,7 @@ export function LearningPage() {
         <dl className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
             { icon: CheckCircle2, value: completedKnown, label: "Lessons done" },
-            { icon: Flame, value: inProgress.length, label: "In progress" },
+            { icon: BookOpen, value: inProgress.length, label: "In progress" },
             { icon: Trophy, value: finished.length, label: "Courses finished" },
             { icon: Star, value: savedLessons.length, label: "Saved lessons" },
           ].map(({ icon: Icon, value, label }) => (
@@ -66,19 +68,24 @@ export function LearningPage() {
         </dl>
       </PageHeader>
 
-      <div className="container-page space-y-16 pt-12">
-        {isEmpty && (
-          <EmptyState
-            icon={GraduationCap}
-            title="Your learning journey starts here"
-            action={
-              <Link to="/" className="btn-primary">
-                Browse courses <ArrowRight className="h-4 w-4" />
-              </Link>
-            }
-          >
-            Mark lessons as done, star courses and save lessons for later. They'll all show up here.
-          </EmptyState>
+      <div className="container-page space-y-12 pt-12 sm:space-y-14">
+        {isEmpty ? (
+          <>
+            <EmptyState
+              icon={GraduationCap}
+              title="Your learning journey starts here"
+              action={
+                <Link to="/" className="btn-primary">
+                  Browse courses <ArrowRight className="h-4 w-4" />
+                </Link>
+              }
+            >
+              Mark lessons as done, star courses and save lessons for later. They'll all show up here.
+            </EmptyState>
+            <StreakCard />
+          </>
+        ) : (
+          <StreakCard />
         )}
 
         {inProgress.length > 0 && (
@@ -206,9 +213,31 @@ function BackupCard() {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const exportProgress = () => {
-    const { completedVideos, starredVideos, starredCourses, lastWatched } = useProgressStore.getState();
+    const {
+      completedVideos,
+      starredVideos,
+      starredCourses,
+      lastWatched,
+      dailyCompletions,
+      celebratedMilestones,
+    } = useProgressStore.getState();
     const blob = new Blob(
-      [JSON.stringify({ app: "engineering-in-kannada", version: 2, completedVideos, starredVideos, starredCourses, lastWatched }, null, 2)],
+      [
+        JSON.stringify(
+          {
+            app: "engineering-in-kannada",
+            version: 3,
+            completedVideos,
+            starredVideos,
+            starredCourses,
+            lastWatched,
+            dailyCompletions,
+            celebratedMilestones,
+          },
+          null,
+          2
+        ),
+      ],
       { type: "application/json" }
     );
     const a = document.createElement("a");
@@ -225,11 +254,21 @@ function BackupCard() {
       const list = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : []);
       if (data.app !== "engineering-in-kannada") throw new Error("not ours");
       const s = useProgressStore.getState();
+      const importedDaily = sanitizeDailyCompletions(data.dailyCompletions);
+      const mergedDaily = mergeDailyCompletions(s.dailyCompletions, importedDaily);
+      const importedDailyVideoIds = Object.values(importedDaily).flat();
       useProgressStore.setState({
-        completedVideos: Array.from(new Set([...s.completedVideos, ...list(data.completedVideos)])),
+        completedVideos: Array.from(
+          new Set([...s.completedVideos, ...list(data.completedVideos), ...importedDailyVideoIds])
+        ),
         starredVideos: Array.from(new Set([...s.starredVideos, ...list(data.starredVideos)])),
         starredCourses: Array.from(new Set([...s.starredCourses, ...list(data.starredCourses)])),
         lastWatched: s.lastWatched ?? data.lastWatched ?? null,
+        dailyCompletions: mergedDaily,
+        celebratedMilestones: sanitizeMilestones([
+          ...s.celebratedMilestones,
+          ...sanitizeMilestones(data.celebratedMilestones),
+        ]),
       });
       toast("Progress restored", "success");
     } catch {
