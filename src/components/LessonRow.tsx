@@ -1,9 +1,10 @@
-import { memo, useRef } from "react";
+import { memo, useRef, type MouseEvent } from "react";
 import { Check, Code2, ExternalLink, FileText, Play, Share2, Star } from "lucide-react";
 import { Course, Video } from "../types";
 import { getVideos, isGithubMarkdown, lessonTitle, youtubeThumb } from "../lib/catalog";
 import { useProgressStore } from "../store/progress";
 import { celebrateCourse, celebrateLesson } from "../lib/celebrate";
+import { calculateStreakStats, getAchievedMilestone } from "../lib/streak";
 import { shareLink } from "../lib/share";
 import { toast } from "../store/toast";
 import { trackEvent } from "../lib/analytics";
@@ -34,21 +35,29 @@ export const LessonRow = memo(function LessonRow({
   const title = lessonTitle(video.title);
   const thumb = youtubeThumb(video.youtubeUrl);
 
-  const toggleComplete = () => {
+  const toggleComplete = (event?: MouseEvent<HTMLButtonElement>) => {
     const store = useProgressStore.getState();
     if (completed) {
       store.markVideoIncomplete(video.id);
       return;
     }
     store.markVideoComplete(video.id);
+    const updated = useProgressStore.getState();
+    const { currentStreak } = calculateStreakStats(updated.dailyCompletions);
+    const milestone = getAchievedMilestone(currentStreak, updated.celebratedMilestones);
+    if (milestone !== null) {
+      updated.markMilestoneCelebrated(milestone);
+      toast(`${milestone}-day learning streak! Keep up the consistency.`, "success");
+      trackEvent("streak_milestone", { days: milestone });
+    }
     const ids = getVideos(course.id).map((v) => v.id);
-    const done = useProgressStore.getState().completedVideos;
+    const done = updated.completedVideos;
     if (ids.every((id) => done.includes(id))) {
       celebrateCourse();
       toast(`You finished ${course.title}! 🎉`, "success");
       trackEvent("course_complete", { course_id: course.id });
     } else {
-      celebrateLesson(checkRef.current);
+      celebrateLesson(event?.currentTarget ?? checkRef.current);
     }
   };
 
@@ -184,6 +193,29 @@ export const LessonRow = memo(function LessonRow({
               <Code2 className="h-3.5 w-3.5" /> Practice <ExternalLink className="h-3 w-3 opacity-60" />
             </a>
           )}
+          <button
+            type="button"
+            onClick={toggleComplete}
+            aria-pressed={completed}
+            aria-label={
+              completed
+                ? `Completed: ${title}. Activate to mark as not done`
+                : `Mark Complete: ${title}`
+            }
+            className={cn(
+              "btn border px-3.5 py-2 text-[13px] motion-reduce:transition-none motion-reduce:active:scale-100",
+              completed
+                ? "border-emerald-500/35 bg-emerald-500/15 text-emerald-300 hover:border-emerald-400/60 hover:bg-emerald-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-dark"
+                : "border-primary/35 bg-primary/10 text-primary hover:border-primary/65 hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-dark"
+            )}
+          >
+            <Check
+              className={cn("h-3.5 w-3.5", completed && "text-emerald-400")}
+              strokeWidth={completed ? 2.5 : 2}
+              aria-hidden="true"
+            />
+            {completed ? "Completed" : "Mark Complete"}
+          </button>
         </div>
       </div>
     </li>
